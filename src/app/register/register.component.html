@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xl-6 p-0 hungerimg">
+            <svg width="500" height="680">
+                <circle cx="250" cy="340" [attr.r]="radius" stroke="black" stroke-width="0" fill="rgb(252, 219, 135)">
+                    <text x="0" y="15" fill="red">I love SVG!</text>
+                </circle>
+                <text x="50%" y="50%" font-family="Arial, Helvetica, sans-serif" [attr.font-size]="size" text-anchor="middle" stroke="white" fill="purple" stroke-width="0.2"   dy=".3em">{{word}}</text>
+            </svg>
+            <!-- <span class="adver">Are you Hungary</span> -->
+        </div>
+        <div class="col-xl-6 p-0">
+            <form action="#" [formGroup]="registerForm" (ngSubmit)="onRegister()" >
+                <fieldset>
+                    <legend>Register Now</legend>
+                    <div class="form-group">
+                        <label for="name">name</label>
+                        <input class="form-control" type="text" id="name" formControlName="name" (blur)="checkval($event)" (click)="overfield($event)" >
+                        
+                        <div id="nameHelp" class="form-text error-msg" *ngIf="registerForm.controls['name'].touched && registerForm.controls['name'].invalid">
+                            <span *ngIf="registerForm.controls['name']?.errors?.['required']"><fa-icon [icon]="errorSign" title="Reqiured"></fa-icon> </span>
+                            <span *ngIf="registerForm.controls['name']?.errors?.['minlength']"><fa-icon [icon]="errorSign" title="Minimum length is 3"></fa-icon></span>
+                            <span *ngIf="registerForm.controls['name']?.errors?.['maxlength']"><fa-icon [icon]="errorSign" title="Maximum length is 15"></fa-icon></span>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" id="email" formControlName="email" (blur)="checkval($event)" (click)="overfield($event)">
+                        
+                        <div id="emailHelp" class="form-text error-msg" *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].invalid">
+                            <span *ngIf="registerForm.controls['email']?.errors?.['required']"><fa-icon [icon]="errorSign" title="Reqiured"></fa-icon></span>
+                            <span *ngIf="registerForm.controls['email']?.errors?.['email']"><fa-icon [icon]="errorSign" title="It should be like username@example.com"></fa-icon></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="usrname">user name</label>
+                        <input class="form-control" type="text" id="usrname" formControlName="usrname" (blur)="checkval($event)" (click)="overfield($event)">
+
+                        <div id="usrnameHelp" class="form-text error-msg" *ngIf="registerForm.controls['usrname'].touched && registerForm.controls['usrname'].invalid">
+                            <span *ngIf="registerForm.controls['usrname']?.errors?.['required']"><fa-icon [icon]="errorSign" title="Reqiured"></fa-icon></span>
+                            <span *ngIf="registerForm.controls['usrname']?.errors?.['pattern']"><fa-icon [icon]="errorSign" title="It should not contain white space"></fa-icon></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass">password</label>
+                        <input class="form-control" type="password" id="pass" formControlName="pass" (blur)="checkval($event)" (click)="overfield($event)">
+
+                        <div id="passHelp" class="form-text error-msg" *ngIf="registerForm.controls['pass'].touched && registerForm.controls['pass'].invalid">
+                            <span *ngIf="registerForm.controls['pass']?.errors?.['required']"><fa-icon [icon]="errorSign" title="Reqiured"></fa-icon></span>
+                            <span *ngIf="registerForm.controls['pass']?.errors?.['pattern'] || registerForm.controls['pass']?.errors?.['minlength']  "><fa-icon [icon]="errorSign" title="Its lenght should be 8 characters at least contains [a-z], [A-z], [0-9], and [!$%@]"></fa-icon></span>
+                            <!-- <span *ngIf="registerForm.controls['pass']?.errors?.['minlength']"><fa-icon [icon]="errorSign" title="Minimum length is 8"></fa-icon></span> -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="passconfirm">password Confirm</label>
+                        <input class="form-control" type="password" id="passconfirm" formControlName="passconfirm" aria-describedby="descriptionHelp" (blur)="checkval($event)" (click)="overfield($event)">
+
+                        <div id="passconfirmHelp" class="form-text error-msg" *ngIf="registerForm.controls['passconfirm'].touched && registerForm.controls['passconfirm'].invalid" >
+                            <span *ngIf="registerForm.controls['passconfirm']?.errors?.['required']"><fa-icon [icon]="errorSign" title="Reqiured"></fa-icon></span>
+                            <span *ngIf="registerForm.controls['passconfirm']?.errors?.['matched']"><fa-icon [icon]="errorSign" title="Passwords not matched"></fa-icon></span>
+                        </div>
+                    </div>
+                    <input class="btn " type="submit" value="Submit" [disabled]="registerForm.invalid">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

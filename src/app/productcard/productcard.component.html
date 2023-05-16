@@ -1,0 +1,13 @@
+<div class="card" (click)="showDetails(productItem.id,productItem.category)">
+  <div class="card-img">
+    <img [src]="productItem.imgsrc" class="card-img-top" alt="...">
+    <sub [style]="productItem.count|stocking|fontcolor">{{productItem.count|stocking}}</sub>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{productItem.name}}</h5>
+    
+    <p class="card-text">{{productItem.category}}</p>
+    <span id="prod-price">{{productItem.price}} EGP</span>
+    <a href="#" class="btn addtocart">Add To Cart</a>
+  </div>
+</div>

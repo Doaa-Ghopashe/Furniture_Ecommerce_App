@@ -1,0 +1,21 @@
+.active , .active-link
+{
+    color: orange;
+
+
+}
+#logo
+{
+    margin-left: 6px;
+    width: 80px;
+}
+#navbarNav
+{
+    display: flex;
+    justify-content: space-between;
+}
+.navbar
+{
+    width: 100%;
+    z-index: 500;
+}

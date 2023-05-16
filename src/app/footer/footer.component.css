@@ -1,0 +1,53 @@
+footer{
+    /* margin-top:auto ; */
+    padding: 50px 0;
+    font-family: 'Poppins', sans-serif;
+    text-align: center ;
+    color: #e3e3e3;
+}
+a
+{
+    text-decoration: none;
+    color: rgb(198, 198, 198);
+}
+.heading{
+    font-family: 'Nunito', sans-serif;
+}
+.heading h4{
+    font-size: 23px;
+    font-weight: 700;
+    right: 23px;
+    color: rgb(208, 208, 208);
+}
+.support li , .support a{
+    color: #edecec;
+    transition: all 0.5s;
+}
+.support a{
+    padding-left: 4px;
+    transition: all 0.5s;
+}
+.google-map{
+    height: 100%;
+}
+.social-links a{
+    font-size: 29px;
+    transition: all 0.5s;
+    padding: 0 10px;
+    color: #e4e4e4;
+}
+.about li{
+    text-align: left;
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+.copyright a{
+    font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+}
+ul
+{
+    list-style: none;
+    padding: 0;
+}

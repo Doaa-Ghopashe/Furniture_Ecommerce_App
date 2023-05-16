@@ -1,0 +1,141 @@
+/* fieldset
+{
+  background-color:#CCC;
+  max-width:500px;
+  padding:16px;	
+}*/
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+.container
+{
+    border-radius: 24px;
+    overflow: hidden;
+}
+legend
+{
+    float: none;
+    width: fit-content;
+    font-size: 30px;
+    margin-bottom: 30px;
+    /* border-bottom: 1px double rgba(0, 0, 0, 0.229); */
+    font-family: 'Rajdhani', sans-serif;
+    text-align: center;
+    color: #7120bd;
+
+} 
+fieldset
+{
+    height: 100%;
+    padding: 0 69px;
+}
+form
+{
+    height: 100%;
+    /* border: 1px solid; */
+    padding: 50px 0px;
+    background: rgb(252, 219, 135);
+    overflow: hidden;
+}
+.form-group
+{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    position: relative;
+}
+.form-control
+{
+    width: 100%;
+    margin-bottom: 34px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding-top: 20px;
+    border-bottom: 3px solid white;
+    
+}
+label
+{
+    font-size: 18px;
+    color: #7120bd;
+    font-weight: 400;
+    width: 100%;
+    text-transform: capitalize;
+    position: absolute;
+    top: 12px;
+    left: 0;
+    transition: all 0.2s;
+}
+input[type='submit']
+{
+    display: block;
+    margin: auto;
+    color: white;
+    background:#7120bd;
+    padding: 8px 18px;
+    font-size: 18px;
+    font-weight: 500;
+    border: 1px dashed white;
+    margin-top: 30px;
+    
+}
+.hungerimg
+{
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1;
+    background-image: url("https://media.gettyimages.com/id/98680757/photo/pacific-islander-businessman-eating-large-sandwich.jpg?s=612x612&w=0&k=20&c=LwbuyKG-mUdBArrczGZwDJ_Db2Uq5IekNaslKxlvB-4=");
+}
+.hungerimg::after
+{
+    content: "";
+    backdrop-filter: blur(2px);
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+}
+.col-xl-6:first-child
+{
+    display: flex;
+    justify-content: center;
+}
+circle
+{
+    transition: all 2s;
+}
+.adver
+{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    inset: 0;
+    justify-content: center;
+}
+text
+{
+    transition: all 2s;
+    color: #7120bd;;
+}
+.form-group:hover label
+{
+    font-size: 12px;
+    top: 0;
+}
+.form-control:focus 
+{
+    box-shadow: none;
+    border-bottom: 3px solid white;
+}
+.error-msg
+{
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 0;
+    background: transparent;
+    align-items: center;
+    color: #d50909;
+    font-size: 25px;
+    font-weight: 500;
+}
