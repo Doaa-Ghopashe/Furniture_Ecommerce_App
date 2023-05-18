@@ -1,10 +1,15 @@
 
 export interface ProductInterface {
-    "name": string,
-    "category": string,
-    "imgsrc": string,
-    "price": number,
-    "count":number,
-    "recipe": string,
-    "id": number
+    "brand":string,
+    "category":string,
+    "description":string,
+    "discountPercentage":number,
+    "id":number,
+    "images":[],
+    "price":number,
+    "rating":number,
+    "stock":number,
+    "thumbnail":string,
+    "title":string,
+    "count":number 
 }

@@ -64,3 +64,24 @@ p{
     font-weight: 100;
     line-height: 1.8;
 }
+fa-icon
+{
+    color: rgb(255, 200, 0);
+    font-size: 23px;
+}
+section
+{
+    display: flex;
+    align-items: baseline;
+    font-size: 18px;
+    /* justify-content: space-between; */
+    font-weight: 700;
+}
+section h6
+{
+    margin-right: 18px;
+}
+section span
+{
+    margin-left: 18px;
+}

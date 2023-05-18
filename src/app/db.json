@@ -1,9 +1,9 @@
 [
   {
-    "name": "Cappuccino",
+    "name": "Ca",
     "category": "Hot Drink",
     "imgsrc": "assets/Images/Hot drinks/Hot drink 1.jpg ",
-    "price": 30,
+    "price": 80,
     "count": 5,
     "recipe": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, blanditiis. Quod, rem eaque ducimus hic quaerat temporibus dolorem molestiae voluptate unde obcaecati ipsa rerum fuga. Id repellat fugiat saepe quo ad. Voluptas ea atque laboriosam architecto officia et harum dolores omnis, sit, distinctio, labore quas doloremque odit dolorem placeat eius.","id": 1
   },

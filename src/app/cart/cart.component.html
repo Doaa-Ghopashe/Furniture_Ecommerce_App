@@ -1,1 +1,39 @@
-<p>cart works!</p>
+<!-- <h1>Counter</h1> -->
+
+<div class="cartproduct" *ngFor="let product of cartlist">
+    <div *ngIf="product">
+        <div class="row align-items-center">
+            <div class="col-xl-2">
+                <div class="prod-img">
+                    <img [src]="product.thumbnail">
+                </div>
+            </div>
+            <div class="col-xl-9">
+                <div class="prod-title">
+                    <h3>{{product.title}}</h3>
+                </div>
+                <div class="prod-categ">
+                    <span>{{product.brand}}</span>
+                </div>
+                <div class="prod-price">
+                    <span>Price: {{product.price * product.count}} EGP</span>
+                </div>
+                <div class="prod-control">
+                    <button class="btn btn-danger"   (click)="increment(product,product.stock)">+</button>
+                        <span >{{product.count}}</span>
+                    <button class="btn btn-primary" (click)="decrement(product,product.stock)">-</button>
+                </div>
+            </div>
+            <div class="col-xl-1">
+                <button class="btn btn-danger" (click)="removecart(product)">remove</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="cartlist.length ==0">
+    <div class="row">
+        <div class="cart-img">
+            <img src="https://cdn-icons-png.flaticon.com/512/3081/3081986.png">
+        </div>
+    </div>
+</div>

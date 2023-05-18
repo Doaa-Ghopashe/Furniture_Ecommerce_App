@@ -2,22 +2,68 @@
     <div class="row">
         <div class="col-xl-6 p-0">
             <div class="prodImg">
-                <img [src]="product.imgsrc">
+                <img [src]="productItem?.thumbnail">
             </div>
         </div>
         <div class="col-xl-6 p-0">
             <div class="prodInfo">
                 <div class="card-head">
-                    <h1 class="prodtitle">{{product.name}}</h1>
-                    <span class="availability" [style]="product.count|stocking|fontcolor">{{product.count|stocking}}</span>
+                    <h1 class="prodtitle">{{productItem?.title}}</h1>
+                    <span class="availability"
+                        [style]="productItem?.stock|stocking|fontcolor">{{productItem?.stock|stocking}}</span>
                 </div>
-                <h6>Category: <span>{{product.category}}</span></h6>
-                <h6>Price: <span>{{product.price}} EGP</span></h6>
-                <h6>Recipe:</h6>
+                <h6>Category: <span>{{productItem?.category}}</span></h6>
+                <h6>Price: <span>{{productItem?.price}} EGP</span></h6>
+                <h6>Description:</h6>
                 <p>
-                    {{product.recipe}}
+                    {{productItem?.description}}
                 </p>
-                <span></span>
+                <section class="rating">
+                    <h6>Rating: </h6>
+                    <div *ngIf="productItem?.rating >=5">
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                    </div>
+                    <div *ngIf="productItem?.rating >= 4 && productItem?.rating < 5">
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                    </div>
+                    <div *ngIf="productItem?.rating >= 3 && productItem?.rating < 4">
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                    </div>
+                    <div *ngIf="productItem?.rating >= 2 && productItem?.rating < 3">
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                    </div>
+                    <div *ngIf="productItem?.rating >= 1 && productItem?.rating < 2">
+                        <fa-icon [icon]="solidfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                    </div>
+                    <div *ngIf="productItem?.rating > 0 && productItem?.rating < 1">
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                        <fa-icon [icon]="regularfastar"></fa-icon>
+                    </div>
+                    <span>{{productItem?.rating}}</span>
+                </section>
             </div>
         </div>
     </div>

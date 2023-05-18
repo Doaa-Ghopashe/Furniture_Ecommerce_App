@@ -1,24 +1,36 @@
 import { Component, Input } from '@angular/core';
+
 import { ProductInterface } from '../interfaces/product-interface';
+
 import { ActivatedRoute } from '@angular/router';
-import ProductData from '../db.json';
+
+import { ProductService } from '../services/product.service';
+
+import { faStar as solidsatr } from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-productdetails',
   templateUrl: './productdetails.component.html',
   styleUrls: ['./productdetails.component.css']
 })
-export class ProductdetailsComponent {
-  @Input() product : ProductInterface | any;
-  productlist:ProductInterface[] = ProductData
-  constructor(private activetedrouter:ActivatedRoute)
-  {
 
-  }
+export class ProductdetailsComponent {
+  @Input() productItem : ProductInterface | any;
+  productlist!:ProductInterface[] ;
+  solidfastar = solidsatr;
+  regularfastar = faStar
+  constructor(private activetedrouter:ActivatedRoute,private productservice:ProductService){}
+
   ngOnInit()
   {
-    this.product = this.productlist.find((product)=>{
-      return product.id == this.activetedrouter.snapshot.params['id'] && product.category == this.activetedrouter.snapshot.params['category']
-    })
+    this.productservice.getProducts().subscribe(
+      (res:any)=>{
+        this.productItem =  res?.['products']?.find((product:ProductInterface)=>{
+        return product.id == this.activetedrouter.snapshot.params['id']
+        })
+      }
+    )
   }
+  
 }

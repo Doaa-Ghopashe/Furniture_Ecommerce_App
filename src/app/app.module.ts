@@ -8,8 +8,6 @@ import { StokepipePipe } from './pipes/stock/stokepipe.pipe';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProductcardComponent } from './productcard/productcard.component';
 import { ProductlistComponent } from './productlist/productlist.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
 import { ProductdetailsComponent } from './productdetails/productdetails.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { CartComponent } from './cart/cart.component';
@@ -17,6 +15,8 @@ import { FooterComponent } from './footer/footer.component';
 import { FontcolorPipe } from './pipes/fontcolor/fontcolor.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { AuthenticationModule } from './authentication/authentication.module';
+import {HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -25,8 +25,6 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     ProductcardComponent,
     ProductlistComponent,
-    RegisterComponent,
-    LoginComponent,
     ProductdetailsComponent,
     NotfoundComponent,
     CartComponent,
@@ -38,7 +36,10 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FontAwesomeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AuthenticationModule,
+    HttpClientModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

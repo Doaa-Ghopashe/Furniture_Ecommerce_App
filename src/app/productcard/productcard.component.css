@@ -17,6 +17,8 @@
 {
    
     transition: all 1s;
+    height: 100%;
+    object-fit: cover;
     
 }
 .card:hover img
@@ -26,6 +28,7 @@
     
 }
 .card-img{
+    height: 213px;
     border-radius: 0;
     overflow: hidden;
     position: relative;
@@ -41,7 +44,7 @@
     text-align: center;
     position: relative;
 }
-sub
+.avalability
 {
     border-radius: 0 10px 0 0;
     font-size: 18px;
@@ -52,7 +55,6 @@ sub
      align-items: center;
      padding: 10px;
     left: 0;
-    top: 250px;
     background-color: rgba(240, 248, 255, 0.633);
     backdrop-filter: blur(10px);
     z-index: 100;

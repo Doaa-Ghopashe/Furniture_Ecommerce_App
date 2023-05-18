@@ -1,11 +1,21 @@
 .row
 {
 
-    /* justify-content: center;
+    justify-content: center;
     align-content: center;
-    box-sizing: border-box; */
+    box-sizing: border-box;
+    font-size: 30px;
+    align-items: center;
+}
+fa-icon
+{
+    display: flex;
+    justify-content: center;
+    font-size: 55px;
+    color: red;
+    text-align: center;
 }
 h1
 {
-    /* text-align: center; */
+    font-size: 40px;
 }

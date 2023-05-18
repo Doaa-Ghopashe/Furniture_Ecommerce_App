@@ -18,7 +18,7 @@ export class RegisterComponent {
     this.registerForm = new FormGroup({
       name: new FormControl('', [Validators.minLength(3), Validators.required, Validators.maxLength(15)]),
       email: new FormControl('', [Validators.email, Validators.required]),
-      usrname: new FormControl('', [Validators.pattern(/^([A-Z]+.[0-9]*|[a-z]+.[0-9]*).$/), Validators.required]),
+      usrname: new FormControl('', [Validators.pattern(/^\S*$/), Validators.required]),
       pass: new FormControl('', [Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!|\$|@|%|#])/), Validators.required, Validators.minLength(8)]),
       passconfirm: new FormControl('', [Validators.required, this.createPasswordConfirmValidator()])
 

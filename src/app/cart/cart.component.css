@@ -1,0 +1,24 @@
+.cartproduct
+{
+    background-color: antiquewhite;
+    margin-bottom: 12px;
+}
+.prod-img
+{
+    /* height: 50px; */
+    height: 200px;
+}
+.prod-img img
+{
+    height: 100%;
+    object-fit: cover;
+}
+.cart-img
+{
+    height: 300px;
+}
+.cart-img img
+{
+    height: 100%;
+    object-fit: contain;
+}
