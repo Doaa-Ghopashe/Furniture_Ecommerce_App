@@ -12,7 +12,6 @@ import { CartService } from '../services/cart.service';
 export class ProductcardComponent {
   @Input() productItem:any;
   @Input() val!:string;
-
   counter!:number;
   products!:ProductInterface[];
   product!:any

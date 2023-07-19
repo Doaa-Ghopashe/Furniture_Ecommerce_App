@@ -7,7 +7,16 @@
 #logo
 {
     margin-left: 6px;
-    width: 80px;
+    width: 215px;
+}
+nav , .dropdown{
+    background-color: var(--mode);
+
+}
+
+nav a , .dropdown button{
+    color: var(--fontcolor);
+
 }
 #navbarNav
 {
@@ -18,6 +27,17 @@
 {
     width: 100%;
     z-index: 500;
+}
+.navbar-nav{
+    align-items: center;
+}
+.nav-link{
+    display: flex;
+    align-items: center;
+}
+.nav-link p{
+    margin: 0;
+    margin-left: 10px;
 }
 .nav-item:last-child
 {
@@ -36,3 +56,62 @@ fa-icon
     bottom: 0;
     right: 0;
 }
+.dropdown-menu {
+    text-align: center;
+    padding: 5px;
+    border: none;
+    background-color: rgb(221 219 219 / 56%);
+    min-width: 0;
+}
+.dropdown-menu .btn:first-child{
+    border-bottom: 1px solid #00000030;
+    /* width: 100%; */
+    padding-bottom: 10px;
+}
+.lightpage , .lightmode{
+    background-color: white;
+    color: black !important;
+}
+.lightpage .btn{
+    color: black;
+}
+.darkpage , .darkmode{
+    background-color: black;
+    color: white !important;
+}
+.darkpage .btn , .darkpage input::placeholder{
+    color: white;
+}
+.searchbox{
+    position: relative;
+    background-color: rgb(221 219 219 / 56%);
+    border-radius: 25px;
+    overflow: hidden;
+    padding: 6px 15px;
+    width: 900px;
+}
+input , input::placeholder{
+    width: 98%;
+    color:var(--fontcolor);
+}
+input:focus{
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+.searchbox input{
+    border:none;
+    background-color: transparent;
+}
+.searchbox .btn{
+    padding: 0 10px 0 0;
+    color:var(--fontcolor);
+    
+}
+.searchbtn{
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+

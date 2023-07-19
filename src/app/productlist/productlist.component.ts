@@ -14,6 +14,6 @@ export class ProductlistComponent {
 
   ngOnInit()
   {
-    this.productservice.getProducts().subscribe((res:any)=>  this.productlist = res?.['products'])
+    this.productservice.getProducts().subscribe((res:any)=>  this.productlist = res)
   }
 }

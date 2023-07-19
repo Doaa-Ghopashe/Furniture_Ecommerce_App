@@ -8,7 +8,7 @@ export class ProductService {
   constructor(private http: HttpClient) {}
   
   getProducts() {
-    return this.http.get(`https://dummyjson.com/products`);
+    return this.http.get(`https://64b28a4238e74e386d553b5c.mockapi.io/Data/Furnitures`);
   }
   
 }

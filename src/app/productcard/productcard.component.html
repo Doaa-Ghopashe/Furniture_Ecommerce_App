@@ -1,13 +1,13 @@
 <div class="card" (click)="  showDetails (productItem.id)" >
   <div class="card-img">
-    <img [src]="productItem.images[0]" class="card-img-top" alt="...">
-    <span class="avalability" [style]="productItem.stock|stocking|fontcolor">{{productItem.stock|stocking}}</span>
+    <img [src]="productItem.Image" class="card-img-top" alt="...">
+    <span class="avalability" [style]="productItem.QTY|stocking|fontcolor">{{productItem.QTY|stocking}}</span>
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{productItem.title}}</h5>
+    <h5 class="card-title">{{productItem.name}}</h5>
     
-    <p class="card-text">{{productItem.brand}}</p>
-    <span id="prod-price">{{productItem.price}} EGP</span>
+    <p class="card-text">{{productItem.Category}}</p>
+    <span id="prod-price">{{productItem.Price}} EGP</span>
     <a class="btn addtocart" (click)="addtocart($event)">Add To Cart</a>
   </div>
 </div>

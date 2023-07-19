@@ -14,3 +14,10 @@ img
 {
     width: 100%;
 }
+:root{
+    --fontcolor:white;
+    --mode:black;
+    --sliderwidth:-40px;
+    --window-width:1536px;
+}
+

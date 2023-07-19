@@ -1,0 +1,15 @@
+<section class="updatebar" #updateBar>
+  <div class="container-fluid">
+      <div class="carsoule-bar">
+          <div class="top-update-bar d-flex" #topBar >
+              <div class="update" *ngFor = "let item of Data">
+                  <div class="update-text">
+                      <p>
+                         {{item}}
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

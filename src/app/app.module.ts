@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgbModule as bootstrap } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -16,8 +16,12 @@ import { FontcolorPipe } from './pipes/fontcolor/fontcolor.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { AuthenticationModule } from './authentication/authentication.module';
-import {HttpClientModule} from '@angular/common/http'
-
+import {HttpClientModule} from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NewsbarComponent } from './newsbar/newsbar.component';
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +33,10 @@ import {HttpClientModule} from '@angular/common/http'
     NotfoundComponent,
     CartComponent,
     FooterComponent,
-    FontcolorPipe
+    FontcolorPipe,
+    NewsbarComponent,
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +45,10 @@ import {HttpClientModule} from '@angular/common/http'
     FormsModule,
     ReactiveFormsModule,
     AuthenticationModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    bootstrap,
+    CarouselModule, 
     
   ],
   providers: [],
