@@ -1,5 +1,21 @@
 header{
-    background-color: rgb(249 209 84 / 57%);
+    background-color: rgb(162 185 127);
+}
+header .col-xl-6:first-child{
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.5px);
+    -webkit-backdrop-filter: blur(9.5px);
+    border: 1px solid rgba(255, 255, 255, 0.64);
+    transform:rotateY(5deg);
+    box-shadow: -8px 3px 10px rgba(0, 0, 0, 0.219);
+    overflow: hidden;
+}
+header .col-xl-6:last-child{
+    -webkit-box-reflect: left -250px linear-gradient(to left, rgba(0,0,0,0.05), rgba(0, 0, 0, 0.0));
+
 }
 header .row{
     height: 55vh;
@@ -19,11 +35,14 @@ p{
     font-size: 18px;
 }
 .btn{
-    background-color: orange;
+    background-color: rgb(255, 242, 102);
     border-radius: 20px;
     padding: 5px 15px;
-    font-size: 16px;
-    text-transform: capitalize;
-    border: 2px solid black;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 300;
     margin: 0 6px;
+}
+.btn:hover{
+    background-color: rgba(255, 241, 91, 0.69);;
 }

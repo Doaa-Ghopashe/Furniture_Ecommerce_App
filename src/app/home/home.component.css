@@ -1,0 +1,13 @@
+ul li{
+    list-style: none;
+    margin: 0 10px ;
+    color: var(--fontcolor);
+    cursor: pointer;
+}
+ul{
+    justify-content: center;
+}
+h1{
+    color: var(--fontcolor);
+    text-align: center;
+}
