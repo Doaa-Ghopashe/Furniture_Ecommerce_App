@@ -22,6 +22,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NewsbarComponent } from './newsbar/newsbar.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
+import { LightningComponent } from './lightning/lightning.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { HeaderComponent } from './header/header.component';
     FontcolorPipe,
     NewsbarComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    LightningComponent
   ],
   imports: [
     BrowserModule,

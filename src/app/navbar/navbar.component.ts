@@ -23,18 +23,6 @@ export class NavbarComponent {
       $(".dropdown-mode").slideToggle();
   
     })
-    $(".lightmode").click(() => {
-      document.documentElement.style.setProperty('--mode', 'white');
-      document.documentElement.style.setProperty('--fontcolor', 'black');
-
-
-    })
-    $(".darkmode").click(() => {
-      document.documentElement.style.setProperty('--mode', 'black');
-      document.documentElement.style.setProperty('--fontcolor', 'white');
-
-
-    })
 
   }
 

@@ -3,12 +3,13 @@ footer{
     padding: 50px 0;
     font-family: 'Poppins', sans-serif;
     text-align: center ;
-    color: #e3e3e3;
+    color: var(--fontcolor);
+    background-color: var(--mode);
 }
 a
 {
     text-decoration: none;
-    color: rgb(198, 198, 198);
+    color: var(--fontcolor);
 }
 .heading{
     font-family: 'Nunito', sans-serif;
@@ -17,10 +18,10 @@ a
     font-size: 23px;
     font-weight: 700;
     right: 23px;
-    color: rgb(208, 208, 208);
+    color: var(--fontcolor);
 }
 .support li , .support a{
-    color: #edecec;
+    color: var(--fontcolor);
     transition: all 0.5s;
 }
 .support a{
@@ -34,7 +35,7 @@ a
     font-size: 29px;
     transition: all 0.5s;
     padding: 0 10px;
-    color: #e4e4e4;
+    color: var(--fontcolor);
 }
 .about li{
     text-align: left;

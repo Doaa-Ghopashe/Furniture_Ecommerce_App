@@ -1,4 +1,4 @@
-.carousel img , .carousel video{
+/* .carousel img , .carousel video{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -53,4 +53,15 @@
 }
 .owl-carousel.owl-drag .owl-item {
     width: 98.9vw  !important;
+} */
+/* header{
+    height: 50vh;
+} */
+header .row{
+    height: 50vh;
+    align-items: center;
+    color: var(--fontcolor);
+}
+header .row img{
+    border-radius: 10px;
 }
