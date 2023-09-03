@@ -1,0 +1,36 @@
+.updatebar
+{
+    background-color: #D80000;
+    color: var(--fontcolor);
+    overflow: hidden;
+}
+.carsoule-bar{
+    overflow: hidden;
+    padding: 5px 0;
+}
+.top-update-bar{
+    width: fit-content;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+    animation: slider 100s linear  infinite running;
+}
+.update{
+    display: inline-flex;
+    padding: 0 20px;
+}
+.update p{
+    margin: 0px;
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 18px;
+    user-select: none;
+}
+@keyframes slider {
+    0%{
+        transform: translate(var(--window-width));
+    }
+    100%{
+        transform: translate(var(--sliderwidth));
+    }
+}

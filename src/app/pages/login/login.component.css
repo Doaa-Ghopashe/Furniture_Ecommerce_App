@@ -1,0 +1,24 @@
+.closed{
+    background:linear-gradient(90deg,rgba(0, 0, 0, 0.17) 50% ,rgba(0, 0, 0, 0.44) 50%);
+    position: relative;
+}
+:host{
+
+    height: 100%;
+}
+.closed::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50%;
+    background: linear-gradient(90deg,rgb(0 0 0 / 39%) 50% ,rgb(223 223 223 / 61%) 50%);
+}
+.opened{
+    background-color: var(--fontcolor);
+}
+.signin-img{
+    border-radius: 400px 200px 600px 300px;
+/* background: url(<path-to-image>), lightgray 50% / cover no-repeat; */
+}
