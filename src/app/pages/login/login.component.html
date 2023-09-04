@@ -1,20 +1,103 @@
 <div class="container">
-    <div class="row  rounded-4 overflow-hidden bg-light position-relative">
-        <div class="col-xl-8 opened">
-            <h1>Sign Up</h1>
-            <form>
-                <input class="form-control" type="text" placeholder="Full Name">
-                <input class="form-control" type="text" placeholder="Full Name">
-                <input class="form-control" type="text" placeholder="Full Name">
-                <input class="form-control" type="text" placeholder="Full Name">
-                <input class="form-control" type="text" placeholder="Full Name">
-
-            </form>
+    <div class="row overflow-hidden rounded-4" style="flex-wrap: nowrap;background-color: var(--fontcolor); color: var(--mode);">
+        <div [@openedwindow]='state'>
+            <div class="row rounded-4 overflow-hidden position-relative" id="signup-window">
+                <div class="col-xl-8  py-5 px-4 ">
+                    <div class="title">
+                        <h1 class="m-0">Sign Up</h1>
+                    </div>
+                    <form>
+                        <div class="mb-4">
+                            <input class="form-control rounded-5" type="text" placeholder="Full Name">
+                        </div>
+                        <div class="mb-4">
+                            <input class="form-control rounded-5" type="email" placeholder="Email">
+                        </div>
+                        <div class="mb-4">
+                            <input class="form-control rounded-5" type="text" placeholder="Phone Number">
+                        </div>
+                        <div class="mb-4">
+                            <input class="form-control rounded-5" type="text" placeholder="Address">
+                        </div>
+                        <div class="mb-4 position-relative">
+                            <input class="form-control rounded-5" type="password" placeholder="Password">
+                            <button class="btn position-absolute bottom-0 top-0" style="right:0">
+                                <fa-icon [icon]="faeye"></fa-icon>
+                            </button>
+                        </div>
+                        <div class="mb-4 position-relative">
+                            <input class="form-control rounded-5" type="password" placeholder="Confirm Password">
+                            <button class="btn position-absolute bottom-0 top-0" style="right:0">
+                                <fa-icon [icon]="faeye"></fa-icon>
+                            </button>
+                        </div>
+                        <div class="form-check">
+                            <input class="me-2" type="checkbox" value="" id="flexCheckIndeterminate">
+                            <label class="form-check-label" for="flexCheckIndeterminate">
+                                Remember me
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <button class="special-btn">Create</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xl-4 closed">
+                    <div class="py-5 mt-5">
+                        <p class="signQ">Already have account, so click on the button.</p>
+                        <button class="special-btn signinbtn my-4" (click)="openwindow()">Sign In
+                            <fa-icon [icon]="faright"></fa-icon>
+                            <fa-icon style="opacity: 0.5;" [icon]="faright"></fa-icon>
+                        </button>
+                        <div>
+                            <img class="signin-img" src="../../../assets/Images/img1.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-xl-4 closed">
-            <h1>Already have account, so click on the  button.</h1>
-            <button>Sign In</button>
-            <img class="signin-img" src="../../../assets/Images/img1.jpg">
+        <div>
+            <div class="row rounded-4 overflow-hidden position-relative" id="signup-window">
+                <div class="col-xl-4 closed">
+                    <div class="py-5 mt-5">
+                        <p class="signQ">Doesn’t have account, so register now.</p>
+                        <button class="special-btn signinbtn my-4" (click)="openwindow()">
+                            <fa-icon [icon]="faleft"></fa-icon>
+                            <fa-icon style="opacity: 0.5;" [icon]="faleft"></fa-icon>
+                            Sign Up
+                        </button>
+                        <div>
+                            <img class="signin-img" src="../../../assets/Images/img1.jpg">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-8 py-5 px-4">
+                    <div class="title">
+                        <h1 class="m-0">Sign In</h1>
+                    </div>
+                    <form>
+                        <div class="mb-4">
+                            <input class="form-control rounded-5" type="email" placeholder="Email">
+                        </div>
+                        <div class="mb-4 position-relative">
+                            <input class="form-control rounded-5" type="password" placeholder="Password">
+                            <button class="btn position-absolute bottom-0 top-0" style="right:0">
+                                <fa-icon [icon]="faeye"></fa-icon>
+                            </button>
+                        </div>
+                        <div class="form-check">
+                            <input class="me-2" type="checkbox" value="" id="flexCheckIndeterminate">
+                            <label class="form-check-label" for="flexCheckIndeterminate">
+                                Remember me
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <button class="special-btn">Login</button>
+                        </div>
+                        <a>Forget Password?</a>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

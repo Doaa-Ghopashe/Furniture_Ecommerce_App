@@ -1,24 +1,109 @@
-.closed{
-    background:linear-gradient(90deg,rgba(0, 0, 0, 0.17) 50% ,rgba(0, 0, 0, 0.44) 50%);
+.closed {
+    /* background: linear-gradient(90deg, rgba(0, 0, 0, 0.17) 50%, rgba(0, 0, 0, 0.44) 50%); */
     position: relative;
+    z-index: 1;
 }
-:host{
+.closed::before{
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.17) 50%, rgba(0, 0, 0, 0.44) 50%);
+    position: absolute;
+    z-index: -1;
+}
+:host {
 
     height: 100%;
 }
-.closed::after{
+
+.closed::after {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
     height: 50%;
-    background: linear-gradient(90deg,rgb(0 0 0 / 39%) 50% ,rgb(223 223 223 / 61%) 50%);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.44) 50% , rgba(0, 0, 0, 0.17) 50%);
 }
-.opened{
-    background-color: var(--fontcolor);
+
+#signin-window ,#signup-window{
+    height: 70vh;
+    border-radius:40%
 }
-.signin-img{
+
+
+.signin-img {
     border-radius: 400px 200px 600px 300px;
-/* background: url(<path-to-image>), lightgray 50% / cover no-repeat; */
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    position:absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50%;
+    /* background: url(<path-to-image>), lightgray 50% / cover no-repeat; */
+}
+
+input {
+    border-radius: 22px;
+    border: 1px solid #C2C2C3;
+    background: #F5F3F3;
+}
+input [type="text"]:focus{
+    appearance: none;
+    box-shadow: none;
+    background: #F5F3F3;
+    border: 1px solid #C2C2C3;
+}
+.title {
+    font-family: Abhaya Libre;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    width: fit-content;
+    margin-bottom: 30px;
+}
+.title h1{
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.special-btn{
+    border-radius: 22px;
+    border: 1px solid #484848;
+    background: #484848;
+    color: var(--fontcolor);
+    text-align: center;
+    font-size: 18px;
+    font-family: Bai Jamjuree;
+    padding: 5px 15px;
+    margin: auto;
+    width: fit-content;
+    display: block;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 104.348% */
+    letter-spacing: 0.92px;
+}
+.signQ{
+    color: #000;
+font-family: Abhaya Libre ExtraBold;
+font-size: 35px;
+
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+}
+.signQ::first-letter{
+    color: #FFF;
+font-family: Abhaya Libre ExtraBold;
+font-size: 45px;
+font-style: normal;
+font-weight: 800;
+
+line-height: normal;
+}
+.signinbtn{
+
 }
