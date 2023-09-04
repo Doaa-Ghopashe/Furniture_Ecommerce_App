@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faEyeSlash , faChevronLeft , faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash, faChevronLeft, faChevronRight, faExclamationCircle, faEye} from '@fortawesome/free-solid-svg-icons';
 
 import { 
   // Trigger is imported here
@@ -8,17 +8,15 @@ import {
   style, 
   transition, 
   animate } from '@angular/animations';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   animations: [
-  
-    // Trigger is used here
     trigger('openedwindow',[
       state('signup', style({
-        // dispaly:"flex",
         width:'100%',
       })),
       state('signin', style({
@@ -33,17 +31,37 @@ import {
   ]
 })
 export class LoginComponent {
-  faeye:any = faEyeSlash;
+  faeyeslash:any = faEyeSlash;
+  faeye:any = faEye;
+  isShown:boolean = false;
+  isShown2:boolean = false;
   faright: any = faChevronRight;
   faleft:any = faChevronLeft;
-  state = 'green';
-  div:any = {
-    signup:true,
-    signin:false
+  errorSign:any=faExclamationCircle;
+
+  state:string = 'signup';
+  
+
+  signInForm = new FormGroup({
+    "fullName":new FormControl("",[Validators.required]),
+    "email" : new FormControl("",[Validators.required,Validators.email]),
+    "address":new FormControl("",[Validators.required]),
+    "phoneNumber":new FormControl("",[Validators.required,Validators.pattern(/[0-9]{10}/)]),
+    "password":new FormControl("",[
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z0-9]{8,}$/)]),
+    "confirmPass":new FormControl("",[Validators.required]),
+  })
+  openwindow = () =>this.state == 'signup' ? this.state = 'signin' : this.state = 'signup';
+
+  loginIn(){
+
   }
 
-  openwindow() {
-    this.state == 'signup' ?
-    this.state = 'signin' : this.state = 'signup';
+  showPassword(){
+    this.isShown =!this.isShown;
+  }
+  showConfirmPassword(){
+    this.isShown2 =!this.isShown2
   }
 }

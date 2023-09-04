@@ -1,5 +1,6 @@
 footer{
     /* margin-top:auto ; */
+    border-top: 0.3px solid var(--bordercolor);
     padding: 50px 0;
     font-family: 'Poppins', sans-serif;
     text-align: center ;
