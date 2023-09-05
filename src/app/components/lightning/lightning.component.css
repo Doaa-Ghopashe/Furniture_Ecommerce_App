@@ -1,21 +1,20 @@
 #bulb{
-    width: 18%;
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    right: 0;
-
+    /* width: 18%; */
+    
     transition: all 0.5s;
 }
-#cord{
-    width: 8%;
+ #cord{
+    top: -30px;
+    /* width: 8%;
     position: fixed;
     z-index: 100;
-    top:-10px;
-    right: 0;
+    
+    right: 0; */
+    /* position: absolute; */
+    /* top:-1px; */
     transition: all 0.2s;
     cursor: pointer;
 }
 #cord:hover{
     top:0
-}
+} 

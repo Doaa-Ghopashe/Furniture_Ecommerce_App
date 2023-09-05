@@ -1,6 +1,6 @@
 footer{
     /* margin-top:auto ; */
-    border-top: 0.3px solid var(--bordercolor);
+    border-top: 0.3px solid rgba(202, 202, 202, 0.374);
     padding: 50px 0;
     font-family: 'Poppins', sans-serif;
     text-align: center ;
@@ -44,7 +44,14 @@ a
     font-weight: 400;
     margin-bottom: 8px;
 }
+.copyright{
+    border-top: 1px solid  rgba(202, 202, 202, 0.374);
+    color: rgba(201, 201, 201, 0.493);
+
+
+}
 .copyright a{
+    
     font-family: 'Dancing Script', cursive;
     font-size: 20px;
 }

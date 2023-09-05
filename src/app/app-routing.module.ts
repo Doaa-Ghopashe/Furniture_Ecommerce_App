@@ -7,7 +7,7 @@ import { ProductdetailsComponent } from './productdetails/productdetails.compone
 import { CartComponent } from './cart/cart.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthGaurdService } from './guards/authguard.guard';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 
 
 const routes: Routes = [

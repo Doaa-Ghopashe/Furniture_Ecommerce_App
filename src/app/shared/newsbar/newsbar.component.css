@@ -1,7 +1,7 @@
 .updatebar
 {
     background-color: #D80000;
-    color: var(--fontcolor);
+    color: white;
     overflow: hidden;
 }
 .carsoule-bar{

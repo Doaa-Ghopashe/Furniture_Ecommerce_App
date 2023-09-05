@@ -1,0 +1,81 @@
+header {
+	position: relative; 
+	background:linear-gradient(180deg,  var(--headerbgColor));
+}
+
+/*#canvas {
+	left: 0;
+	top: 0;
+}
+header::after{
+	content:"Rent";
+	inset: 0;
+	width: fit-content;
+	margin: auto;
+	height: fit-content;
+	font-size: 35px;
+	font-family:'Times New Roman', Times, serif;
+	position: absolute;
+	animation: completeWords 8s infinite 2s ;
+} */
+/* header::before{
+	content: "";
+	position: absolute; */
+/* backdrop-filter: blur(5px); */
+/* background-color: rgba(255, 255, 255, 0.107); */
+/* inset: 0; */
+/* backdrop-filter: blur(1px); */
+
+/* } */
+.glass {
+	border-radius: 40px;
+	border: 1px solid #FFF;
+	background: rgba(255, 255, 255, 0.40);
+	box-shadow: -9px 8px 4px 0px rgba(255, 255, 255, 0.32);
+	backdrop-filter: blur(2px);
+	position: relative;
+	transform: rotateY(20deg);
+}
+.glass::before{
+	content: "";
+	position: absolute;
+	background-image: url("../../../assets/Images/1.png") ;
+	inset: 0;
+	background-size: cover;
+	background-position: center;
+	z-index: -1;
+	transform: rotateY(180deg);
+	opacity: 0.1;
+}
+.glass h3 {
+	color: var(--fontcolor);
+	font-family: Abril Fatface;
+	font-size: 50px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+}
+
+.glass p {
+	color: var(--fontcolor);
+	font-family: Abhaya Libre;
+	font-size: 21px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+button {
+	border-radius: 39px;
+	border: 4px solid rgba(0, 0, 0, 0.27);
+	background: #FAEE85;
+	color: #000;
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	font-family: Abhaya Libre;
+	padding: 3px 15px;
+	margin: 0 5px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	text-transform: uppercase;
+}

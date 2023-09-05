@@ -18,9 +18,9 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import {HttpClientModule} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { LightningComponent } from './lightning/lightning.component';
+import { HomeComponent } from './pages/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LightningComponent } from './components/lightning/lightning.component';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './pages/login/login.component';
 @NgModule({

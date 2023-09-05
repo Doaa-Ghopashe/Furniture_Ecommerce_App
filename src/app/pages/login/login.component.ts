@@ -1,14 +1,7 @@
 import { Component } from '@angular/core';
-import { faEyeSlash, faChevronLeft, faChevronRight, faExclamationCircle, faEye} from '@fortawesome/free-solid-svg-icons';
-
-import { 
-  // Trigger is imported here
-  trigger, 
-  state, 
-  style, 
-  transition, 
-  animate } from '@angular/animations';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { faEyeSlash, faChevronLeft, faChevronRight, faExclamationCircle, faEye, IconDefinition} from '@fortawesome/free-solid-svg-icons';
+import { trigger,state, style, transition, animate } from '@angular/animations';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -31,37 +24,56 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   ]
 })
 export class LoginComponent {
-  faeyeslash:any = faEyeSlash;
-  faeye:any = faEye;
-  isShown:boolean = false;
-  isShown2:boolean = false;
-  faright: any = faChevronRight;
-  faleft:any = faChevronLeft;
-  errorSign:any=faExclamationCircle;
-
-  state:string = 'signup';
+  faeyeslash:IconDefinition;
+  faeye:IconDefinition;
+  faright: IconDefinition;
+  faleft:IconDefinition;
+  errorSign:IconDefinition;
   
+  isShown:boolean;
+  isShown2:boolean;
+  state:string;
 
-  signInForm = new FormGroup({
-    "fullName":new FormControl("",[Validators.required]),
-    "email" : new FormControl("",[Validators.required,Validators.email]),
-    "address":new FormControl("",[Validators.required]),
-    "phoneNumber":new FormControl("",[Validators.required,Validators.pattern(/[0-9]{10}/)]),
-    "password":new FormControl("",[
-      Validators.required,
-      Validators.pattern(/^[a-zA-Z0-9]{8,}$/)]),
-    "confirmPass":new FormControl("",[Validators.required]),
-  })
-  openwindow = () =>this.state == 'signup' ? this.state = 'signin' : this.state = 'signup';
+  signInForm:FormGroup;
+  
+  
+  constructor(private fb : FormBuilder){
+    this.faeye = faEye;
+    this.faeyeslash = faEyeSlash;
+    this.faright = faChevronRight;
+    this.faleft = faChevronLeft;
+    this.errorSign=faExclamationCircle;
+
+    this.signInForm = fb.group({
+      "fullName": ["",Validators.required],
+      "email": ["",[Validators.required,Validators.email]],
+      // "address":["",Validators.required],
+      // "phoneNumber":["",[Validators.required,Validators.pattern(/[0-9]{10}/)]],
+      "password":["",[   Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9]{8,}$/)]],
+      "confirmPass":["",[Validators.required,this.checkMatching()]]
+    }) // we can dispense of phoneNumber and address and put them in another form
+
+    this.state = 'signup';
+    this.isShown = false;
+    this.isShown2 = false;
+  }
+
+  ngOnInit(){
+    
+  }
+
+  //A custom validator to check if confirmed password match password or not
+  checkMatching():ValidatorFn{
+    return(control:AbstractControl):ValidationErrors | null =>{
+      const val = control.value;
+      return val == this.signInForm?.controls["password"]?.value?null:{passwordMatch:true};
+    }
+  }
 
   loginIn(){
-
+    
   }
 
-  showPassword(){
-    this.isShown =!this.isShown;
-  }
-  showConfirmPassword(){
-    this.isShown2 =!this.isShown2
-  }
+ 
 }

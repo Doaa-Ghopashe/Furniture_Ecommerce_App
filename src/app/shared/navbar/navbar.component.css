@@ -10,7 +10,7 @@
     width: 215px;
 }
 nav , .dropdown{
-    background-color: var(--mode);
+    background-color: var(--navbarcolor);
 
 }
 

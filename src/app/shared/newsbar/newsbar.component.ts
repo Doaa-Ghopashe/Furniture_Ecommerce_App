@@ -14,7 +14,7 @@ export class NewsbarComponent {
   @ViewChild('topBar') topBar!: ElementRef;
 
   scrollLeft!:number;
-  Data:string[] = ['Discount 10% in bedroom Category' , 'Discount 20% in kid\'s beds' , 'Discount 10% on red table']
+  Data:string[] = ['Lorem, ipsum dolor sit amet consectetur adipisicing elit' , 'Consequatur obcaecati reiciendis quibusdam sequi facere impedit' , 'quidem culpa impedit id, provident a','et velit cupiditate eos fuga? Veritatis assumenda asperiores fuga animi dolores']
   ngAfterViewInit() {
     this.scrollLeft = this.updateBar.nativeElement.scrollWidth - 1485;
 
