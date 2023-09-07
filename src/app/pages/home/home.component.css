@@ -11,3 +11,22 @@ h1{
     color: var(--fontcolor);
     text-align: center;
 }
+.list{
+	
+	border-bottom: 0.5px solid #ffffff52;
+}
+.X-Hero h2 , .X-Hero p ,.list a{
+	color: var(--fontcolor);
+}
+.X-Hero h2 {
+    
+}
+.active a{
+	border-bottom:1px solid #F0E475;
+	color:#F0E475 ;
+    transition: all 1s;
+}
+.btn{
+    border: 0;
+    border-radius: 0;
+}

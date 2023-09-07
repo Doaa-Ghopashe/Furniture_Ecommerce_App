@@ -1,4 +1,38 @@
 <app-header></app-header>
+<div class="container X-Hero py-5">
+    <div class="text-center">
+        <h2>Popular Products</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, distinctio odit? Molestiae debitis dolore repellat natus eveniet itaque laborum!</p>
+    </div>
+    <ul class="d-flex px-5 justify-content-center align-items-center m-0 list">
+        <li class="list-group-item px-2" [ngClass]="{'active': activeIndex === 0}">
+            <a class="btn" (click)="activeIndex=0" >Couch</a>
+        </li>
+        <li class="list-group-item px-2" [ngClass]="{'active': activeIndex === 1}">
+            <a class="btn" (click)="activeIndex=1">ArmChair</a>
+        </li>
+        <li class="list-group-item px-2" [ngClass]="{'active': activeIndex === 2}">
+            <a class="btn" (click)="activeIndex=2">Table</a>
+        </li>
+        <li class="list-group-item px-2" [ngClass]="{'active': activeIndex === 3}">
+            <a class="btn" (click)="activeIndex=3">Bed</a>
+        </li>
+        <li class="list-group-item px-2" [ngClass]="{'active': activeIndex === 4}">
+            <a class="btn" (click)="activeIndex=4">Lightning</a>
+        </li>
+    </ul>
+    <div class="row align-items-center">
+        <div class="col-xl-4">
+            <img src="/assets/Images/couch1.png">
+        </div>
+        <div class="col-xl-4">
+            <img src="/assets/Images/couch3.png">
+        </div>
+        <div class="col-xl-4">
+            <img src="/assets/Images/couch2.png">
+        </div>
+    </div>
+</div>
 <!-- <div class="container p-5">
     <h1>Popular products</h1>
     <div class="categories">
