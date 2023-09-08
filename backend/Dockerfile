@@ -3,11 +3,13 @@ FROM node
 
 WORKDIR /app
 
-COPY . /app
+COPY package.json /app
 
 RUN npm install
+
+COPY . /app
 
 EXPOSE 4000
 
 #to run the application
-CMD [ "node" , "index.js" ]
+CMD [ "npm" ,"run", "start-dev" ]
