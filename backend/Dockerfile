@@ -1,5 +1,5 @@
 #base image is a dependency that is needed to build a docker image to the project
-FROM node
+FROM node:10.0.0
 
 WORKDIR /app
 
