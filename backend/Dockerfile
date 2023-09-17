@@ -5,7 +5,15 @@ WORKDIR /app
 
 COPY package.json /app
 
-RUN npm install
+ARG NODE_ENV
+
+#this is a condition statement that check the type of environment that is run if it's production 
+# then the dependencies that are being installed will be the dependencies of production only else 
+# the all dependenices will be installed
+RUN if ["$NODE_ENV" == "production"];\
+    then npm install --only=production \
+    else npm install \
+    fi
 
 COPY . /app
 
