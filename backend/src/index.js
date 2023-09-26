@@ -2,18 +2,33 @@
 
 const express = require('express'),
 
-user = require('./routes/user')
+    errorHandling = require('./middleware/errorHandling'),
 
-PORT = process.env.PORT || 4000,
+    user = require('./routes/user'),
 
-app = express();
+    product = require('./routes/product'),
 
-app.use(express.json())
+    PORT = process.env.PORT || 4000,
 
-app.use('/user',user)
-// app.get('/',(req,res)=>{res.send("<h1>Doaa Adel Ghopashe mohamed de</h1>")});
+    app = express();
 
-app.listen(PORT,()=>{console.log("listening on port")});
+app.use(express.json());
+
+app.use(express.static('public'));
+
+app.use(errorHandling);
+
+app.use('/user',user);
+
+app.use('/product',product);
+
+app.listen(PORT,(err)=>{
+    if(err){
+        console.error(err);
+        return;
+    }
+    console.log("listening on port 4000")
+});
 
 
 // let http = require('http');
