@@ -32,22 +32,7 @@ export class NavbarComponent {
   }
 
   changeMode(){
-    if(this.currentMode == "black"){
-      document.documentElement.style.setProperty('--mode', 'white');
-      document.documentElement.style.setProperty('--fontcolor', 'black');
-      document.documentElement.style.setProperty('--navbarcolor', '#dadada');
-      document.documentElement.style.setProperty('--overlaycolor', 'linear-gradient(90deg, rgba(255, 255, 255, 0.44) 50%, rgba(255, 255, 255, 0.17) 50%)');
-      document.documentElement.style.setProperty('--btncolor', '#bbbbbb');
-      document.documentElement.style.setProperty('--bordercolor', 'rgb(255 255 255 / 46%)');
-    }else{
-      document.documentElement.style.setProperty('--mode', 'black');
-      document.documentElement.style.setProperty('--fontcolor', 'white');
-      document.documentElement.style.setProperty('--navbarcolor', 'rgb(33, 33, 33)');
-      document.documentElement.style.setProperty('--overlaycolor', 'linear-gradient(90deg, rgba(0, 0, 0, 0.44) 50%, rgba(0, 0, 0, 0.17) 50%)');
-      document.documentElement.style.setProperty('--btncolor', '#484848');
-      document.documentElement.style.setProperty('--bordercolor', 'rgba(39, 39, 39, 0.137)');
-    }
-    this.currentMode  = document.documentElement.style.getPropertyValue('--mode');
+
   }
 
   logout(){
