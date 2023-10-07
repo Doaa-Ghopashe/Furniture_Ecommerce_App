@@ -37,11 +37,25 @@
             <i class="fa-solid fa-circle-half-stroke"></i>
           </a>
         </span>
-        <span class="mx-3">
+        <!--This name is being displayed in case the user is signed-->
+        <span *ngIf="!signedIn"  class="mx-3">
           <a class="nav-link btn" routerLink="/login">
             <fa-icon [icon]="fauser"></fa-icon>
           </a>
         </span>
+
+        <span *ngIf="signedIn" class="mx-3 d-flex align-items-center">
+          <div class="dropdown">
+            <a class="btn">
+              <fa-icon [icon]="fauser"></fa-icon>
+              <span class="p-2 username">{{username}}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><button class="btn" (click)="logout()">Logout</button></li>
+            </ul>
+          </div>          
+        </span>
+
         <span class="mx-3 position-relative">
           <a class="nav-link btn" >
             <fa-icon [icon]="facart"></fa-icon>

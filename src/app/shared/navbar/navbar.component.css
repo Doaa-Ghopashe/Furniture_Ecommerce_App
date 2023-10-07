@@ -57,16 +57,13 @@ fa-icon
     right: 0; */
 }
 .dropdown-menu {
-    text-align: center;
-    padding: 5px;
     border: none;
-    background-color: rgb(221 219 219 / 56%);
+    width: 100%;
     min-width: 0;
 }
-.dropdown-menu .btn:first-child{
-    border-bottom: 1px solid #00000030;
-    /* width: 100%; */
-    padding-bottom: 10px;
+.dropdown-menu .btn{
+    color: var(--navbarcolor);
+    font-size: 16px;
 }
 .lightpage , .lightmode{
     background-color: white;
@@ -97,4 +94,7 @@ li{
 }
 .nav-item .active-link{
     opacity: 1;
+}
+.username{
+    color:var(--fontcolor)
 }

@@ -6,12 +6,12 @@
                     <div class="title">
                         <h1 class="m-0">Sign Up</h1>
                     </div>
-                    <form  [formGroup]="signInForm" (ngSubmit)="loginIn()">
+                    <form  [formGroup]="signUpForm" (ngSubmit)='register()'>
                         <div class="mb-4 position-relative">
-                            <input class="form-control rounded-5" type="text" formControlName="fullName" placeholder="User Name">
-                            <div id="fullNameHelp" class="form-text position-absolute error-msg m-0" 
-                            *ngIf="signInForm.controls['fullName'].touched && signInForm.controls['fullName'].invalid">
-                                <span *ngIf="signInForm.controls['fullName']?.errors?.['required']">
+                            <input class="form-control rounded-5" type="text" formControlName="name" placeholder="User Name">
+                            <div id="nameHelp" class="form-text position-absolute error-msg m-0" 
+                            *ngIf="signUpForm.controls['name'].touched && signUpForm.controls['name'].invalid">
+                                <span *ngIf="signUpForm.controls['name']?.errors?.['required']">
                                     <fa-icon [icon]="errorSign" title="Reqiured"></fa-icon>
                                 </span>
                             </div>
@@ -19,11 +19,11 @@
                         <div class="mb-4 position-relative">
                             <input class="form-control rounded-5" type="email" formControlName="email" placeholder="Email">
                             <div id="emailHelp" class="form-text position-absolute error-msg m-0" 
-                            *ngIf="signInForm.controls['email'].touched && signInForm.controls['email'].invalid" >
-                                <span  *ngIf="signInForm.controls['email']?.errors?.['required']" >
+                            *ngIf="signUpForm.controls['email'].touched && signUpForm.controls['email'].invalid" >
+                                <span  *ngIf="signUpForm.controls['email']?.errors?.['required']" >
                                     <fa-icon [icon]="errorSign" title="Reqiured"></fa-icon>
                                 </span>
-                                <span  *ngIf="signInForm.controls['email']?.errors?.['email']">
+                                <span  *ngIf="signUpForm.controls['email']?.errors?.['email']">
                                     <fa-icon [icon]="errorSign" title="It should be like username@example.com"></fa-icon>
                                 </span>
                             </div>
@@ -32,11 +32,11 @@
                             <input class="form-control rounded-5 px-5" type="text" formControlName="phoneNumber" placeholder="Phone Number">
                             <span class="position-absolute top-0 bottom-0 d-flex align-items-center px-2  " style="border-right: 0.5px solid rgba(0, 0, 0, 0.142);">+20</span>
                             <div id="emailHelp" class="form-text error-msg m-0" 
-                            *ngIf="signInForm.controls['phoneNumber'].touched && signInForm.controls['phoneNumber'].invalid" >
-                                <span *ngIf="signInForm.controls['phoneNumber']?.errors?.['required']">
+                            *ngIf="signUpForm.controls['phoneNumber'].touched && signUpForm.controls['phoneNumber'].invalid" >
+                                <span *ngIf="signUpForm.controls['phoneNumber']?.errors?.['required']">
                                     <fa-icon [icon]="errorSign" title="Reqiured"></fa-icon>
                                 </span>
-                                <span *ngIf="signInForm.controls['phoneNumber']?.errors?.['pattern']">
+                                <span *ngIf="signUpForm.controls['phoneNumber']?.errors?.['pattern']">
                                     <fa-icon [icon]="errorSign" title="It should formed from 10 numbers"></fa-icon>
                                 </span>
                             </div>
@@ -44,8 +44,8 @@
                         <div class="mb-4 position-relative">
                             <input class="form-control rounded-5" type="text" formControlName="address" placeholder="Address">
                             <div id="emailHelp" class="form-text error-msg m-0" 
-                            *ngIf="signInForm.controls['address'].touched && signInForm.controls['address'].invalid" >
-                                <span *ngIf="signInForm.controls['address']?.errors?.['required']">
+                            *ngIf="signUpForm.controls['address'].touched && signUpForm.controls['address'].invalid" >
+                                <span *ngIf="signUpForm.controls['address']?.errors?.['required']">
                                     <fa-icon [icon]="errorSign" title="Reqiured"></fa-icon>
                                 </span>
                             </div>
@@ -57,38 +57,38 @@
                                 <fa-icon [icon]="isShown?faeye:faeyeslash"></fa-icon>
                             </button>
                             <div id="passwordHelp" class="form-text error-msg m-0"
-                            *ngIf="signInForm.controls['password'].touched && signInForm.controls['password'].invalid" >
-                                <span *ngIf="signInForm.controls['password']?.errors?.['required']">
+                            *ngIf="signUpForm.controls['password'].touched && signUpForm.controls['password'].invalid" >
+                                <span *ngIf="signUpForm.controls['password']?.errors?.['required']">
                                     <fa-icon [icon]="errorSign" title="Reqiured"></fa-icon>
                                 </span>
-                                <span *ngIf="signInForm.controls['password']?.errors?.['pattern']">
+                                <span *ngIf="signUpForm.controls['password']?.errors?.['pattern']">
                                     <fa-icon [icon]="errorSign" 
                                     title=" the password to contain [a-zA-z0-9!@#$] and be at least 8 characters">
                                     </fa-icon>
                                 </span>
-                                <span *ngIf="signInForm.controls['password']?.errors?.['maxlength']">
+                                <span *ngIf="signUpForm.controls['password']?.errors?.['maxlength']">
                                     <fa-icon [icon]="errorSign" title="Its maximum length is 8"></fa-icon>
                                 </span>
                             </div>
                         </div>
                         <div class="mb-4 position-relative">
-                            <input class="form-control rounded-5" formControlName="confirmPass" [type]="isShown2?'text':'password'" placeholder="Confirm Password">
+                            <input class="form-control rounded-5" formControlName="confirmPassword" [type]="isShown2?'text':'password'" placeholder="Confirm Password">
                             <button class="btn position-absolute bottom-0 top-0" style="right:0" 
                             (click)="this.isShown2 =!this.isShown2">
                                 <fa-icon [icon]="isShown2?faeye:faeyeslash"></fa-icon>
                             </button>
-                            <div id="confirmPasswordHelp" class="form-text error-msg m-0" 
-                            *ngIf="signInForm.controls['confirmPass'].touched && signInForm.controls['confirmPass'].invalid" >
-                                <span *ngIf="signInForm.controls['confirmPass']?.errors?.['required']">
+                            <div id="confirmPasswordwordHelp" class="form-text error-msg m-0" 
+                            *ngIf="signUpForm.controls['confirmPassword'].touched && signUpForm.controls['confirmPassword'].invalid" >
+                                <span *ngIf="signUpForm.controls['confirmPassword']?.errors?.['required']">
                                     <fa-icon [icon]="errorSign" title="required"></fa-icon>
                                 </span>
-                                <span *ngIf="signInForm.controls['confirmPass']?.errors?.['passwordMatch']">
+                                <span *ngIf="signUpForm.controls['confirmPassword']?.errors?.['passwordMatch']">
                                     <fa-icon [icon]="errorSign" title="Not Matched"></fa-icon>
                                 </span>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <button [disabled]="signInForm.invalid" class="special-btn">Create</button>
+                            <button [disabled]="signUpForm.invalid" class="special-btn">Create</button>
                         </div>
                     </form>
                 </div>
@@ -127,12 +127,12 @@
                     <div class="title">
                         <h1 class="m-0">Sign In</h1>
                     </div>
-                    <form>
+                    <form [formGroup]="signInForm" (ngSubmit)="logIn()">
                         <div class="mb-4">
-                            <input class="form-control rounded-5" type="email" placeholder="Email">
+                            <input class="form-control rounded-5" formControlName="email" type="email" placeholder="Email">
                         </div>
                         <div class="mb-4 position-relative">
-                            <input class="form-control rounded-5" type="password" placeholder="Password">
+                            <input class="form-control rounded-5" formControlName="password" type="password" placeholder="Password">
                             <button class="btn position-absolute bottom-0 top-0" style="right:0">
                                 <fa-icon [icon]="isShown?faeye:faeyeslash"></fa-icon>
                             </button>

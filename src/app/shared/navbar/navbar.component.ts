@@ -4,6 +4,7 @@ import { CounterService } from 'src/app/services/counter.service';
 import $ from "jquery";
 import {  OwlOptions } from 'ngx-owl-carousel-o';
 import { OwlDOMData } from 'ngx-owl-carousel-o/lib/models/owlDOM-data.model';
+import { VerifyTokenService } from 'src/app/services/verify-token.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -14,17 +15,19 @@ export class NavbarComponent {
   fauser:any = faUser;
   currentMode:string = "black";
   count!:number;
+  signedIn!:boolean;
+  username!:string;
   // customOptions!:OwlOptions;
   // slides !: any;
-  constructor(private counter:CounterService){}
+  constructor(private counter:CounterService,private decodeToken:VerifyTokenService){}
 
   ngOnInit()
   {
+    this.username = this.decodeToken.decodeToken()
 
-    this.counter.counterVal.subscribe((res)=>this.count = res)
-    $(".dropdown .btn").click(() => {
-      $(".dropdown-mode").slideToggle();
-    })
+    this.counter.counterVal.subscribe((res)=>this.count = res);
+
+    this.signedIn = sessionStorage.getItem('token') ? true : false
 
   }
 
@@ -45,6 +48,10 @@ export class NavbarComponent {
       document.documentElement.style.setProperty('--bordercolor', 'rgba(39, 39, 39, 0.137)');
     }
     this.currentMode  = document.documentElement.style.getPropertyValue('--mode');
+  }
+
+  logout(){
+    sessionStorage.removeItem('token')
   }
 
 }

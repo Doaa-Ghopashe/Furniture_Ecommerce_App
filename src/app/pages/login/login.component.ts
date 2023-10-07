@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { faEyeSlash, faChevronLeft, faChevronRight, faExclamationCircle, faEye, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import { trigger,state, style, transition, animate } from '@angular/animations';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-
+import { UserService } from 'src/app/services/user.service';
+import { error } from 'jquery';
+import Swal from 'sweetalert2';
+import { text } from '@fortawesome/fontawesome-svg-core';
+import { Route, Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -29,31 +33,32 @@ export class LoginComponent {
   faright: IconDefinition;
   faleft:IconDefinition;
   errorSign:IconDefinition;
-  
   isShown:boolean;
   isShown2:boolean;
   state:string;
-
+  signUpForm:FormGroup;
   signInForm:FormGroup;
   
-  
-  constructor(private fb : FormBuilder){
+  constructor(private fb : FormBuilder,private user_service:UserService,private router:Router){
     this.faeye = faEye;
     this.faeyeslash = faEyeSlash;
     this.faright = faChevronRight;
     this.faleft = faChevronLeft;
     this.errorSign=faExclamationCircle;
 
-    this.signInForm = fb.group({
-      "fullName": ["",Validators.required],
-      "email": ["",[Validators.required,Validators.email]],
-      // "address":["",Validators.required],
-      // "phoneNumber":["",[Validators.required,Validators.pattern(/[0-9]{10}/)]],
-      "password":["",[   Validators.required,
+    this.signUpForm = fb.group({
+      name: ["",Validators.required],
+      email: ["",[Validators.required,Validators.email]],
+      password:["",[   Validators.required,
         Validators.pattern(/^[a-zA-Z0-9]{8,}$/)]],
-      "confirmPass":["",[Validators.required,this.checkMatching()]]
-    }) // we can dispense of phoneNumber and address and put them in another form
+      confirmPassword:["",[Validators.required,this.checkMatching()]]
+    })
 
+    this.signInForm = fb.group({
+      email: ["",[Validators.required,Validators.email]],
+      password:["",[   Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9]{8,}$/)]],
+    })
     this.state = 'signup';
     this.isShown = false;
     this.isShown2 = false;
@@ -67,12 +72,60 @@ export class LoginComponent {
   checkMatching():ValidatorFn{
     return(control:AbstractControl):ValidationErrors | null =>{
       const val = control.value;
-      return val == this.signInForm?.controls["password"]?.value?null:{passwordMatch:true};
+      return val == this.signUpForm?.controls["password"]?.value?null:{passwordMatch:true};
     }
   }
 
-  loginIn(){
-    
+  register(){
+    //after the register successding we want to redirect the user to the login
+    this.user_service.register(this.signUpForm.value).subscribe({
+      next:(res)=>{
+        setTimeout(()=>{
+          this.signUpForm.reset();
+          this.state = 'signin';
+        },200)
+      },
+      error:(res)=>{
+        Swal.fire({
+          text:res.error,
+          showConfirmButton:false,
+          timer:5000,
+          icon:'error',
+          width: 600,
+          padding: '3em',
+          backdrop: `
+            rgba(0,0,0,0.4)
+            left top
+            no-repeat
+          `
+        })
+      }
+    })
+  }
+
+  logIn(){
+    console.log(this.signInForm.value)
+    this.user_service.login(this.signInForm.value).subscribe({
+      next:(res)=>{
+        sessionStorage.setItem('token',JSON.stringify(res));                                                                                                                                  
+        this.router.navigate(['/']);
+      },
+      error:(res)=>{
+        Swal.fire({
+          text:res.error,
+          icon:'error',
+          timer:5000,
+          showConfirmButton:false,
+          width: 600,
+          padding: '3em',
+          backdrop: `
+            rgba(0,0,0,0.4)
+            left top
+            no-repeat
+          `
+        })
+      }
+    })
   }
 
  
