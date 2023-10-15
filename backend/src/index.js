@@ -4,9 +4,9 @@ const express = require('express'),
 
     errorHandling = require('./middleware/errorHandling'),
 
-    cors = require('cors')
+    cors = require('cors'),
 
-user = require('./routes/user'),
+    user = require('./routes/user'),
 
     product = require('./routes/product'),
 

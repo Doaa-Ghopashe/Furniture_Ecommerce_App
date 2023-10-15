@@ -8,6 +8,7 @@ import { CartComponent } from './cart/cart.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthGaurdService } from './guards/authguard.guard';
 import { HomeComponent } from './pages/home/home.component';
+import { VerificationComponent } from './pages/verification/verification.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path:"productdetails/:id",
     component:ProductdetailsComponent
+    // canActivate: [AuthGaurdService]
+  },
+  {
+    path:"user/verify/:userId/:uniqueString",
+    component:VerificationComponent
     // canActivate: [AuthGaurdService]
   },
   {

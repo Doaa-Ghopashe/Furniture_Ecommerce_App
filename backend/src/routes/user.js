@@ -14,5 +14,8 @@ router.get('/profile',auth,controller.profile);
 
 router.put('/profile',auth,controller.updateProfile);
 
+router.get('/user/verify/:userId/:uniqueStr',controller.verify);
+
+
 
 module.exports = router;

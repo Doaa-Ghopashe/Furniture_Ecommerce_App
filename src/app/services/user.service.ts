@@ -19,4 +19,8 @@ export class UserService {
   profile(){
 
   }
+
+  verificationRequest(id:String,uniqueString:String){
+    return this.http.get(`http://localhost:4000/user/verify/${id}/${uniqueString}`)
+  }
 }

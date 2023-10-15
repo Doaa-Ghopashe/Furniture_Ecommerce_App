@@ -16,6 +16,7 @@ let userSchema = new mongoose.Schema({
         type:'string',
         required:true
     },
+    verified:Boolean,
     token: String
 }),
 

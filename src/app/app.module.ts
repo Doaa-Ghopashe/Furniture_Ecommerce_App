@@ -23,6 +23,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LightningComponent } from './components/lightning/lightning.component';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './pages/login/login.component';
+import { VerificationComponent } from './pages/verification/verification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { LoginComponent } from './pages/login/login.component';
     HomeComponent,
     HeaderComponent,
     LightningComponent,
-    LoginComponent
+    LoginComponent,
+    VerificationComponent
   ],
   imports: [
     BrowserModule,
