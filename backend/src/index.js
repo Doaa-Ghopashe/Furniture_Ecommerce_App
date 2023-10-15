@@ -2,11 +2,11 @@ require('dotenv').config();
 require('cors')
 const express = require('express'),
 
-    errorHandling = require('./middleware/errorHandling'),  
+    errorHandling = require('./middleware/errorHandling'),
 
     cors = require('cors')
 
-    user = require('./routes/user'),
+user = require('./routes/user'),
 
     product = require('./routes/product'),
 
@@ -15,18 +15,14 @@ const express = require('express'),
     Mongodb = process.env.MONGODB_URL,
 
     app = express(),
-    
+
     mongoose = require('mongoose');
 
 app.use(cors());
 
-mongoose.connect(Mongodb,{ useUnifiedTopology: true,useNewUrlParser: true } ,(err)=>{
-    if(err){
-        console.error(err);
-        return ;
-    }
-    console.log("DB connected successfully ")
-});
+mongoose.connect(Mongodb, { useUnifiedTopology: true, useNewUrlParser: true })
+    .then(() => console.log("DB connected successfully "))
+    .catch((err) => console.error(err));
 
 app.use(express.json());
 
@@ -34,12 +30,12 @@ app.use(express.static('public'));
 
 app.use(errorHandling);
 
-app.use('',user);
+app.use('', user);
 
-app.use('/product',product);
+app.use('/product', product);
 
-app.listen(PORT,(err)=>{
-    if(err){
+app.listen(PORT, (err) => {
+    if (err) {
         console.error(err);
         return;
     }
