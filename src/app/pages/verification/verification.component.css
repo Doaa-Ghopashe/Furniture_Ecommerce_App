@@ -1,3 +1,44 @@
 :host {
     height: 100%;
 }
+
+.VE-container{
+    position: relative;
+    background-image: url('../../../assets/Images/EmailVeified.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.VE-container::after{
+    content:"";
+    position: absolute;
+    inset:0;
+    background: #00000071;
+    backdrop-filter: blur(2px);
+    z-index: -1;
+}
+
+.VE-container h1{
+    font-size: 65px;
+    font-weight: 200;
+    margin-bottom: 24px;
+}
+
+.VE-container p{
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 35px;
+}
+
+.VE-container .btn{
+    width: fit-content;
+    border: none;
+    text-transform: uppercase;
+    background: rebeccapurple;
+}
