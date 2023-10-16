@@ -241,7 +241,7 @@ let verify = (req, res) => {
         })
 }
 
-let resetPassword = (req,res)=>{
+let sendPasswordResetEmail = (req,res)=>{
     //destruct the comming request
     const {email} = req.body;
     //check if the email exists in the request
@@ -252,7 +252,12 @@ let resetPassword = (req,res)=>{
     userModel
     .findOne({email})
     .then((result)=>{
-        validator.resetPassword(result)
+        //check if there is a result
+        if(result){
+            validator.sendResetPasswordLink(result)
+            return res.status(200).send('Email send successfully')
+        }
+        res.status(200).send('Email does not exist')
     })
     .catch((err)=>{
         console.log(err);
@@ -260,4 +265,4 @@ let resetPassword = (req,res)=>{
     })
 }
 
-module.exports = { login, logout, register, profile, updateProfile, verify };
+module.exports = { login, logout, register, profile, updateProfile, verify, sendPasswordResetEmail };

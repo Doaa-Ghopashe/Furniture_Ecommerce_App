@@ -1,10 +1,12 @@
-const nodemailer = require('nodemailer'),
+    const nodemailer = require('nodemailer'),
 
     userEmail = process.env.AUTH_EMAIL,
 
     userPass = process.env.AUTH_PASSWORD,
 
     userVerificationModel = require('../model/userVerification'),
+
+    currUrl = 'http://localhost:4200/',
 
     bcrypt = require('bcrypt'),
 
@@ -32,15 +34,12 @@ transporter.verify(err => err ? console.log(err) : console.log("Ready for messag
 
 function sendVerificationEmail({ _id, email }) {
 
-    //url to be used in the email
-    const currUrl = 'http://localhost:4200/';
-
     //create a unique string 
     const uniqueString = uuidv4() + _id;
 
     //compose that will be send 
     const mailerOptions = {
-        from: process.env.AUTH_EMAIL,
+        from: userEmail,
         to: email,
         subject: "Verify your email",
         html: `<p>verify your email address to complete sign up process and login into your account </p>
@@ -82,8 +81,32 @@ function sendVerificationEmail({ _id, email }) {
         })
 }
 
-function resetPassword({email,password}) {
+function sendResetPasswordLink({ email, password , _id }) {
 
+    const uniqueString = uuidv4() + _id;
+
+    //compose that will be send
+    const mailerOptions = {
+        from: userEmail,
+        to: email,
+        subject:"Reset Password",
+        html:`<p>reset password to login </p>
+        <p><b>This link expires in 6 hours</b>.</p>
+        <p>Press 
+        <a href='${currUrl + "resetpassword/" + _id + '/' + uniqueString}'>here</a>
+        to proceed.</p>`
+    }
+
+    //send mail
+    transporter
+    .sendMail(mailerOptions)
+    .then(()=>{
+        console.log('Email send successfully')
+        return 'Email send successfully'
+    }).catch((err)=>{
+        console.log(err);
+        return "Email send failed"
+    })
 }
 
-module.exports = { sendVerificationEmail, resetPassword }
+module.exports = { sendVerificationEmail, sendResetPasswordLink }

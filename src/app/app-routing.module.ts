@@ -10,6 +10,7 @@ import { AuthGaurdService } from './guards/authguard.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { VerificationComponent } from './pages/verification/verification.component';
 import { ForgettenpassComponent } from './forgettenpass/forgettenpass.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path:"user/verify/:userId/:uniqueString",
     component:VerificationComponent
+    // canActivate: [AuthGaurdService]
+  },
+  {
+    path:"resetpassword/:userId/:uniqueString",
+    component:ResetpasswordComponent
     // canActivate: [AuthGaurdService]
   },
   {

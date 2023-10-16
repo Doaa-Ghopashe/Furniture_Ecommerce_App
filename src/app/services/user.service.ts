@@ -23,4 +23,10 @@ export class UserService {
   verificationRequest(id:String,uniqueString:String){
     return this.http.get(`http://localhost:4000/user/verify/${id}/${uniqueString}`)
   }
+
+  forgetPassword(id:String,uniqueString:String,data:UserInterface){
+    return this.http.post(`http://localhost:4000/password/reset/${id}/${uniqueString}`,data)
+  }
+
+  
 }

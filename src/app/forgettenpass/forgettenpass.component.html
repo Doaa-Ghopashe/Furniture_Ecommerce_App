@@ -2,20 +2,22 @@
     <div class="h-100 m-auto px-5 py-3 mb-3 kk">
         <h1 class="text-center">Reset Password </h1>
         <p class="text-center">Enter your email address</p>
-        <form  >
+        <form  [formGroup]="emailForm" (ngSubmit)='sendMail()'>
             <div class="mb-4 position-relative dd">
-                <input class="form-control" type="email" placeholder="user@example.com">
+                <input class="form-control" type="email" formControlName="email" placeholder="user@example.com">
                 <div id="emailHelp" class="form-text position-absolute error-msg m-0" 
-                *ngIf="" >
-                    <span  *ngIf="" >
+                *ngIf="emailForm.controls['email'].touched && emailForm.controls['email'].invalid" >
+                    <span  *ngIf="emailForm.controls['email']?.errors?.['required']" >
+                        <fa-icon [icon]="errorSign" title="Reqiured"></fa-icon>
                     </span>
-                    <span  *ngIf="">
+                    <span  *ngIf="emailForm.controls['email']?.errors?.['email']">
+                        <fa-icon [icon]="errorSign" title="It should be like username@example.com"></fa-icon>
                     </span>
                 </div>
             </div>
 
             <div class="mb-3 m-auto" style="width: fit-content;">
-                <button [disabled]="" class="special-btn btn">Submit</button>
+                <button [disabled]="emailForm.invalid" class="special-btn">Submit</button>
             </div>
         </form> 
     </div>

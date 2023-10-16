@@ -16,6 +16,6 @@ router.put('/profile',auth,controller.updateProfile);
 
 router.get('/user/verify/:userId/:uniqueStr',controller.verify);
 
-
+router.post('/password/reset/:userId/:uniqueStr',controller.sendPasswordResetEmail);
 
 module.exports = router;

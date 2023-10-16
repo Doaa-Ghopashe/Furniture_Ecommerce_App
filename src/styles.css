@@ -26,3 +26,12 @@ img
     --headerbgColor:rgba(199, 250, 167, 0.64) 0%, rgba(190, 255, 150, 0.60) 44.89%, rgba(255, 255, 255, 0.68) 99.99%;
 }
 
+.special-btn{
+    background: #2a2a29;
+    color: white;
+    text-transform: uppercase;
+    font-size: 16px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: 0;
+}

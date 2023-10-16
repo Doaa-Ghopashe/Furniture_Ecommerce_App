@@ -25,6 +25,7 @@ import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './pages/login/login.component';
 import { VerificationComponent } from './pages/verification/verification.component';
 import { ForgettenpassComponent } from './forgettenpass/forgettenpass.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { ForgettenpassComponent } from './forgettenpass/forgettenpass.component'
     LightningComponent,
     LoginComponent,
     VerificationComponent,
-    ForgettenpassComponent
+    ForgettenpassComponent,
+    ResetpasswordComponent
   ],
   imports: [
     BrowserModule,
