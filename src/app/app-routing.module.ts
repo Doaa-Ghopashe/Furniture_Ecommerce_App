@@ -8,9 +8,9 @@ import { CartComponent } from './cart/cart.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthGaurdService } from './guards/authguard.guard';
 import { HomeComponent } from './pages/home/home.component';
-import { VerificationComponent } from './pages/verification/verification.component';
+import { VerificationComponent } from './authentication/verification/verification.component';
 import { ForgettenpassComponent } from './forgettenpass/forgettenpass.component';
-import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { ResetpasswordComponent } from './authentication/resetpassword/resetpassword.component';
 
 
 const routes: Routes = [

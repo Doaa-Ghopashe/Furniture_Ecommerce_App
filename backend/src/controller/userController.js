@@ -2,6 +2,8 @@ const userVerification = require('../model/userVerification'),
 
     userModel = require('../model/user'),
 
+    passwordReset = require('../model/passwordReset'),
+
     secretKey = process.env.SECRET_KEY,
 
     jwt = require('jsonwebtoken'), bcrypt = require('bcrypt'),
@@ -64,19 +66,19 @@ let login = async (req, res) => {
 
         const { email, password } = req.body;
 
-        if (!(email && password)) 
+        if (!(email && password))
 
             return res.status(400).send('All inputs are required');
-        
+
         const user = await userModel.findOne({ email });
 
-        if (!user.verified) 
+        if (!user.verified)
 
             return res.status(400).send('Please verify the email first then back login');
-        
+
         //compare the password with the encrypted password
         if (user && (await bcrypt.compare(password, user.password))) {
-            
+
             //create the token 
             const token = jwt.sign(
                 {
@@ -241,28 +243,126 @@ let verify = (req, res) => {
         })
 }
 
-let sendPasswordResetEmail = (req,res)=>{
-    //destruct the comming request
-    const {email} = req.body;
-    //check if the email exists in the request
-    if(!email){
-        res.status(400).send("Email is not found, Please enter the email");
-    }
-    //check the existence of the email in the collection
+let sendPasswordResetEmail = (req, res) => {
+
+    const { email } = req.body;
+
+    if (!email)
+
+        return res.status(400).send("Email is not found, Please enter the email");
+
     userModel
-    .findOne({email})
-    .then((result)=>{
-        //check if there is a result
-        if(result){
-            validator.sendResetPasswordLink(result)
-            return res.status(200).send('Email send successfully')
-        }
-        res.status(200).send('Email does not exist')
-    })
-    .catch((err)=>{
-        console.log(err);
-        res.status(400).send("Email is not found, Please sign up")
-    })
+        .findOne({ email })
+        .then((result) => {
+            //check if there is a result
+            if (result) {
+                validator.sendResetPasswordLink(result)
+                return res.status(200).send('Email send successfully')
+            }
+            res.status(200).send('Email does not exist')
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(400).send("Email is not found, Please sign up")
+        })
 }
 
-module.exports = { login, logout, register, profile, updateProfile, verify, sendPasswordResetEmail };
+let updatePassword = (req, res) => {
+
+    const { password, confirmPassword } = req.body,
+
+        { userId, uniqueStr } = req.params;
+        console.log(uniqueStr);
+
+    if (!(password && confirmPassword && userId && uniqueStr))
+
+        return res.status(400).send("You should enter the two passwords");
+
+    if (password != confirmPassword)
+
+        return res.status(400).send('confirm password should match password');
+
+    passwordReset
+        .find({ userId })
+        .then((result) => {
+
+            if (result.length <= 0)
+
+                return res.json({
+                    status: 400,
+                    message: "There is no ask to change the password"
+                });
+
+            const { expiresAt, uniqueString } = result[0];
+
+            if (Date.now() > expiresAt) {
+
+                passwordReset
+                    .deleteOne({ userId })
+                    .then(() => {
+                        res.json({
+                            status: 200,
+                            message: 'The link has been expired, Please send a demand again to reset the password'
+                        });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        res.json({
+                            status: 400,
+                            message: 'The deletion process could not be completed'
+                        });
+                    });
+            }
+
+            bcrypt
+                .compare(uniqueStr, uniqueString)
+                .then((result) => {
+                    if (result) {
+                        userModel
+                            .updateOne({ _id: userId }, { password })
+                            .then(() => {
+                                passwordReset
+                                    .deleteOne({ userId })
+                                    .then(() => {
+                                        return res.json({
+                                            status: 200,
+                                            message: 'Password has been changes'
+                                        });
+                                    })
+                                    .catch((err) => {
+                                        console.log(err);
+                                        return res.json({
+                                            status: 400,
+                                            message: 'User does not exist in collection'
+                                        });
+                                    })
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                                return res.json({
+                                    status: 400,
+                                    message: 'Password update does not completed successfully'
+                                });
+                            })
+                    } else {
+                        return res.status(400).send('Existing email, but incorrect verification details')
+                    }
+                })
+                .catch((err) => {
+                    res.status(400).send('An error occurred while comparing the unique strings')
+                })
+
+        })
+        .catch(() => {
+            console.log(err);
+            res
+                .status(400)
+                .send('Password hasn\'t be updated');
+        })
+}
+
+module.exports = {
+    login, logout, register,
+    profile, updateProfile,
+    verify, sendPasswordResetEmail, updatePassword
+};

@@ -4,7 +4,7 @@
 
 .VE-container{
     position: relative;
-    background-image: url('../../../assets/Images/EmailVeified.png');
+    background-image: url('/assets/Images/EmailVeified.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom;

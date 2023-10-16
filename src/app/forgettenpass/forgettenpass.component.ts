@@ -26,7 +26,7 @@ export class ForgettenpassComponent {
     const { userId, uniqueString } = this.rooute.snapshot.params;
     /////////ERRORRRRRR
     this.user_service
-      .forgetPassword(userId, uniqueString,this.emailForm.value)
+      .passwordReset  (userId, uniqueString,this.emailForm.value)
       .subscribe((res:any) => { 
         console.log(res.message);
       })

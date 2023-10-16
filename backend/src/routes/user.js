@@ -18,4 +18,6 @@ router.get('/user/verify/:userId/:uniqueStr',controller.verify);
 
 router.post('/password/reset/:userId/:uniqueStr',controller.sendPasswordResetEmail);
 
+router.post('/password/update/:userId/:uniqueStr',controller.updatePassword);
+
 module.exports = router;

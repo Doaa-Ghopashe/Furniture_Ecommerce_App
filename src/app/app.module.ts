@@ -23,9 +23,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { LightningComponent } from './components/lightning/lightning.component';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './pages/login/login.component';
-import { VerificationComponent } from './pages/verification/verification.component';
+import { VerificationComponent } from './authentication/verification/verification.component';
 import { ForgettenpassComponent } from './forgettenpass/forgettenpass.component';
-import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { ResetpasswordComponent } from './authentication/resetpassword/resetpassword.component';
 @NgModule({
   declarations: [
     AppComponent,

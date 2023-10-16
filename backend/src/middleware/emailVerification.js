@@ -1,10 +1,14 @@
-    const nodemailer = require('nodemailer'),
+const nodemailer = require('nodemailer'),
 
     userEmail = process.env.AUTH_EMAIL,
 
     userPass = process.env.AUTH_PASSWORD,
 
+    saltVal = 10,
+
     userVerificationModel = require('../model/userVerification'),
+
+    passwordResetModel = require('../model/passwordReset'),
 
     currUrl = 'http://localhost:4200/',
 
@@ -49,8 +53,6 @@ function sendVerificationEmail({ _id, email }) {
         to proceed.</p>`
     }
 
-    const saltVal = 10;
-
     bcrypt
         .hash(uniqueString, saltVal)
         .then((hashedUniqueStr) => {
@@ -81,32 +83,59 @@ function sendVerificationEmail({ _id, email }) {
         })
 }
 
-function sendResetPasswordLink({ email, password , _id }) {
+function sendResetPasswordLink({ email, _id }) {
 
     const uniqueString = uuidv4() + _id;
 
-    //compose that will be send
     const mailerOptions = {
         from: userEmail,
         to: email,
-        subject:"Reset Password",
-        html:`<p>reset password to login </p>
+        subject: "Reset Password",
+        html: `<p>reset password to login </p>
         <p><b>This link expires in 6 hours</b>.</p>
         <p>Press 
         <a href='${currUrl + "resetpassword/" + _id + '/' + uniqueString}'>here</a>
         to proceed.</p>`
     }
 
-    //send mail
-    transporter
-    .sendMail(mailerOptions)
-    .then(()=>{
-        console.log('Email send successfully')
-        return 'Email send successfully'
-    }).catch((err)=>{
-        console.log(err);
-        return "Email send failed"
-    })
+
+    bcrypt
+        .hash(uniqueString, saltVal)
+        .then((hashedUniqueStr) => {
+
+            const passwordResetEmail = new passwordResetModel({
+                userId: _id,
+                uniqueString: hashedUniqueStr,
+                expiresAt: Date.now() + 21600000,
+                createdAt: Date.now()
+            });
+
+            passwordResetEmail
+                .save()
+                .then(() => {
+
+                    transporter
+                        .sendMail(mailerOptions)
+                        .then(() => {
+                            console.log('Email send successfully')
+                            return 'Email send successfully'
+                        }).catch((err) => {
+                            console.log(err);
+                            return "Email send failed"
+                        })
+
+                    return "Email Send Successfully"
+                })
+                .catch(err => {
+                    console.log(err);
+                    return "Error while saving user"
+                })
+        })
+        .catch(err => {
+            console.log(err);
+            return "Error while saving user"
+        })
+
 }
 
 module.exports = { sendVerificationEmail, sendResetPasswordLink }
