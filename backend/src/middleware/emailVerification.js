@@ -28,10 +28,10 @@ const transporter = nodemailer.createTransport({
 });
 
 //check if this transporter is already connected
-transporter.verify(err => err ? console.log(err):console.log("Ready for message"));
+transporter.verify(err => err ? console.log(err) : console.log("Ready for message"));
 
-function sendVerificationEmail({ _id, email },res) {
-    
+function sendVerificationEmail({ _id, email }) {
+
     //url to be used in the email
     const currUrl = 'http://localhost:4200/';
 
@@ -53,26 +53,37 @@ function sendVerificationEmail({ _id, email },res) {
     const saltVal = 10;
 
     bcrypt
-        .hash(uniqueString,saltVal)
+        .hash(uniqueString, saltVal)
         .then((hashedUniqueStr) => {
             //set the value in the userVerification collection
             const newVerification = new userVerificationModel({
                 userId: _id,
                 uniqueString: hashedUniqueStr,
-                expiresAt: Date.now()+ 21600000,
+                expiresAt: Date.now() + 21600000,
                 createdAt: Date.now()
             });
             //after saving the record in the collection, send the mail to the user
             newVerification
                 .save()
-                .then(()=>{
+                .then(() => {
                     transporter
-                    .sendMail(mailerOptions)
-                    .catch(err=>console.log(err))
+                        .sendMail(mailerOptions)
+                        .catch(err => console.log(err));
+                    return "Email Send Successfully"
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    console.log(err);
+                    return "Error while saving user"
+                })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err);
+            return "Error while saving user"
+        })
 }
 
-module.exports = { sendVerificationEmail }
+function resetPassword({email,password}) {
+
+}
+
+module.exports = { sendVerificationEmail, resetPassword }

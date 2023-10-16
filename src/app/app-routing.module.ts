@@ -9,6 +9,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthGaurdService } from './guards/authguard.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { VerificationComponent } from './pages/verification/verification.component';
+import { ForgettenpassComponent } from './forgettenpass/forgettenpass.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path:"register",
     component:RegisterComponent
+  },
+  {
+    path:"forgettenpassword",
+    component:ForgettenpassComponent
   },
   {
     path:"productdetails/:id",

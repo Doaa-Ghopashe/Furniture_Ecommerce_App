@@ -6,42 +6,54 @@ const userVerification = require('../model/userVerification'),
 
     jwt = require('jsonwebtoken'), bcrypt = require('bcrypt'),
 
-    validator = require('../middleware/validator');
+    validator = require('../middleware/emailVerification');
 
 let register = async (req, res) => {
-    //first we need to catch errors
     try {
-        //then we need to destruct the coming data
         let { name, password, confirmPassword, email } = req.body;
-        //make sure that all this inputs are recieved
-        if (!(name && password && confirmPassword && email)) {
-            return res.status(400).send('All inputs should be existed');
-        }
 
-        //check if both password and confirm_password are matching
-        if (password != confirmPassword) {
+        if (!(name && password && confirmPassword && email))
+
+            return res.status(400).send('All inputs should be existed');
+
+        if (password != confirmPassword)
+
             return res.status(400).send('confirm password should match password');
-        }
-        //check if the email is already exists on the database or not
+
         let oldUser = await userModel.findOne({ email });
 
-        if (oldUser) {
+        if (oldUser)
+
             return res.status(400).send('Email have already exists, Please login');
-        }
-        //encrypt the password before saving it in the db
+
         let encryptedPassword = await bcrypt.hash(password, 10);
-        //insert the data into the db
-        const user = await userModel.create({
-            name,
-            email,
-            password: encryptedPassword,
-            verified: false
-        }).then((result) => {
-            //handle account verification by sending mail to the account
-            validator.sendVerificationEmail(result);
-        });
-        //return the success message
-        return res.status(200).send("User Added Successfully")
+
+        userModel
+            .create({
+                name,
+                email,
+                password: encryptedPassword,
+                verified: false
+            })
+            .then(result => {
+                //handle account verification by sending mail to the account
+                validator.sendVerificationEmail(result);
+
+                res.json({
+                    status: 200,
+                    message: 'Email is sent, Please verify it'
+                })
+
+            })
+            .catch((err) => {
+                console.log(err);
+
+                res.json({
+                    status: 400,
+                    send: "Error in DB Process"
+                })
+
+            });
     } catch (err) {
         console.log(err);
     }
@@ -49,20 +61,22 @@ let register = async (req, res) => {
 
 let login = async (req, res) => {
     try {
-        //destruct the recieved data
-        const { email, password, verified } = req.body;
-        //first check if both inputs are recieved
-        if (!(email && password)) {
+
+        const { email, password } = req.body;
+
+        if (!(email && password)) 
+
             return res.status(400).send('All inputs are required');
-        }
-        //find if the email is verified so allow him to login
-        if (!verified) {
-            return res.status(400).send('Please verify the email first then back login');
-        }
-        //search for the user that has this email
+        
         const user = await userModel.findOne({ email });
+
+        if (!user.verified) 
+
+            return res.status(400).send('Please verify the email first then back login');
+        
         //compare the password with the encrypted password
         if (user && (await bcrypt.compare(password, user.password))) {
+            
             //create the token 
             const token = jwt.sign(
                 {
@@ -210,7 +224,7 @@ let verify = (req, res) => {
                                     message: 'User update does not completed successfully'
                                 });
                             })
-                    }else{
+                    } else {
                         return res.status(400).send('Existing email, but incorrect verification details')
                     }
                 })
@@ -225,6 +239,25 @@ let verify = (req, res) => {
                 .status(400)
                 .send('not verified');
         })
+}
+
+let resetPassword = (req,res)=>{
+    //destruct the comming request
+    const {email} = req.body;
+    //check if the email exists in the request
+    if(!email){
+        res.status(400).send("Email is not found, Please enter the email");
+    }
+    //check the existence of the email in the collection
+    userModel
+    .findOne({email})
+    .then((result)=>{
+        validator.resetPassword(result)
+    })
+    .catch((err)=>{
+        console.log(err);
+        res.status(400).send("Email is not found, Please sign up")
+    })
 }
 
 module.exports = { login, logout, register, profile, updateProfile, verify };

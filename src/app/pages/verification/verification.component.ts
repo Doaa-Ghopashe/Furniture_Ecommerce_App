@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { IconDefinition, faHandshake } from '@fortawesome/free-regular-svg-icons';
 @Component({
@@ -10,7 +10,7 @@ import { IconDefinition, faHandshake } from '@fortawesome/free-regular-svg-icons
 export class VerificationComponent {
   message:string = "Waiting for verification";
   fashake!:IconDefinition;
-  constructor(private user_service:UserService,private route:ActivatedRoute){
+  constructor(private user_service:UserService,private route:ActivatedRoute,private router:Router){
   
   }
 
@@ -18,9 +18,13 @@ export class VerificationComponent {
     const {userId,uniqueString}=this.route.snapshot.params;
 
     this.fashake = faHandshake;
-    
+
     this.user_service.verificationRequest(userId,uniqueString).subscribe((res:any)=>{
       this.message = res.message
     })
+  }
+
+  redirectToSignIn(){
+    this.router.navigate(["login"])
   }
 }

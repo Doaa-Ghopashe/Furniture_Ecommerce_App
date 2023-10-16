@@ -79,11 +79,25 @@ export class LoginComponent {
   register(){
     //after the register successding we want to redirect the user to the login
     this.user_service.register(this.signUpForm.value).subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         setTimeout(()=>{
           this.signUpForm.reset();
           this.state = 'signin';
-        },200)
+        },200);
+
+        Swal.fire({
+          text:res.message,
+          showConfirmButton:false,
+          timer:5000,
+          icon:'success',
+          width: 600,
+          padding: '3em',
+          backdrop: `
+            rgba(0,0,0,0.4)
+            left top
+            no-repeat
+          `
+        })
       },
       error:(res)=>{
         Swal.fire({
@@ -104,7 +118,6 @@ export class LoginComponent {
   }
 
   logIn(){
-    console.log(this.signInForm.value)
     this.user_service.login(this.signInForm.value).subscribe({
       next:(res)=>{
         sessionStorage.setItem('token',JSON.stringify(res));                                                                                                                                  
