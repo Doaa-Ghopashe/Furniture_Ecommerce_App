@@ -1,7 +1,10 @@
 require('dotenv').config();
-require('cors')
+
+require('cors');
+
 const express = require('express'),
 
+//to use error handling instead of try catch
     errorHandling = require('./middleware/errorHandling'),
 
     cors = require('cors'),
@@ -28,11 +31,11 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-app.use(errorHandling);
-
 app.use('', user);
 
 app.use('/product', product);
+
+app.use(errorHandling);
 
 app.listen(PORT, (err) => {
     if (err) {
@@ -41,18 +44,3 @@ app.listen(PORT, (err) => {
     }
     console.log(`listening on port ${PORT}`)
 });
-
-
-// let http = require('http');
-// let PORT = process.env.PORT || 4000;
-
-// let server = http.createServer();
-
-// server.listen(PORT,(err)=>
-// !err ? console.log("the server listen to the port 4000"):console.log("the server is down"));
-
-// server.on("request",(req,res)=>{
-//     if(req.method == 'GET'){
-//         res.end("<h1>Hello server is open</h1>");
-//     }
-// })

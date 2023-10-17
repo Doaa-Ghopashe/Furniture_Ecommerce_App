@@ -1,6 +1,14 @@
+
+
+
+
 const userVerification = require('../model/userVerification'),
 
     userModel = require('../model/user'),
+
+    { tryCatch } = require('../utlis/tryCatch'),
+
+    { appError } = require('../appError'),
 
     passwordReset = require('../model/passwordReset'),
 
@@ -10,94 +18,196 @@ const userVerification = require('../model/userVerification'),
 
     validator = require('../middleware/emailVerification');
 
-let register = async (req, res) => {
-    try {
-        let { name, password, confirmPassword, email } = req.body;
+//register then verify email and set the user data in the database
+let register = tryCatch(async (req, res) => {
+    let { name, password, confirmPassword, email } = req.body;
 
-        if (!(name && password && confirmPassword && email))
+    if (!(name && password && confirmPassword && email))
+        throw new appError('All inputs should be existed', 400);
 
-            return res.status(400).send('All inputs should be existed');
+    if (password != confirmPassword)
+        throw new appError('Confirm password should match password', 400);
 
-        if (password != confirmPassword)
+    let oldUser = await userModel.findOne({ email });
 
-            return res.status(400).send('confirm password should match password');
+    if (oldUser)
+        throw new appError('Email have already exists, Please login', 400);
 
-        let oldUser = await userModel.findOne({ email });
-
-        if (oldUser)
-
-            return res.status(400).send('Email have already exists, Please login');
-
-        let encryptedPassword = await bcrypt.hash(password, 10);
-
-        userModel
-            .create({
+    bcrypt.hash(password, 10)
+        .then((encryptedPassword) => {
+            userModel.create({
                 name,
                 email,
                 password: encryptedPassword,
                 verified: false
-            })
-            .then(result => {
-                //handle account verification by sending mail to the account
+            }).then(result => {
                 validator.sendVerificationEmail(result);
-
-                res.json({
-                    status: 200,
+                res.status(200).json({
                     message: 'Email is sent, Please verify it'
                 })
 
-            })
-            .catch((err) => {
-                console.log(err);
-
-                res.json({
-                    status: 400,
-                    send: "Error in DB Process"
+            }).catch((err) => {
+                return res.status(400).json({
+                    message: err.message,
                 })
-
             });
-    } catch (err) {
-        console.log(err);
-    }
+        }).catch((err) => {
+            res.status(400).json({
+                message: err.message
+            })
+        });
+})
+
+//verify the signed up email 
+let verify = (req, res) => {
+
+    const { userId, uniqueStr } = req.params;
+
+    userVerification
+        .find({ userId })
+        .then((result) => {
+
+            if (!result)
+                throw new appError('Account has already verified, or doesn\'t exist', 400)
+
+            const { expiresAt, uniqueString } = result[0];
+
+            if (Date.now() > expiresAt)
+
+                userVerification
+                    .deleteOne({ userId })
+                    .then(() => {
+                        userModel
+                            .deleteOne({ _id: userId })
+                            .then(() => {
+                                throw new appError('The link has been expired, Please sign up again');
+                            })
+                            .catch((err) => {
+                                return res.status(400).json({
+                                    message: err.message
+                                });
+                            })
+                    })
+                    .catch((err) => {
+                        return res.status(400).json({
+                            message: err.message
+                        });
+                    });
+
+            bcrypt
+                .compare(uniqueStr, uniqueString)
+                .then((result) => {
+
+                    if (result)
+
+                        userModel
+                            .updateOne({ _id: userId }, { verified: true })
+                            .then(() => {
+                                userVerification
+                                    .deleteOne({ userId })
+                                    .then(() => {
+                                        return res.status(200).json({
+                                            message: 'Email verified'
+                                        });
+                                    })
+                                    .catch((err) => {
+                                        return res.status(400).json({
+                                            message: err.message
+                                        });
+                                    })
+                            })
+                            .catch((err) => {
+                                return res.status(400).json({
+                                    message: err.message
+                                });
+                            })
+
+                    throw new appError('Existing email, but incorrect verification details', 400);
+                })
+                .catch((err) => {
+                    res.status(400).json({
+                        message: err.message
+                    });
+                })
+        })
+        .catch((err) => {
+            res.status(400).json({
+                message: 'not verified'
+            });
+        })
 }
 
-let login = async (req, res) => {
-    try {
+//check the validation of credentials and allow user to login with sending a token
+let login = tryCatch(async (req, res) => {
+    const { email, password } = req.body;
 
-        const { email, password } = req.body;
+    if (!(email && password))
+        throw new appError('All inputs are required', 400);
 
-        if (!(email && password))
-
-            return res.status(400).send('All inputs are required');
-
-        const user = await userModel.findOne({ email });
+    userModel.findOne({ email }).then((user) => {
+        if (!user)
+            throw new appError('This email is not found, Please sign up', 400);
 
         if (!user.verified)
+            throw new appError('Please verify the email first then back to login', 400);
 
-            return res.status(400).send('Please verify the email first then back login');
+        bcrypt
+            .compare(password, user.password)
+            .then((result) => {
+                if (!result)
+                    throw new Error('Wrong email or password');
 
-        //compare the password with the encrypted password
-        if (user && (await bcrypt.compare(password, user.password))) {
+                const token = jwt.sign(
+                    {
+                        name: user.name,
+                        id: user._id,
+                        email
+                    }, secretKey,
+                    {
+                        expiresIn: "2h"
+                    }
+                )
+                return res.status(200).json(token);
+            })
+            .catch((err) => {
+                res.status(400).json({
+                    message: err.message
+                })
+            })
+    }).catch((err) => {
+        res.status(400).json({
+            message: err.message
+        })
+    });
 
-            //create the token 
-            const token = jwt.sign(
-                {
-                    name: user.name,
-                    id: user._id,
-                    email
-                }, secretKey,
-                {
-                    expiresIn: "2h"
-                }
-            )
-            //return the respone
-            return res.status(200).json(token);
-        }
-        //in case the password doesn't match the real password
-        res.status(400).send('Wrong email or password');
-    } catch (err) {
-        console.log(err)
-    }
+})
+
+//reset the password as its forgotten
+let sendPasswordResetEmail = (req, res) => {
+
+    const { email } = req.body;
+
+    if (!email)
+        throw new appError('Email is not found, Please enter the email', 400)
+
+    userModel
+        .findOne({ email })
+        .then((result) => {
+
+            if (result) {
+                validator.sendResetPasswordLink(result)
+                return res.status(200).json({
+                    message: 'Email send successfully'
+                })
+            }
+
+            throw new appError('Email does not exist', 400)
+        })
+        .catch(err => {
+            res.status(400).json({
+                message: err.message
+            })
+        })
 }
 
 let profile = (req, res) => {
@@ -141,138 +251,14 @@ let logout = (req, res) => {
     res.send("<h1>logout of user account</h1>")
 }
 
-let verify = (req, res) => {
-    let { userId, uniqueStr } = req.params;
 
-    //search for the user in the userVerification collection
-    userVerification
-        .find({ userId })
-        .then((result) => {
-
-            //check if the user exists in the collection or not
-            if (result.length <= 0) {
-                return res.json({
-                    status: 400,
-                    message: "Account has already verified, or doesn\'t exist"
-                });
-            }
-
-            //destruct the returned user data
-            const { expiresAt, uniqueString } = result[0];
-
-            //here we handle the case where the link expired
-            if (Date.now() > expiresAt) {
-                //if the link expired then the data should be deleted from the collection to allow signing up again
-                userVerification
-                    .deleteOne({ userId })
-                    .then(() => {
-                        userModel
-                            .deleteOne({ _id: userId })
-                            .then(() => {
-                                res.json({
-                                    status: 200,
-                                    message: 'The link has been expired, Please sign up again'
-                                });
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                                res.json({
-                                    status: 400,
-                                    message: 'The account could not be deleted'
-                                });
-                            })
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        res.json({
-                            status: 400,
-                            message: 'The deletion process could not be completed'
-                        });
-                    })
-            }
-
-            //compare the hashed unique string with the real string
-            bcrypt
-                .compare(uniqueStr, uniqueString)
-                .then((result) => {
-
-                    //check if the two strings are the same
-                    if (result) {
-
-                        //set true to the verified field and delete the verification record from the verification collection
-                        userModel
-                            .updateOne({ _id: userId }, { verified: true })
-                            .then(() => {
-                                userVerification
-                                    .deleteOne({ userId })
-                                    .then(() => {
-                                        return res.json({
-                                            status: 200,
-                                            message: 'Email verified'
-                                        });
-                                    })
-                                    .catch((err) => {
-                                        console.log(err);
-                                        return res.json({
-                                            status: 400,
-                                            message: 'User does not exist in verification collection'
-                                        });
-                                    })
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                                return res.json({
-                                    status: 400,
-                                    message: 'User update does not completed successfully'
-                                });
-                            })
-                    } else {
-                        return res.status(400).send('Existing email, but incorrect verification details')
-                    }
-                })
-                .catch((err) => {
-                    res.status(400).send('An error occurred while comparing the unique strings')
-                })
-
-        })
-        .catch((err) => {
-            console.log(err);
-            res
-                .status(400)
-                .send('not verified');
-        })
-}
-
-let sendPasswordResetEmail = (req, res) => {
-
-    const { email } = req.body;
-
-    if (!email)
-
-        return res.status(400).send("Email is not found, Please enter the email");
-
-    userModel
-        .findOne({ email })
-        .then((result) => {
-            //check if there is a result
-            if (result) {
-                validator.sendResetPasswordLink(result)
-                return res.status(200).send('Email send successfully')
-            }
-            res.status(200).send('Email does not exist')
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(400).send("Email is not found, Please sign up")
-        })
-}
 
 let updatePassword = (req, res) => {
 
     const { password, confirmPassword } = req.body,
 
         { userId, uniqueStr } = req.params;
-        console.log(uniqueStr);
+    console.log(uniqueStr);
 
     if (!(password && confirmPassword && userId && uniqueStr))
 
