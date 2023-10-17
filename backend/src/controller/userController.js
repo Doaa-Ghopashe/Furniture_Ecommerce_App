@@ -1,7 +1,3 @@
-
-
-
-
 const userVerification = require('../model/userVerification'),
 
     userModel = require('../model/user'),
@@ -150,7 +146,7 @@ let login = tryCatch(async (req, res) => {
 
         if (!user.verified)
             throw new appError('Please verify the email first then back to login', 400);
-
+        
         bcrypt
             .compare(password, user.password)
             .then((result) => {
@@ -210,6 +206,81 @@ let sendPasswordResetEmail = (req, res) => {
         })
 }
 
+//change the password
+let updatePassword = (req, res) => {
+
+    const { password, confirmPassword } = req.body,
+        { userId, uniqueStr } = req.params;
+
+    if (!(password && confirmPassword && userId && uniqueStr))
+        throw new appError('All inputs are required', 400);
+
+    if (password != confirmPassword)
+        throw new appError('Confirm password should match password', 400);
+
+    passwordReset
+        .find({ userId })
+        .then((result) => {
+
+            if (result.length <= 0)
+                throw new appError('There is no ask to change the password', 400);
+
+            const { expiresAt, uniqueString } = result[0];
+
+            if (Date.now() > expiresAt)
+
+                passwordReset
+                    .deleteOne({ userId })
+                    .then(() => {
+                        throw new appError('The link has been expired, Please send a demand again to reset the password', 400);
+                    })
+                    .catch((err) => {
+                        res.status(400).json({
+                            message: err.message
+                        });
+                    });
+
+            bcrypt
+                .compare(uniqueStr, uniqueString)
+                .then((result) => {
+                    if (result) {
+                        console.log(password)
+                        userModel
+                            .updateOne({ _id: userId }, { password })
+                            .then(() => {
+                                passwordReset
+                                    .deleteOne({ userId })
+                                    .then(() => {
+                                        throw new appError('Password has been changes', 400);
+                                    })
+                                    .catch((err) => {
+                                        return res.status(400).json({
+                                            message: err.message
+                                        });
+                                    })
+                            })
+                            .catch((err) => {
+                                return res.status(400).json({
+                                    message: err.message
+                                });
+                            })
+                    }
+                    throw new appError('Existing email, but incorrect verification details');
+                })
+                .catch((err) => {
+                    res.status(400).json({
+                        message: err.message
+                    })
+                })
+
+        })
+        .catch((err) => {
+            res.status(400).json({
+                message:err.message
+            });
+        })
+}
+
 let profile = (req, res) => {
 
     const { id } = req.user
@@ -247,104 +318,11 @@ let updateProfile = async (req, res) => {
     }
 }
 
+//logout
 let logout = (req, res) => {
-    res.send("<h1>logout of user account</h1>")
-}
-
-
-
-let updatePassword = (req, res) => {
-
-    const { password, confirmPassword } = req.body,
-
-        { userId, uniqueStr } = req.params;
-    console.log(uniqueStr);
-
-    if (!(password && confirmPassword && userId && uniqueStr))
-
-        return res.status(400).send("You should enter the two passwords");
-
-    if (password != confirmPassword)
-
-        return res.status(400).send('confirm password should match password');
-
-    passwordReset
-        .find({ userId })
-        .then((result) => {
-
-            if (result.length <= 0)
-
-                return res.json({
-                    status: 400,
-                    message: "There is no ask to change the password"
-                });
-
-            const { expiresAt, uniqueString } = result[0];
-
-            if (Date.now() > expiresAt) {
-
-                passwordReset
-                    .deleteOne({ userId })
-                    .then(() => {
-                        res.json({
-                            status: 200,
-                            message: 'The link has been expired, Please send a demand again to reset the password'
-                        });
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        res.json({
-                            status: 400,
-                            message: 'The deletion process could not be completed'
-                        });
-                    });
-            }
-
-            bcrypt
-                .compare(uniqueStr, uniqueString)
-                .then((result) => {
-                    if (result) {
-                        userModel
-                            .updateOne({ _id: userId }, { password })
-                            .then(() => {
-                                passwordReset
-                                    .deleteOne({ userId })
-                                    .then(() => {
-                                        return res.json({
-                                            status: 200,
-                                            message: 'Password has been changes'
-                                        });
-                                    })
-                                    .catch((err) => {
-                                        console.log(err);
-                                        return res.json({
-                                            status: 400,
-                                            message: 'User does not exist in collection'
-                                        });
-                                    })
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                                return res.json({
-                                    status: 400,
-                                    message: 'Password update does not completed successfully'
-                                });
-                            })
-                    } else {
-                        return res.status(400).send('Existing email, but incorrect verification details')
-                    }
-                })
-                .catch((err) => {
-                    res.status(400).send('An error occurred while comparing the unique strings')
-                })
-
-        })
-        .catch(() => {
-            console.log(err);
-            res
-                .status(400)
-                .send('Password hasn\'t be updated');
-        })
+    res.status(200).json({
+        message:"logout successfully"
+    })
 }
 
 module.exports = {

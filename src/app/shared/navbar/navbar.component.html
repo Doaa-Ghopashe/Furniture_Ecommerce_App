@@ -2,33 +2,35 @@
   <span class="navbar-brand" href="#">
     <img id="logo" src="../../assets/Images/Logo/logo.png">
   </span>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="d-flex" style="width:90%">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav w-100 justify-content-around">
+        <li class="nav-item d-flex align-items-baseline">
+          <span class="mx-3">
+            <a class="nav-link" routerLink="/" routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{ exact: true}">Home </a>
+          </span>
+
+          <span class="mx-3">
+            <a class="nav-link" routerLink="/products" routerLinkActive="active-link">Products</a>
+          </span>
+
+          <span class="mx-3">
+            <a class="nav-link" routerLink="/contact" routerLinkActive="active-link">Contact</a>
+          </span>
+
+          <span class="mx-3">
+            <a class="nav-link" routerLink="/blogs" routerLinkActive="active-link">Blogs</a>
+          </span>
+        </li>
+      </ul>
+    </div>
+    
     <ul class="navbar-nav w-100 justify-content-evenly">
-      <li class="nav-item d-flex align-items-baseline">
-        <span class="mx-3">
-          <a class="nav-link" routerLink="/" routerLinkActive="active-link"  [routerLinkActiveOptions]="{ exact: true}">Home </a>
-        </span>
-
-        <span class="mx-3">
-          <a class="nav-link" routerLink="/products" routerLinkActive="active-link">Products</a>
-        </span>
-
-        <span class="mx-3">
-          <a class="nav-link" routerLink="/contact" routerLinkActive="active-link">Contact</a>
-        </span>
-
-        <span class="mx-3">
-          <a class="nav-link" routerLink="/blogs" routerLinkActive="active-link">Blogs</a>
-        </span>
-      </li>
-
-      <li class="position-relative rounded-5 overflow-hidden w-50">
-        <button class="btn position-absolute border-0 rounded-0 text-bg-dark bottom-0 top-0" style="right: 0;"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <input type="text" class="rounded-5 border-0 form-control w-100"  placeholder="Search">
+      <li class="position-relative rounded-5 overflow-hidden " style="width: 70%;">
+        <button class="btn position-absolute border-0 rounded-0 text-bg-dark bottom-0 top-0" style="right: 0;"><i
+            class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="text" class="rounded-5 border-0 form-control w-100" placeholder="Search">
       </li>
 
       <li class="d-flex align-items-baseline">
@@ -38,7 +40,7 @@
           </a>
         </span>
         <!--This name is being displayed in case the user is signed-->
-        <span *ngIf="!signedIn"  class="mx-3">
+        <span *ngIf="!signedIn" class="mx-3">
           <a class="nav-link btn" routerLink="/login">
             <fa-icon [icon]="fauser"></fa-icon>
           </a>
@@ -53,17 +55,21 @@
             <ul class="dropdown-menu">
               <li><button class="btn" (click)="logout()">Logout</button></li>
             </ul>
-          </div>          
+          </div>
         </span>
 
         <span class="mx-3 position-relative">
-          <a class="nav-link btn" >
+          <a class="nav-link btn">
             <fa-icon [icon]="facart"></fa-icon>
           </a>
-          <span class="text-white bg-danger position-absolute bottom-0 rounded-5 px-1" style="right: 0;font-size: 12px;">{{count}}</span>
+          <span class="text-white bg-danger position-absolute bottom-0 rounded-5 px-1"
+            style="right: 0;font-size: 12px;">{{count}}</span>
         </span>
       </li>
     </ul>
-
   </div>
+  <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon text-white"></span>
+  </button>
 </nav>

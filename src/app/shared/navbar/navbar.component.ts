@@ -29,6 +29,14 @@ export class NavbarComponent {
 
     this.signedIn = sessionStorage.getItem('token') ? true : false
 
+    $(document).ready(function() {
+      $(".dropdown .btn").click(() => {
+        $(".dropdown-menu").slideToggle();
+      })
+      $(".navbar-toggler").click(()=>{
+        $(".collapse").slideToggle()
+      })
+    });
   }
 
   changeMode(){

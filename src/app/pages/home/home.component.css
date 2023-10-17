@@ -30,3 +30,8 @@ h1{
     border: 0;
     border-radius: 0;
 }
+@media only screen and (max-width: 1024) {
+    body {
+      background-color: lightblue;
+    }
+  } 

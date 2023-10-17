@@ -4,7 +4,6 @@ require('cors');
 
 const express = require('express'),
 
-//to use error handling instead of try catch
     errorHandling = require('./middleware/errorHandling'),
 
     cors = require('cors'),
