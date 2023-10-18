@@ -23,9 +23,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { LightningComponent } from './components/lightning/lightning.component';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './pages/login/login.component';
-import { VerificationComponent } from './authentication/verification/verification.component';
-import { ForgettenpassComponent } from './forgettenpass/forgettenpass.component';
-import { ResetpasswordComponent } from './authentication/resetpassword/resetpassword.component';
+import { VerificationComponent } from './components/verification/verification.component';
+import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
+import { ResetpasswordformComponent } from './components/resetpasswordform/resetpasswordform.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,8 +41,9 @@ import { ResetpasswordComponent } from './authentication/resetpassword/resetpass
     LightningComponent,
     LoginComponent,
     VerificationComponent,
-    ForgettenpassComponent,
-    ResetpasswordComponent
+    ResetpasswordformComponent,
+    ResetpasswordComponent,
+    ResetpasswordformComponent
   ],
   imports: [
     BrowserModule,

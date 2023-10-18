@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IconDefinition, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { IconDefinition, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-forgettenpass',
-  templateUrl: './forgettenpass.component.html',
-  styleUrls: ['./forgettenpass.component.css']
+  selector: 'app-resetpasswordform',
+  templateUrl: './resetpasswordform.component.html',
+  styleUrls: ['./resetpasswordform.component.css']
 })
-export class ForgettenpassComponent {
+export class ResetpasswordformComponent {
   emailForm!: FormGroup;
   errorSign!: IconDefinition;
 

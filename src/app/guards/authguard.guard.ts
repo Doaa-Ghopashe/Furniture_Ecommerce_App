@@ -1,5 +1,4 @@
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import ProductData from '../db.json';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
@@ -13,12 +12,13 @@ export class AuthGaurdService implements CanActivate {
   }
  
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
-    if(ProductData.find(product=> product.id == route.params['id'] && product.category == route.params['category'])){
-            return true
-         }else{
-            this.router.navigate(['products'])
-            return false;
-         }
+    // if(ProductData.find(product=> product.id == route.params['id'] && product.category == route.params['category'])){
+    //         return true
+    //      }else{
+    //         this.router.navigate(['products'])
+    //         return false;
+    //      }
+    return true
   }
 }
 
