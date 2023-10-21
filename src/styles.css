@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+
+html , body, main{
+    height: 100%;
+}
+:root {
+    --mode: black;
+    --fontcolor: white;
+    --maincolor: rgb(1, 34, 44)
+}
+
+main {
+    background-color: rgb(227, 225, 225);
+    width:100%;
+    
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    height: 90vh;
+    /* Set initial height to occupy full viewport height */
+    overflow-y: auto;
+    /* Enable scrolling if sidebar content exceeds viewport height */
+    border-top: 0.5px solid rgb(98, 98, 98);
+    width: 280px;
+    background: #000000b8;
+    backdrop-filter: blur(4px);
+}

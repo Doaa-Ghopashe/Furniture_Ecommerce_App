@@ -1,0 +1,6 @@
+img{
+
+    image-rendering:optimizeQuality;
+    image-resolution: 100px;
+    filter: drop-shadow(-4px 2px 1px rgba(181, 79, 79, 0.648)) contrast(1) saturate(1) brightness(0.8) blur(0.3px);
+}

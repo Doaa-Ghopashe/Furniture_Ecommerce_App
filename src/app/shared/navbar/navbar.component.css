@@ -1,0 +1,123 @@
+.active , .active-link
+{
+    color: orange;
+
+
+}
+#logo
+{
+    margin-left: 6px;
+    width: 215px;
+}
+nav , .dropdown{
+    background-color: var(--maincolor);
+
+}
+
+nav a , .dropdown button{
+    color: var(--fontcolor);
+
+}
+#navbarNav
+{
+    display: flex;
+    justify-content: space-between;
+}
+.navbar
+{
+    width: 100%;
+    z-index: 500;
+}
+.navbar-nav{
+    align-items: center;
+}
+.nav-link{
+    display: flex;
+    align-items: center;
+}
+.nav-link p{
+    margin: 0;
+    margin-left: 10px;
+}
+.nav-item:last-child
+{
+    position: relative;
+}
+fa-icon
+{
+    font-size: 20px;
+}
+.productcount
+{
+    /* font-size: 12px;
+    padding: 0 5px;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0; */
+}
+.dropdown-menu {
+    border: none;
+    width: 100%;
+    min-width: 0;
+}
+.dropdown-menu .btn{
+    color: var(--navbarcolor);
+    font-size: 16px;
+}
+.lightpage , .lightmode{
+    background-color: white;
+    color: black !important;
+}
+.lightpage .btn{
+    color: black;
+}
+.darkpage , .darkmode{
+    background-color: black;
+    color: white !important;
+}
+.darkpage .btn , .darkpage input::placeholder{
+    color: white;
+}
+input:focus{
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+li{
+    font-size: 18px;
+}
+.nav-item a{
+    color:var(--fontcolor);
+    opacity:0.5
+}
+.nav-item .active-link{
+    opacity: 1;
+}
+.username{
+    color:var(--fontcolor)
+}
+.navbar-toggler{
+    background-color: rgba(255, 255, 255, 0.619);
+    padding: 0;
+    border:1px solid black
+}
+.main-nav{
+    width: 90%;
+}
+@media screen and (max-width:1024px) {
+    #navbarSupportedContent .navbar-nav{
+        display: none;
+    } 
+    .navbar-toggler{
+        display: block;
+    }
+
+}
+@media screen and (max-width:991px) {
+    .main-nav{
+        width: 70%;
+    }
+
+}

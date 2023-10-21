@@ -1,0 +1,12 @@
+.sidebar {
+    height: calc(100% + 0rem); /* Set initial height to occupy full viewport height */
+    overflow-y: auto; /* Enable scrolling if sidebar content exceeds viewport height */
+    width: fit-content;
+    background-color: var(--maincolor);
+    backdrop-filter: blur(4px);
+
+  }
+  .sidebar li{
+    padding: 0;
+    border-top:1px solid rgba(255, 255, 255, 0.125)
+  }
