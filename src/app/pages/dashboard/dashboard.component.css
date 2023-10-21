@@ -1,0 +1,22 @@
+.widget{
+    height:350px;
+    background-color:#fff;
+    border-radius:5px;
+    margin:10px;
+    box-shadow: 5px 5px 5px #939393
+}
+.middle-section .left{
+    width:890px;
+}
+
+.middle-section .right{
+     width: 400px
+}
+.bottom-section .left{
+    width:690px;
+    height:300px;
+}
+.bottom-section .right{
+    width: 600px;
+    height:300px;
+}

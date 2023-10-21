@@ -13,6 +13,13 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SlideRawComponent } from './components/slide-raw/slide-raw.component';
+import { TopWidgetsComponent } from './components/top-widgets/top-widgets.component';
+import { SalesByMonthComponent } from './components/sales-by-month/sales-by-month.component';
+import { SalesByCategoryComponent } from './components/sales-by-category/sales-by-category.component';
+import { SalesByLastFewTransactionsComponent } from './components/sales-by-last-few-transactions/sales-by-last-few-transactions.component';
+import { TopThreeProductsComponent } from './components/top-three-products/top-three-products.component';
+import { ChartModule } from 'angular-highcharts';
 
 @NgModule({
   declarations: [
@@ -23,12 +30,19 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     FooterComponent,
     SidebarComponent,
     NotfoundComponent,
-    DashboardComponent
+    DashboardComponent,
+    SlideRawComponent,
+    TopWidgetsComponent,
+    SalesByMonthComponent,
+    SalesByCategoryComponent,
+    SalesByLastFewTransactionsComponent,
+    TopThreeProductsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
