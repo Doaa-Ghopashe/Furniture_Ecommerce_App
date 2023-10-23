@@ -1,0 +1,161 @@
+<div class="container AddProductForm w-50">
+    <div>
+        <h1 class="fw-light mt-3 mb-3 border-bottom">Add new Furniture</h1>
+    </div>
+    <div>
+        <form [formGroup]="productForm" class="px-5 py-3" (ngSubmit)="CreateProduct(productForm)">
+            <div class="d-flex justify-content-between">
+                <!--Name-->
+                <div class="mb-4 position-relative d-flex align-items-center w-50 ">
+                    <label for="Name">Name</label>
+                    <input class="form-control" type="text" id="Name" formControlName="name">
+                    <div id="nameHelp" class="form-text position-absolute error-msg m-0"
+                        *ngIf="productForm.controls['name'].touched && productForm.controls['name'].invalid">
+
+                        <span *ngIf="productForm.controls['name']?.errors?.['required']">
+                            <fa-icon [icon]="errorIcon" title="Reqiured"></fa-icon>
+                        </span>
+
+                        <span
+                            *ngIf="productForm.controls['name']?.errors?.['maxlength'] || productForm.controls['name']?.errors?.['minlength'] ">
+                            <fa-icon [icon]="errorIcon" title="It should be between 5 and 14"></fa-icon>
+                        </span>
+
+                    </div>
+                </div>
+                <!--Category-->
+                <div class="mb-4 position-relative d-flex align-items-center w-50">
+                    <label>category</label>
+
+                    <select class="form-select" formControlName="category">
+                        <option selected disabled value="">--Select One From This Categories--</option>
+                    </select>
+
+                    <div id="nameHelp" class="form-text position-absolute error-msg m-0"
+                        *ngIf="productForm.controls['category'].invalid && productForm.controls['category'].touched">
+
+                        <span *ngIf="productForm.controls['category'].errors?.['required']">
+                            <fa-icon [icon]="errorIcon" title="Reqiured"></fa-icon>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex">
+                <!--Price-->
+                <div class="mb-4 position-relative d-flex align-items-center w-50">
+                    <label for="Price">Price</label>
+                    <input class="form-control" id="Price" type="number" formControlName="price">
+
+                    <span class="position-absolute p-1 "
+                        style="right: 0; border-left:1px solid rgba(0, 0, 0, 0.184)">EGP</span>
+
+                    <div id="priceHelp" class="form-text position-absolute error-msg m-0"
+                        *ngIf="productForm.controls['price'].touched && productForm.controls['price'].invalid">
+
+                        <span *ngIf="productForm.controls['price'].errors?.['required']">
+                            <fa-icon [icon]="errorIcon" title="Reqiured"></fa-icon>
+                        </span>
+
+                        <span *ngIf="productForm.controls['price'].errors?.['max']">
+                            <fa-icon [icon]="errorIcon" title="Price should not exceed 100,000"></fa-icon>
+                        </span>
+
+                    </div>
+
+
+                </div>
+                <!--Quantity-->
+                <div class="mb-4 position-relative d-flex align-items-center w-25">
+                    <label for="Quantity">Quantity</label>
+                    <input class="form-control" id="Quantity" type="number" formControlName="quantity">
+
+                    <div id="nameHelp" class="form-text position-absolute error-msg m-0"
+                        *ngIf="productForm.controls['quantity'].touched && productForm.controls['quantity'].invalid">
+
+                        <span *ngIf="productForm.controls['quantity'].errors?.['required']">
+                            <fa-icon [icon]="errorIcon" title="Reqiured"></fa-icon>
+                        </span>
+
+                        <span *ngIf="productForm.controls['quantity'].errors?.['max']">
+                            <fa-icon [icon]="errorIcon" title="Maximum quantity should not exceed 1000"></fa-icon>
+                        </span>
+
+                    </div>
+
+                </div>
+                <!--Offer-->
+                <div class="mb-4 position-relative d-flex align-items-center w-25">
+                    <label for="">Offer</label>
+                    <input class="form-control" id="" type="number" formControlName="offer" step="0.1">
+
+                    <div id="nameHelp" class="form-text position-absolute error-msg m-0"
+                        *ngIf="productForm.controls['offer'].touched && productForm.controls['offer'].invalid">
+
+                        <span *ngIf="productForm.controls['offer'].errors?.['required']">
+                            <fa-icon [icon]="errorIcon" title="Reqiured"></fa-icon>
+                        </span>
+
+                        <span *ngIf="productForm.controls['offer'].errors?.['max']">
+                            <fa-icon [icon]="errorIcon" title="Maximum sale should not exceed 100"></fa-icon>
+                        </span>
+
+                    </div>
+
+                </div>
+            </div>
+            <!--Colors-->
+            <div class="d-flex justify-content-evenly align-items-center">
+                <div class="mb-4 position-relative selection-area d-flex">
+                    <label for="colors">Choose the colors</label>
+                    <input type="color" id="draggable colors" draggable="true" (dragstart)="dragFun($event)">
+
+                    <select id="selectColors" class="d-none" formControlName="colors">
+                        <!--The selected colors will be added here to be send-->
+                    </select>
+
+                </div>
+                <div class="mb-4 d-flex Box" (dragover)="myDrop($event)" (drop)="dropMe($event)">
+                    <!--The colors will be displayed here-->
+                    <div id="colorsHelp" class="form-text position-absolute error-msg m-0"
+                        *ngIf="productForm.controls['colors'].touched && productForm.controls['colors'].invalid">
+
+                        <span *ngIf="productForm.controls['colors'].errors?.['required']">
+                            <fa-icon [icon]="errorIcon" title="Reqiured"></fa-icon>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+            <!--Image-->
+            <div class="mb-4 position-relative">
+                <input class="form-control" type="file" formControlName="image" accept="image/png, image/jpg, image/jpeg">
+
+                <div id="nameHelp" class="form-text position-absolute error-msg m-0"
+                    *ngIf="productForm.controls['image'].touched && productForm.controls['image'].invalid">
+
+                    <span *ngIf="productForm.controls['image'].errors?.['required']">
+                        <fa-icon [icon]="errorIcon" title="Reqiured"></fa-icon>
+                    </span>
+
+                </div>
+
+            </div>
+            <!--Details-->
+            <div class="mb-4 position-relative d-flex">
+                <label for="Details">details</label>
+                <textarea id="Details" class="form-control" formControlName="details"></textarea>
+
+                <div id="nameHelp" class="form-text position-absolute error-msg m-0"
+                    *ngIf="productForm.controls['details'].touched && productForm.controls['details'].invalid">
+
+                    <span *ngIf="productForm.controls['details'].errors?.['required']">
+                        <fa-icon [icon]="errorIcon" title="Reqiured"></fa-icon>
+                    </span>
+
+                </div>
+            </div>
+            <button [disabled]="productForm.invalid" class="btn special-btn d-block m-auto">Add</button>
+        </form>
+    </div>
+</div>

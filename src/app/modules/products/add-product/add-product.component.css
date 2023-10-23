@@ -1,0 +1,57 @@
+.AddProductForm{
+    margin-top: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.296);
+    box-shadow: 4px 5px 1px rgba(0, 0, 0, 0.237);
+    background-color: rgba(255, 255, 255, 0.687);
+    border-radius: 10px;
+}
+.selection-area {
+    width: 50%;
+    height: 50px;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+   
+    
+    /* border: 1px dashed black */
+}
+.selection-area label{
+    width: 50%;
+    text-transform: uppercase;
+    text-align: start;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.297);
+	background: linear-gradient(to right, #ff4b0a 0%,rgb(74, 155, 236) 40% , rgb(255, 207, 32)50%, #236708 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+    text-transform: capitalize;
+    font-weight: bolder;
+    font-size: 18px;
+}
+#draggable{
+    width:100%;
+    height: 100%;
+    border:none;
+    border-radius: 10px;
+    overflow:hidden
+}
+
+.Box {
+    width: 40%;
+    height: 50px;
+    border: 1px dashed rgba(0, 0, 0, 0.371)
+}
+
+.colorBox {
+    width: 40px;
+    height: 35px;
+}
+
+form label{
+ margin: 0 10px;
+ text-transform: capitalize;
+}
+
+textarea{
+    min-height: 100px;
+    max-height: 100px;
+}

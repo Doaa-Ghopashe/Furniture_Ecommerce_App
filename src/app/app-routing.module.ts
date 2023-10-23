@@ -14,6 +14,10 @@ const routes: Routes = [
     component:DashboardComponent
   },
   {
+    path:"products",
+    loadChildren: ()=> import('./modules/products/products.module').then((m)=> m.ProductsModule)
+  },
+  {
     path:"**",
     component:NotfoundComponent
   }

@@ -30,3 +30,17 @@ img {
     background: #000000b8;
     backdrop-filter: blur(4px);
 }
+
+.special-btn{
+    background-color: rgba(0, 0, 0, 0.324);
+    color:#000000b3;
+    font-weight: 500;
+    border-radius: 50px;
+    padding: 5px 20px;
+    text-transform: uppercase;
+}
+
+.special-btn:hover{
+    background-color:#087ea2cf;
+    color:black
+}
