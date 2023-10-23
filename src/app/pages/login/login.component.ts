@@ -101,7 +101,7 @@ export class LoginComponent {
       },
       error:(res)=>{
         Swal.fire({
-          text:res.error,
+          text:res.error.message,
           showConfirmButton:false,
           timer:5000,
           icon:'error',
@@ -125,7 +125,7 @@ export class LoginComponent {
       },
       error:(res)=>{
         Swal.fire({
-          text:res.error,
+          text:res.error.message,
           icon:'error',
           timer:5000,
           showConfirmButton:false,

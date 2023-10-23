@@ -63,7 +63,7 @@ let verify = (req, res) => {
         .find({ userId })
         .then((result) => {
 
-            if (!result)
+            if (!(result.length < 0))
                 throw new appError('Account has already verified, or doesn\'t exist', 400)
 
             const { expiresAt, uniqueString } = result[0];
@@ -121,14 +121,14 @@ let verify = (req, res) => {
                     throw new appError('Existing email, but incorrect verification details', 400);
                 })
                 .catch((err) => {
-                    res.status(400).json({
+                    return res.status(400).json({
                         message: err.message
                     });
                 })
         })
         .catch((err) => {
             res.status(400).json({
-                message: 'not verified'
+                message: err.message
             });
         })
 }
@@ -146,7 +146,7 @@ let login = tryCatch(async (req, res) => {
 
         if (!user.verified)
             throw new appError('Please verify the email first then back to login', 400);
-        
+
         bcrypt
             .compare(password, user.password)
             .then((result) => {
@@ -191,9 +191,15 @@ let sendPasswordResetEmail = (req, res) => {
         .then((result) => {
 
             if (result) {
-                validator.sendResetPasswordLink(result)
-                return res.status(200).json({
-                    message: 'Email send successfully'
+                passwordReset.findOneAndDelete({userId:result._id}).then(()=>{
+                    validator.sendResetPasswordLink(result)
+                    return res.status(200).json({
+                        message: 'Email send successfully'
+                    })
+                }).catch((err)=>{
+                    res.status(400).json({
+                        message:err.message
+                    })
                 })
             }
 
@@ -225,7 +231,7 @@ let updatePassword = (req, res) => {
             if (result.length <= 0)
                 throw new appError('There is no ask to change the password', 400);
 
-            const { expiresAt, uniqueString } = result[0];
+            const { expiresAt, uniqueString } = result[result.length - 1];
 
             if (Date.now() > expiresAt)
 
@@ -239,19 +245,20 @@ let updatePassword = (req, res) => {
                             message: err.message
                         });
                     });
-
             bcrypt
                 .compare(uniqueStr, uniqueString)
                 .then((result) => {
+
                     if (result) {
-                        console.log(password)
                         userModel
                             .updateOne({ _id: userId }, { password })
                             .then(() => {
                                 passwordReset
                                     .deleteOne({ userId })
                                     .then(() => {
-                                        throw new appError('Password has been changes', 400);
+                                        return res.status(200).json({
+                                            message: 'Password has been changed'
+                                        });
                                     })
                                     .catch((err) => {
                                         return res.status(400).json({
@@ -264,8 +271,9 @@ let updatePassword = (req, res) => {
                                     message: err.message
                                 });
                             })
+                    } else {
+                        throw new appError('Existing email, but incorrect verification details');
                     }
-                    throw new appError('Existing email, but incorrect verification details');
                 })
                 .catch((err) => {
                     res.status(400).json({
@@ -276,7 +284,7 @@ let updatePassword = (req, res) => {
         })
         .catch((err) => {
             res.status(400).json({
-                message:err.message
+                message: err.message
             });
         })
 }
@@ -321,7 +329,7 @@ let updateProfile = async (req, res) => {
 //logout
 let logout = (req, res) => {
     res.status(200).json({
-        message:"logout successfully"
+        message: "logout successfully"
     })
 }
 

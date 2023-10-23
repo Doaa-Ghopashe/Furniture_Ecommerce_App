@@ -33,7 +33,7 @@
 
 #signin-window,
 #signup-window {
-    height: 70vh;
+    height: 35rem;
     border-radius: 40%
 }
 
@@ -78,13 +78,12 @@ input[type=text]:focus,input[type=email]:focus,input[type=password]:focus  {
 
 .special-btn {
     border-radius: 22px;
-    border: 1px solid var(--bordercolor);
     background: var(--btncolor);
     color: var(--fontcolor);
     text-align: center;
     font-size: 18px;
     font-family: Bai Jamjuree;
-    padding: 5px 15px;
+    text-transform: capitalize;
     margin: auto;
     width: fit-content;
     display: block;
@@ -123,7 +122,7 @@ input[type=text]:focus,input[type=email]:focus,input[type=password]:focus  {
     font-size: 25px;
     font-weight: 500;
 }
-#passwordHelp,#confirmPasswordHelp{
+#passwordHelp , #confirmPasswordwordHelp{
     right: 40px;
 }
 a{

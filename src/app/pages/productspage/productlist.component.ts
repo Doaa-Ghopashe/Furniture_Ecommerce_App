@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { ProductInterface } from 'src/app/interfaces/product-interface';
 
-import { ProductService } from '../services/product.service';
-import { ProductInterface } from '../interfaces/product-interface';
+import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-productlist',
   templateUrl: './productlist.component.html',

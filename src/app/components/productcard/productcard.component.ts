@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { ProductInterface } from '../interfaces/product-interface';
+import { ProductInterface } from '../../interfaces/product-interface';
 import { Router } from '@angular/router';
-import { CounterService } from '../services/counter.service';
-import { ProductService } from '../services/product.service';
-import { CartService } from '../services/cart.service';
+import { CounterService } from '../../services/counter.service';
+import { ProductService } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
 @Component({
   selector: 'app-productcard',
   templateUrl: './productcard.component.html',

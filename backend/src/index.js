@@ -12,6 +12,8 @@ const express = require('express'),
 
     product = require('./routes/product'),
 
+    category = require('./routes/category'),
+
     PORT = process.env.SERVER_PORT,
 
     Mongodb = process.env.MONGODB_URL,
@@ -33,6 +35,9 @@ app.use(express.static('public'));
 app.use('', user);
 
 app.use('/product', product);
+
+app.use('/category', category);
+
 
 app.use(errorHandling);
 

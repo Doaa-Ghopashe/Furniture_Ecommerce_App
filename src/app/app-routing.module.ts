@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductlistComponent } from './productlist/productlist.component';
+
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
-import { ProductdetailsComponent } from './productdetails/productdetails.component';
-import { CartComponent } from './cart/cart.component';
-import { NotfoundComponent } from './notfound/notfound.component';
+import { CartComponent } from './components/cart/cart.component';
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { AuthGaurdService } from './guards/authguard.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { VerificationComponent } from './components/verification/verification.component';
-import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
+import { UpdatepasswordformComponent } from './components/updatepasswordform/updatepasswordform.component';
 import { ResetpasswordformComponent } from './components/resetpasswordform/resetpasswordform.component';
+import { ProductlistComponent } from './pages/productspage/productlist.component';
+import { ProductdetailsComponent } from './components/productdetails/productdetails.component';
 
 
 const routes: Routes = [
@@ -46,7 +47,7 @@ const routes: Routes = [
   },
   {
     path:"resetpassword/:userId/:uniqueString",
-    component:ResetpasswordComponent
+    component:UpdatepasswordformComponent
     // canActivate: [AuthGaurdService]
   },
   {

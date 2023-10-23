@@ -3,4 +3,6 @@ let express = require('express'),
 
  router.get('/',()=>{})
 
+ router.post('/',()=>{})
+
 module.exports = router

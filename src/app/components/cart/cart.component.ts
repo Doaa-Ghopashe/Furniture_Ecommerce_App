@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import { ProductInterface } from '../interfaces/product-interface';
+import { ProductInterface } from '../../interfaces/product-interface';
 
-import { CounterService } from '../services/counter.service';
-import { CartService } from '../services/cart.service';
+import { CounterService } from '../../services/counter.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart',

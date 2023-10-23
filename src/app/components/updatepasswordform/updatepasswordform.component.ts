@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { IconDefinition, faExclamationCircle, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-resetpassword',
-  templateUrl: './resetpassword.component.html',
-  styleUrls: ['./resetpassword.component.css']
+  selector: 'app-updatepasswordform',
+  templateUrl: './updatepasswordform.component.html',
+  styleUrls: ['./updatepasswordform.component.css']
 })
-export class ResetpasswordComponent {
+export class UpdatepasswordformComponent {
   resetPasswordForm!: FormGroup;
   isShown!: boolean;
   isShown2!: boolean;
@@ -17,7 +18,7 @@ export class ResetpasswordComponent {
   faeye!: IconDefinition;
   errorSign!: IconDefinition;
 
-  constructor(private user_service: UserService, private fb: FormBuilder, private route: ActivatedRoute) { }
+  constructor(private user_service: UserService, private fb: FormBuilder, private route: ActivatedRoute, private router:Router) { }
 
   ngOnInit() {
     this.resetPasswordForm = this.fb.group({
@@ -36,7 +37,41 @@ export class ResetpasswordComponent {
     const { userId,uniqueString } = this.route.snapshot.params;
     this.user_service
       .updatePassword(this.resetPasswordForm.value,userId,uniqueString )
-      .subscribe()
+      .subscribe({
+        next:(res:any)=>{
+          Swal.fire({
+            text:res.message,
+            showConfirmButton:false,
+            timer:5000,
+            icon:'success',
+            width: 600,
+            padding: '3em',
+            backdrop: `
+              rgba(0,0,0,0.4)
+              left top
+              no-repeat
+            `
+          });
+          setTimeout(()=>{
+            this.router.navigate(['/login']);
+          },200)
+        },
+        error:(res)=>{
+          Swal.fire({
+            text:res.error.message,
+            showConfirmButton:false,
+            timer:5000,
+            icon:'error',
+            width: 600,
+            padding: '3em',
+            backdrop: `
+              rgba(0,0,0,0.4)
+              left top
+              no-repeat
+            `
+          })
+        }
+      })
   }
 
   //A custom validator to check if confirmed password match password or not

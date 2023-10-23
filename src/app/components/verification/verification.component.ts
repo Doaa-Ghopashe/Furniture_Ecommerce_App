@@ -19,8 +19,13 @@ export class VerificationComponent {
 
     this.fashake = faHandshake;
 
-    this.user_service.verificationRequest(userId,uniqueString).subscribe((res:any)=>{
-      this.message = res.message
+    this.user_service.verificationRequest(userId,uniqueString).subscribe({
+      next:(res:any)=>{
+        this.message = res.message
+      },
+      error:(res:any)=>{
+        this.message = res.error.message
+      }
     })
   }
 
