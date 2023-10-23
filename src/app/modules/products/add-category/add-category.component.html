@@ -8,7 +8,7 @@
                 <div class="mb-4 position-relative d-flex align-items-center w-100 ">
                     <label for="Name">Name</label>
                     <input class="form-control" type="text" id="Name" formControlName="name">
-                    <div id="nameHelp" class="form-text position-absolute error-msg m-0"
+                    <div id="nameHelp" class="form-text error-msg m-0"
                         *ngIf="addCategoryForm.controls['name'].touched && addCategoryForm.controls['name'].invalid">
 
                         <span *ngIf="addCategoryForm.controls['name']?.errors?.['required']">

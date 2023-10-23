@@ -55,3 +55,12 @@ textarea{
     min-height: 100px;
     max-height: 100px;
 }
+
+#nameHelp {
+    position: absolute;
+    right: 9px;
+    top: 0px;
+    bottom: 0;
+    color: red;
+    font-size: 23px;
+}

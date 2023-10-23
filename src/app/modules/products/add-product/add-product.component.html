@@ -29,6 +29,7 @@
 
                     <select class="form-select" formControlName="category">
                         <option selected disabled value="">--Select One From This Categories--</option>
+                        <option *ngFor="let category of categories" [value]="category.name">{{category.name}}</option>
                     </select>
 
                     <div id="nameHelp" class="form-text position-absolute error-msg m-0"
@@ -110,9 +111,8 @@
                     <label for="colors">Choose the colors</label>
                     <input type="color" id="draggable colors" draggable="true" (dragstart)="dragFun($event)">
 
-                    <select id="selectColors" class="d-none" formControlName="colors">
-                        <!--The selected colors will be added here to be send-->
-                    </select>
+                    <!--The selected colors will be added here to be send-->
+                    <input id="selectColors" type="text" class="d-none" formControlName="colors">
 
                 </div>
                 <div class="mb-4 d-flex Box" (dragover)="myDrop($event)" (drop)="dropMe($event)">
@@ -129,7 +129,8 @@
             </div>
             <!--Image-->
             <div class="mb-4 position-relative">
-                <input class="form-control" type="file" formControlName="image" accept="image/png, image/jpg, image/jpeg">
+                <input class="form-control" type="file" formControlName="image"
+                    accept="image/png, image/jpg, image/jpeg">
 
                 <div id="nameHelp" class="form-text position-absolute error-msg m-0"
                     *ngIf="productForm.controls['image'].touched && productForm.controls['image'].invalid">

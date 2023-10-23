@@ -14,4 +14,7 @@ export class CategoryService {
     return this.http.post('http://localhost:4000/category/add-category',data);
   }
 
+  getAllCategories(){
+    return this.http.get('http://localhost:4000/category/list-categories');
+  }
 }

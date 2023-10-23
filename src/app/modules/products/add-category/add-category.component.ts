@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { Category } from 'src/app/interfaces/category';
 import { CategoryService } from 'src/app/services/category.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-category',
@@ -26,8 +26,37 @@ export class AddCategoryComponent {
 
   createCategory(data:FormGroup){
     
-    this.service.addCategory(data.value).subscribe(res=>{
-      console.log(res)
+    this.service.addCategory(data.value).subscribe({
+      next:(res:any)=>{
+        Swal.fire({
+          text:res.message,
+          showConfirmButton:false,
+          timer:5000,
+          icon:'success',
+          width: 600,
+          padding: '3em',
+          backdrop: `
+            rgba(0,0,0,0.4)
+            left top
+            no-repeat
+          `
+        })
+      },
+      error:(res:any)=>{
+        Swal.fire({
+          text:res.error.message,
+          showConfirmButton:false,
+          timer:5000,
+          icon:'error',
+          width: 600,
+          padding: '3em',
+          backdrop: `
+            rgba(0,0,0,0.4)
+            left top
+            no-repeat
+          `
+        })
+      }
     })
   }
 }

@@ -9,3 +9,12 @@ form label{
  margin: 0 10px;
  text-transform: capitalize;
 }
+
+#nameHelp {
+    position: absolute;
+    right: 9px;
+    top: 0px;
+    bottom: 0;
+    color: red;
+    font-size: 23px;
+}
