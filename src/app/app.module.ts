@@ -21,6 +21,7 @@ import { TopThreeProductsComponent } from './components/top-three-products/top-t
 import { ChartModule } from 'angular-highcharts';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsModule } from './modules/products/products.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ProductsModule } from './modules/products/products.module';
     FontAwesomeModule,
     ChartModule,
     ReactiveFormsModule,
-    ProductsModule
+    ProductsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

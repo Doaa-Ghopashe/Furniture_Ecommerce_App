@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-products',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class ListProductsComponent {
 
+  constructor(private router:Router){}
+
+  NavigateToAddCategory(){
+    this.router.navigate(['products/add-category'])
+  }
 }
