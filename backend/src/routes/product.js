@@ -1,8 +1,9 @@
 let express = require('express'),
- router = express.Router();
+    controller = require('../controller/productController'),
+    router = express.Router();
 
- router.get('/',()=>{})
+router.get('/', () => { })
 
- router.post('/',()=>{})
+router.post('/add-product', controller.addProduct)
 
 module.exports = router
