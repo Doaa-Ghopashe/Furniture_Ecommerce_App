@@ -38,7 +38,6 @@ app.use('/product', product);
 
 app.use('/category', category);
 
-
 app.use(errorHandling);
 
 app.listen(PORT, (err) => {

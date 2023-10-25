@@ -1,16 +1,23 @@
-const productModel = require('../model/product');
-const { tryCatch } = require('../utlis/tryCatch');
-const { appError } = require('../appError');
-
+const productModel = require('../model/product'),
+    { tryCatch } = require('../utlis/tryCatch'),
+    { appError } = require('../appError'),
+    categoryModel = require('../model/category');
 
 let addProduct = tryCatch(async (req, res) => {
     const { name, category, image, price, offer, quantity, colors, details } = req.body
     //
-    if (!(name && category && image && price && offer && quantity && colors && details)) {
-        throw new appError('All Inputs should be entered', 400);
-    }
+    let foundOrNot = await categoryModel.findOne({name:category});
     //
-    
+    if(!foundOrNot)
+        throw new appError('Category doesn\'t exist',422);
+    //
+    // console.log(foundOrNot._id)
+    //
+    // productModel.create({...req.body,
+    //     category_Id:foundOrNot._id,
+        
+    // })
+
 
 })
 
