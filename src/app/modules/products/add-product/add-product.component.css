@@ -1,44 +1,71 @@
-.AddProductForm{
+.AddProductForm {
     margin-top: 50px;
     border: 1px solid rgba(0, 0, 0, 0.296);
     box-shadow: 4px 5px 1px rgba(0, 0, 0, 0.237);
     background-color: rgba(255, 255, 255, 0.687);
     border-radius: 10px;
 }
+
 .selection-area {
     width: 50%;
     height: 50px;
     align-items: center;
     text-align: center;
     justify-content: space-around;
-   
-    
     /* border: 1px dashed black */
 }
-.selection-area label{
+
+.Box::before {
+    content: "Colors";
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 400;
+    font-size: 60px;
+    color: #dedddd;
+    text-shadow: 0px 1px rgba(0, 0, 0, 0.472);
+
+    transform: rotateZ(90deg);
+    z-index: -1;
+}
+
+.selection-area label {
     width: 50%;
     text-transform: uppercase;
     text-align: start;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.297);
-	background: linear-gradient(to right, #ff4b0a 0%,rgb(74, 155, 236) 40% , rgb(255, 207, 32)50%, #236708 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+    background: linear-gradient(to right, #ff4b0a 0%, rgb(74, 155, 236) 40%, rgb(255, 207, 32)50%, #236708 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-transform: capitalize;
     font-weight: bolder;
     font-size: 18px;
 }
-#draggable{
-    width:100%;
+
+input[type="color"] {
+    width: 50%;
     height: 100%;
-    border:none;
-    border-radius: 10px;
-    overflow:hidden
+    border: none;
+    border-radius: 80px;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .Box {
     width: 40%;
-    height: 50px;
-    border: 1px dashed rgba(0, 0, 0, 0.371)
+    height: 100%;
+    border: 2px dashed rgba(0, 0, 0, 0.161);
+    border-radius: 10px;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+
+
 }
 
 .colorBox {
@@ -46,14 +73,14 @@
     height: 35px;
 }
 
-form label{
- margin: 0 10px;
- text-transform: capitalize;
+form label {
+    margin: 0 10px;
+    text-transform: capitalize;
 }
 
-textarea{
-    min-height: 100px;
-    max-height: 100px;
+textarea {
+    min-height: 150px;
+    max-height: 150px;
 }
 
 #nameHelp {
@@ -63,4 +90,45 @@ textarea{
     bottom: 0;
     color: red;
     font-size: 23px;
+}
+
+.upload-area {
+    border: 2px dashed rgba(160, 160, 160, 0.534);
+    border-radius: 10px;
+    height: 300px;
+    width: 100%;
+    margin: auto;
+    color: gainsboro;
+    transition: all 0.1s;
+    cursor: pointer;
+}
+
+.upload-area fa-icon {
+    font-size: 80px;
+    filter: drop-shadow(3px 0px 1px rgba(0, 0, 0, 0.468));
+    transition: all 0.1s;
+}
+
+.upload-area:hover {
+    border-color: rgba(0, 0, 0, 0.757);
+    color: rgb(3, 133, 180);
+}
+.list-group{
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.list-group li {
+    width: 20%;
+}
+.xIcon{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 24px;
+    cursor:pointer;
+    color: #d7d7d7;
+    text-shadow: 0px 0px 1px #000000b5;
+}
+.xIcon:hover{
+    background-color: red;
 }

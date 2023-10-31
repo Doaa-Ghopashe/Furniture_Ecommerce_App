@@ -3,7 +3,8 @@
         <h1 class="fw-light mt-3 mb-3 border-bottom">Add new Furniture</h1>
     </div>
     <div>
-        <form [formGroup]="productForm" class="px-5 py-3" (ngSubmit)="CreateProduct(productForm)">
+        <form method="post" [formGroup]="productForm" class="px-5 py-3" (ngSubmit)="CreateProduct()"
+            enctype="multipart/form-data">
             <div class="d-flex justify-content-between">
                 <!--Name-->
                 <div class="mb-4 position-relative d-flex align-items-center w-50 ">
@@ -105,40 +106,52 @@
 
                 </div>
             </div>
-            <!--Colors-->
-            <div class="d-flex justify-content-evenly align-items-center">
-                <div class="mb-4 position-relative selection-area d-flex">
-                    <label for="colors">Choose the colors</label>
-                    <input type="color" id="draggable colors" draggable="true" (dragstart)="dragFun($event)">
+            <div class="d-flex justify-content-center">
 
-                    <!--The selected colors will be added here to be send-->
-                    <input id="selectColors" type="text" class="d-none" formControlName="colors">
+                <!--Image-->
+                <div class="mb-4 position-relative col-8">
+                    <div class="d-flex align-items-center justify-content-center upload-area" (click)="UploadImageToArea()">
+                        <fa-icon class="" [icon]="uploadIcon"></fa-icon>
+                    </div>
+                    <input class="form-control d-none image" type="file" accept="image/png, image/jpg, image/jpeg"
+                        (change)="selectedFile($event)" multiple="multiple">
+                    <div class="position-absolute" style="top: 10px;left: 10px; bottom: 10px;overflow-y: scroll;">
+                        <ul class="list-group d-block" style="list-style: none;">
+                            <!--Images will be showen here-->
+                        </ul>
+                    </div>
+                    <div id="nameHelp" class="form-text position-absolute error-msg m-0"
+                        *ngIf="productForm.controls['image'].touched && productForm.controls['image'].invalid">
 
-                </div>
-                <div class="mb-4 d-flex Box" (dragover)="myDrop($event)" (drop)="dropMe($event)">
-                    <!--The colors will be displayed here-->
-                    <div id="colorsHelp" class="form-text position-absolute error-msg m-0"
-                        *ngIf="productForm.controls['colors'].touched && productForm.controls['colors'].invalid">
-
-                        <span *ngIf="productForm.controls['colors'].errors?.['required']">
+                        <span *ngIf="productForm.controls['image'].errors?.['required']">
                             <fa-icon [icon]="errorIcon" title="Reqiured"></fa-icon>
                         </span>
 
                     </div>
+
                 </div>
-            </div>
-            <!--Image-->
-            <div class="mb-4 position-relative">
-                <input class="form-control" type="file" formControlName="image"
-                    accept="image/png, image/jpg, image/jpeg">
 
-                <div id="nameHelp" class="form-text position-absolute error-msg m-0"
-                    *ngIf="productForm.controls['image'].touched && productForm.controls['image'].invalid">
+                <!--Colors-->
+                <div class="col-3 d-flex justify-content-evenly align-items-center flex-column">
+                    <div class="mb-2 position-relative selection-area d-flex">
+                        <!-- <label for="colors">Choose the colors</label> -->
+                        <input type="color" id="draggable colors" draggable="true" (dragstart)="dragFun($event)">
 
-                    <span *ngIf="productForm.controls['image'].errors?.['required']">
-                        <fa-icon [icon]="errorIcon" title="Reqiured"></fa-icon>
-                    </span>
+                        <!--The selected colors will be added here to be send-->
+                        <input id="selectColors" type="text" class="d-none" formControlName="colors">
 
+                    </div>
+                    <div class="mb-4 d-flex Box" (dragover)="myDrop($event)" (drop)="dropMe($event)">
+                        <!--The colors will be displayed here-->
+                        <div id="colorsHelp" class="form-text position-absolute error-msg m-0"
+                            *ngIf="productForm.controls['colors'].touched && productForm.controls['colors'].invalid">
+
+                            <span *ngIf="productForm.controls['colors'].errors?.['required']">
+                                <fa-icon [icon]="errorIcon" titleng="Reqiured"></fa-icon>
+                            </span>
+
+                        </div>
+                    </div>
                 </div>
 
             </div>
