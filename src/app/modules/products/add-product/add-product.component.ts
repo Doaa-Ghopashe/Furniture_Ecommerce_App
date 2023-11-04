@@ -6,7 +6,8 @@ import { faExclamationTriangle, faTimesCircle, faUpload } from '@fortawesome/fre
 import { Category } from 'src/app/interfaces/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
-
+import { Route, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -14,16 +15,21 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AddProductComponent {
   productForm!: FormGroup;
-  errorIcon!: IconDefinition;
+  
+  selectedColors!: String[];
   categories!: any;
-  files!: FileList;
+  dataTransfer!: DataTransfer;
+
+  errorIcon!: IconDefinition;
   xIcon!: IconDefinition;
   uploadIcon!: IconDefinition;
-  list: DataTransfer = new DataTransfer();
 
-  constructor(private fb: FormBuilder, private category_service: CategoryService, private product_service: ProductService) { }
+  colorList !: Element;
+
+  constructor(private fb: FormBuilder, private category_service: CategoryService, private product_service: ProductService, private router:Router) {}
 
   ngOnInit() {
+
     this.productForm = this.fb.group({
       name: ["", [Validators.required, Validators.maxLength(14), Validators.minLength(5)]],
       category: ["", [Validators.required]],
@@ -31,12 +37,17 @@ export class AddProductComponent {
       quantity: ['', [Validators.required, Validators.max(1000)]],
       offer: ['', [Validators.required, Validators.max(1)]],
       image: ['', [Validators.required]],
-      colors: ['', [Validators.required]],
+      colors: ['',[Validators.required]],
       details: ['', [Validators.required]]
     });
+
     this.xIcon = faTimesCircle;
     this.uploadIcon = faUpload
     this.errorIcon = faExclamationTriangle;
+
+    this.dataTransfer = new DataTransfer();
+    this.selectedColors = new Array();
+
     this.category_service.getAllCategories().subscribe((res: any) => {
       this.categories = res.data.Categories
     });
@@ -46,48 +57,89 @@ export class AddProductComponent {
   CreateProduct() {
     let formdata = new FormData();
 
-    formdata.append('name', this.productForm.controls['name'].value)
-    for (let i = 0; i < this.files.length; i++) {
-      formdata.append('image', this.files[i])
+    Object.entries(this.productForm.controls).forEach(([key, control]) => {
+      if(!(key=='colors'||key=='image')){
+        formdata.append(key, control.value);
+      }
+    });
+  
+    for (let i = 0; i < this.dataTransfer.files.length; i++) {
+      formdata.append('images',this.dataTransfer.files[i]);
     }
-    formdata.append('price', this.productForm.controls['price'].value)
-    formdata.append('offer', this.productForm.controls['offer'].value)
-    formdata.append('quantity', this.productForm.controls['quantity'].value)
-    formdata.append('category', this.productForm.controls['category'].value)
-    formdata.append('colors', this.productForm.controls['colors'].value)
-    formdata.append('details', this.productForm.controls['details'].value)
+    console.log(formdata.get('images'));
+    formdata.append('colors',JSON.stringify(this.selectedColors))
 
-    this.product_service.addProduct(formdata).subscribe((res: any) => {
-      console.log(res)
-    })
+    this.product_service.addProduct(formdata).subscribe({
+      next:(res:any)=>{
+        Swal.fire({
+          text:res.message,
+          showConfirmButton:false,
+          timer:5000,
+          icon:'success',
+          width: 600,
+          padding: '3em',
+          backdrop: `
+            rgba(0,0,0,0.4)
+            left top
+            no-repeat
+          `
+        })
+        this.router.navigate(['/products']);
+      },
+      error:(res:any)=>{
+        Swal.fire({
+          text:res.error.message,
+          showConfirmButton:false,
+          timer:5000,
+          icon:'error',
+          width: 600,
+          padding: '3em',
+          backdrop: `
+            rgba(0,0,0,0.4)
+            left top
+            no-repeat
+          `
+        })
+      }
+    });
   }
 
-  UploadImageToArea() {
+  selectFile() {
     document.getElementsByTagName('input')[4].click();
+
+    setTimeout(() => {
+      this.productForm.controls['image'].markAsTouched()
+    }, 1000);
   }
 
-  selectedFile(e: any) {
-    this.files = e.target.files;
-    this.uploadImgs();
-  }
-  //////////////////ERROR
-  async uploadImgs() {
+  fetchFiles(e: any) {
+    if(e.target.files.length > 5 && this.dataTransfer.items.length == 0){
+      this.productForm.controls['image'].setValue('')
+    }
 
+    if ((e.target.files.length > 5 || this.dataTransfer.items.length > 5)) {
+      return console.log("the limit of images should not exceed 5")
+    }
+
+    for (const file of e.target.files) {
+      this.dataTransfer.items.add(file);
+    }
+
+    this.mapFiles();
+  }
+
+  mapFiles() {
     const listOfImgs = document.getElementsByClassName('list-group')[0];
-
     listOfImgs.innerHTML = '';
 
-    // await this.list.items.clear();
-    console.log(this.files)
-    if (this.files) {
-      for (let i = 0; i < 5 && this.list.files.length < 5; i++) {
+    if (this.dataTransfer.files.length > 0) {
 
-        let imgName = this.files[i].name,
-          imgSize = (this.files[i].size / (1024)).toFixed(2),
-          imgType = this.files[i].type.split('/')[1],
-          imgSrc = URL.createObjectURL(this.files[i]);
+      for (let i = 0; i < this.dataTransfer.files.length; i++) {
 
-        this.list.items.add(this.files[i]);
+        const imgName = this.dataTransfer.files[i].name,
+          imgSize = (this.dataTransfer.files[i].size / (1024)).toFixed(2),
+          imgType = this.dataTransfer.files[i].type.split('/')[1],
+          imgSrc = URL.createObjectURL(this.dataTransfer.files[i]);
 
         this.displayImg(listOfImgs, imgName, Number(imgSize), imgType, imgSrc, i);
       }
@@ -95,6 +147,7 @@ export class AddProductComponent {
   }
 
   displayImg(Imgs: Element, name: string, size: number, type: string, src: string, index: number) {
+
     const listItem = document.createElement('li'),
       itemInfo = document.createElement('span'),
       deletebtn = document.createElement('i'),
@@ -109,43 +162,17 @@ export class AddProductComponent {
 
     itemInfo.innerHTML += "</br><b>File size</b>: " + size + " KB";
 
-    image.style.cssText += `width: 15%; 
-    margin-right: 10px; 
-    border-right: 1px solid #00000036; 
-    padding: 0 8px;`;
+    image.classList.add('product-image')
 
     listItem.appendChild(image);
 
     listItem.appendChild(itemInfo);
 
-    listItem.style.cssText += `border-radius: 6px;
-    position:relative;
-    display: flex;
-    padding: 16px 0px;
-    border: 1px solid rgba(0, 0, 0, 0.21);
-    margin: 5px;
-    backdrop-filter: blur(5px);
-    background: rgb(0 141 205 / 21%); `;
+    listItem.classList.add('listItem')
 
     deletebtn.setAttribute('class', 'deletebtn fa-solid fa-circle-xmark')
 
     deletebtn.setAttribute('id', String(index));
-
-    deletebtn.style.cssText += `position: absolute;
-    top: 5px;
-    right: 5px;
-    font-size: 24px;
-    cursor:pointer;
-    color: #d7d7d7;
-    text-shadow: 0px 0px 1px #000000b5;`
-
-    deletebtn.onmouseover = () => {
-      deletebtn.style.color = "red"
-    }
-
-    deletebtn.onmouseleave = () => {
-      deletebtn.style.color = "#d7d7d7"
-    }
 
     deletebtn.onclick = this.deleteImg
 
@@ -155,41 +182,82 @@ export class AddProductComponent {
 
   }
 
-  //////////////////ERROR
-  deleteImg = async (e: any) => {
-    // let index = e.target.id;
+  deleteImg = (e: any) => {
 
-    this.list.items.remove(0);
+    const index = e.target.id;
 
-    this.files = this.list.files;
+    this.dataTransfer.items.remove(index);
 
-    await this.uploadImgs()
+    if (this.dataTransfer.items.length == 0) {
+      this.productForm.controls['image'].setValue('')
+    }
+
+    this.mapFiles();
+
   }
-  
-  //
+
   myDrop(e: Event) {
     e.preventDefault()
   }
-
+  
   dragFun(e: any) {
     e.dataTransfer.setData("color", e.target.value)
   }
 
   dropMe(e: any) {
-
-    let colorInput = this.productForm.controls['colors'].value;
-    let numOfColors = colorInput.split(' ').length;
-
-    if (!colorInput || numOfColors < 5) {
-      let choosedColor = e.dataTransfer.getData("color");
-      let color = document.createElement('div');
-      this.productForm.controls['colors'].setValue(colorInput + ' ' + choosedColor)
-      color.style.backgroundColor = choosedColor;
-      color.style.height = "20%"
-      color.style.width = "100%";
-      color.style.marginBottom = "10px";
-      e.target.appendChild(color);
+    this.colorList = e.target;
+    
+    if (this.selectedColors.length < 5) {
+      const choosedColor = e.dataTransfer.getData("color");
+      this.selectedColors.push(choosedColor);
+      this.displayColor();
     }
+    this.productForm.controls['colors'].setValue(this.selectedColors[0])
+
+  }
+
+  displayColor() {
+    console.log(this.selectedColors)
+    this.colorList.innerHTML = "";
+    let idx = 0;
+    for (const color of this.selectedColors) {
+
+      const deletebtn = document.createElement('button'),
+        colorItem = document.createElement('div');
+
+     colorItem.classList.add('colorItem');
+
+      colorItem.style.cssText += `background-color:${color};`;
+
+      deletebtn.classList.add('deletebtnclr');
+
+      deletebtn.innerHTML = "X";
+
+      deletebtn.setAttribute('id', String(idx));
+
+      idx++;
+
+      colorItem.appendChild(deletebtn)
+
+      this.colorList.appendChild(colorItem);
+
+      deletebtn.onclick = this.deleteClr;
+    }
+
+
+  }
+
+  deleteClr = (e: any) => {
+
+    const index = Number(e.target.id);
+
+    this.selectedColors.splice(index, 1);
+
+    if(this.selectedColors.length == 0){
+      this.productForm.controls['colors'].setValue('')
+    }
+
+    this.displayColor();
 
   }
 }

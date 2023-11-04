@@ -22,6 +22,6 @@ export class ProductService {
   }
 
   listProducts(){
-    return ;
+    return this.http.get('http://localhost:4000/product') ;
   }
 }
