@@ -15,7 +15,7 @@ const mongoose = require('mongoose'),
             product.findOne({ category_Id: this._conditions._id })
                 .then((res) => {
                     if (res) {
-                        next('This category cannot be deleted');
+                        next({message:'This category cannot be deleted'});
                     }else{
                         next(); 
                     }
