@@ -3,7 +3,7 @@
     <div class="d-flex flex-column justify-content-center align-items-center position-relative"
         *ngIf="allPrds.length == 0">
 
-        <img class="nodata" src="/assets/Product Not Found.png">
+        <img title="productNotFoundImg" class="nodata" src="/assets/Product Not Found.png">
 
         <h4 class="text-center msg mt-0 position-absolute">There is no products to be displayed</h4>
 
@@ -30,7 +30,7 @@
                                     *ngFor="let image of product.images; let isFirst = first"
                                     [class.active]="isFirst">
     
-                                    <img [src]='getImageUrl(image)'>
+                                    <img title="categoryImg" [src]='getImageUrl(image)'>
     
                                 </div>
     
@@ -42,7 +42,7 @@
     
                             </div>
     
-                            <button class="text-black carousel-control-prev" type="button"
+                            <button title="prevBtn" class="text-black carousel-control-prev" type="button"
                                 [attr.data-bs-target]="'#carouselExampleFade' + carouselIndex"
                                 data-bs-slide="prev">
     
@@ -50,7 +50,7 @@
     
                             </button>
     
-                            <button class="text-black carousel-control-next" type="button"
+                            <button title="nextBtn" class="text-black carousel-control-next" type="button"
                                 [attr.data-bs-target]="'#carouselExampleFade' + carouselIndex"
                                 data-bs-slide="next">
     
@@ -62,7 +62,7 @@
     
                         <div class="position-relative overflow-hidden px-3" *ngIf="product.images.length == 1">
                             <div class="prd-img">
-                                <img [src]='getImageUrl(product.images[0])'>
+                                <img title="productImage" [src]='getImageUrl(product.images[0])'>
                             </div>
     
                             <div *ngIf="product.offer.valueOf() > 0">
@@ -85,13 +85,13 @@
                     </div>
     
                     <div class="d-flex position-absolute bottom-0 end-0 mb-3">
-                        <button class="btn inf-btn me-2"><fa-icon
+                        <button title="infoBtn" class="btn inf-btn me-2"><fa-icon
                                 [icon]="infoIcon"></fa-icon></button>
     
-                        <button class="btn dlt-btn me-2" (click)="DeleteProduct(product._id)"><fa-icon
+                        <button title="deleteBtn" class="btn dlt-btn me-2" (click)="DeleteProduct(product._id)"><fa-icon
                                 [icon]="trashIcon"></fa-icon></button>
     
-                        <button class="btn edt-btn"><fa-icon [icon]="penIcon"></fa-icon></button>
+                        <button title="editBtn" class="btn edt-btn"><fa-icon [icon]="penIcon"></fa-icon></button>
                     </div>
                 </li>
             </ul>

@@ -1,6 +1,7 @@
 .product-inf{
     width: 70%;
     user-select: none;
+    -webkit-user-select:none;
     font-weight: 100;
 }
 .product-inf .prd-name{

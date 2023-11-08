@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-    <input class="form-control image d-none"  type="file" formControlName="image"
+    <input class="form-control image d-none" title="image"  type="file" formControlName="image"
     accept="image/png, image/jpg, image/jpeg" (change)="fetchFiles($event)" [multiple]="isMultiple">
 
     <div class="d-flex align-items-center justify-content-center upload-area position-relative" (click)="selectFile()">

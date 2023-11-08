@@ -29,7 +29,7 @@
                 <div class="mb-4 position-relative d-flex align-items-center w-50">
                     <label>category</label>
 
-                    <select class="form-select" formControlName="category">
+                    <select title="category" class="form-select" formControlName="category">
                         <option selected disabled value="">--Select One From This Categories--</option>
                         <option *ngFor="let category of categories" [value]="category.name">{{category.name}}</option>
                     </select>
@@ -98,7 +98,7 @@
                 <!--Offer-->
                 <div class="mb-4 position-relative d-flex align-items-center w-25">
                     <label for="">Offer</label>
-                    <input class="form-control" id="" type="number" formControlName="offer" step="0.1">
+                    <input title="offer" class="form-control" id="" type="number" formControlName="offer" step="0.1">
 
                     <span class="position-absolute p-1" id="measure">%</span>
 
@@ -132,7 +132,7 @@
                 <!--Colors-->
                 <div class="col-3 d-flex justify-content-evenly align-items-center position-relative flex-column">
                     <div class="mb-2 selection-area d-flex">
-                        <input type="color" id="draggable colors" draggable="true" (dragstart)="dragFun($event)"
+                        <input title="color" type="color" id="draggable colors" draggable="true" (dragstart)="dragFun($event)"
                             formControlName="colors">
 
                     </div>
@@ -163,7 +163,7 @@
 
                 </div>
             </div>
-            <button [disabled]="productForm.invalid" class="btn submit-btn d-block m-auto">Add</button>
+            <button type="submit" [disabled]="productForm.invalid" class="btn submit-btn d-block m-auto">Add</button>
         </form>
     </div>
 </div>

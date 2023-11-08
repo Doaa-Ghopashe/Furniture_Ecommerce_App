@@ -89,6 +89,7 @@ img {
     border: 1px solid rgba(0, 0, 0, 0.21);
     margin: 5px;
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     background: rgb(200 214 225)
 }
 

@@ -89,6 +89,7 @@ textarea {
     color: red;
     font-size: 23px;
     backdrop-filter: blur(3px);
+    -webkit-backdrop-filter:blur(3px);
     padding: 0 6px;
 }
 
@@ -120,6 +121,7 @@ textarea {
     display: flex;
     align-items: center;
     backdrop-filter: blur(3px);
+    -webkit-backdrop-filter:blur(3px);
     justify-content: center;
 
 }
