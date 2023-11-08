@@ -22,7 +22,6 @@ import { ChartModule } from 'angular-highcharts';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsModule } from './modules/products/products.module';
 import { HttpClientModule } from '@angular/common/http';
-
 @NgModule({
   declarations: [
     AppComponent,

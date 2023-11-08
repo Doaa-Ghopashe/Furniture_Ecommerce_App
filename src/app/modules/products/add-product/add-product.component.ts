@@ -8,6 +8,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -47,11 +48,16 @@ export class AddProductComponent {
 
     this.dataTransfer = new DataTransfer();
     this.selectedColors = new Array();
-
     this.category_service.getAllCategories().subscribe((res: any) => {
       this.categories = res.data.Categories
     });
 
+  }
+
+
+  addItem(newItem: DataTransfer) {
+    this.productForm.controls['image'].setValue(newItem)
+    this.dataTransfer = newItem
   }
 
   CreateProduct() {
@@ -66,7 +72,7 @@ export class AddProductComponent {
     for (let i = 0; i < this.dataTransfer.files.length; i++) {
       formdata.append('images',this.dataTransfer.files[i]);
     }
-    console.log(formdata.get('images'));
+    
     formdata.append('colors',JSON.stringify(this.selectedColors))
 
     this.product_service.addProduct(formdata).subscribe({
@@ -102,98 +108,6 @@ export class AddProductComponent {
         })
       }
     });
-  }
-
-  selectFile() {
-    document.getElementsByTagName('input')[4].click();
-
-    setTimeout(() => {
-      this.productForm.controls['image'].markAsTouched()
-    }, 1000);
-  }
-
-  fetchFiles(e: any) {
-    if(e.target.files.length > 5 && this.dataTransfer.items.length == 0){
-      this.productForm.controls['image'].setValue('')
-    }
-
-    if ((e.target.files.length > 5 || this.dataTransfer.items.length > 5)) {
-      return console.log("the limit of images should not exceed 5")
-    }
-
-    for (const file of e.target.files) {
-      this.dataTransfer.items.add(file);
-    }
-
-    this.mapFiles();
-  }
-
-  mapFiles() {
-    const listOfImgs = document.getElementsByClassName('list-group')[0];
-    listOfImgs.innerHTML = '';
-
-    if (this.dataTransfer.files.length > 0) {
-
-      for (let i = 0; i < this.dataTransfer.files.length; i++) {
-
-        const imgName = this.dataTransfer.files[i].name,
-          imgSize = (this.dataTransfer.files[i].size / (1024)).toFixed(2),
-          imgType = this.dataTransfer.files[i].type.split('/')[1],
-          imgSrc = URL.createObjectURL(this.dataTransfer.files[i]);
-
-        this.displayImg(listOfImgs, imgName, Number(imgSize), imgType, imgSrc, i);
-      }
-    }
-  }
-
-  displayImg(Imgs: Element, name: string, size: number, type: string, src: string, index: number) {
-
-    const listItem = document.createElement('li'),
-      itemInfo = document.createElement('span'),
-      deletebtn = document.createElement('i'),
-      image = document.createElement('img');
-
-    image.src = src;
-
-    itemInfo.innerHTML = "<b>File name</b>: " +
-      ((name.length > 10) ?
-        name.substring(0, 20) + '...' + type
-        : name);
-
-    itemInfo.innerHTML += "</br><b>File size</b>: " + size + " KB";
-
-    image.classList.add('product-image')
-
-    listItem.appendChild(image);
-
-    listItem.appendChild(itemInfo);
-
-    listItem.classList.add('listItem')
-
-    deletebtn.setAttribute('class', 'deletebtn fa-solid fa-circle-xmark')
-
-    deletebtn.setAttribute('id', String(index));
-
-    deletebtn.onclick = this.deleteImg
-
-    listItem.appendChild(deletebtn);
-
-    Imgs.appendChild(listItem);
-
-  }
-
-  deleteImg = (e: any) => {
-
-    const index = e.target.id;
-
-    this.dataTransfer.items.remove(index);
-
-    if (this.dataTransfer.items.length == 0) {
-      this.productForm.controls['image'].setValue('')
-    }
-
-    this.mapFiles();
-
   }
 
   myDrop(e: Event) {

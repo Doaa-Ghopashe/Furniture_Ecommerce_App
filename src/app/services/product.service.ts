@@ -7,21 +7,21 @@ import { Product } from '../interfaces/product';
 })
 export class ProductService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  addProduct(data:any){
-    return this.http.post('http://localhost:4000/product/add-product',data);
+  addProduct(data: any) {
+    return this.http.post('http://localhost:4000/product/add-product', data);
   }
 
-  editProduct(){
-    return ;
+  editProduct(data: any) {
+    return this.http.put('http://localhost:4000/product/update-product', data);
   }
 
-  deleteProduct(){
-    return ;
+  deleteProduct(id: String) {
+    return this.http.delete(`http://localhost:4000/product/delete-product/${id}`);
   }
 
-  listProducts(){
-    return this.http.get('http://localhost:4000/product') ;
+  listProducts() {
+    return this.http.get('http://localhost:4000/product');
   }
 }

@@ -1,3 +1,5 @@
 export interface Category {
-    "name":string
+    "name":string,
+    "image":string,
+    "_id":string
 }

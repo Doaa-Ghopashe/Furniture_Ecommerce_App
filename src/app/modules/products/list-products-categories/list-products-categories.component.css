@@ -1,0 +1,34 @@
+.title {
+    background-color: rgba(128, 128, 128, 0.587);
+    color: ghostwhite
+}
+
+.categories,
+.products {
+    height: 700px;
+    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.359);
+}
+
+.categories .nodata,
+.products .nodata {
+    filter: brightness(0) saturate(1) drop-shadow(0px 0px 1px black) contrast(0);
+}
+
+.categories .msg,
+.products .msg {
+    bottom: 0;
+    text-transform: capitalize;
+    user-select: none;
+    right: 0;
+    left: 0;
+    color: gray;
+    text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.511);
+}
+
+.category-list {
+    width: 40%;
+}
+
+.product-list {
+    width: 60%
+}

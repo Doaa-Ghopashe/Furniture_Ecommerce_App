@@ -5,15 +5,17 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule, Routes } from '@angular/router';
-import { ListProductsComponent } from './list-products-categories/list-products.component';
 import { ListCategoriesComponent } from './list-categories/list-categories.component';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { UploadAreaComponent } from 'src/app/components/upload-area/upload-area.component';
+import { ListProductsCategoriesComponent } from './list-products-categories/list-products-categories.component';
+import { ListProductsComponent } from './list-products/list-products.component';
 
 const routes:Routes = [
   {
     path:"",
-    component:ListProductsComponent
+    component:ListProductsCategoriesComponent
   },
   {
     path:'add-product',
@@ -37,10 +39,12 @@ const routes:Routes = [
   declarations: [
     AddProductComponent,
     AddCategoryComponent,
-    ListProductsComponent,
     ListCategoriesComponent,
+    ListProductsComponent,
     EditCategoryComponent,
-    EditProductComponent
+    EditProductComponent,
+    UploadAreaComponent,
+    ListProductsCategoriesComponent
   ],
   imports: [
     CommonModule,

@@ -24,6 +24,7 @@
 
                     </div>
                 </div>
+
                 <!--Category-->
                 <div class="mb-4 position-relative d-flex align-items-center w-50">
                     <label>category</label>
@@ -42,8 +43,11 @@
 
                     </div>
                 </div>
+
             </div>
+
             <div class="d-flex">
+
                 <!--Price-->
                 <div class="mb-4 position-relative d-flex align-items-center w-50">
                     <label for="Price">Price</label>
@@ -59,13 +63,15 @@
                         </span>
 
                         <span *ngIf="productForm.controls['price'].errors?.['max']">
-                            <fa-icon id="errorIcon" [icon]="errorIcon" title="Price should not exceed 100,000"></fa-icon>
+                            <fa-icon id="errorIcon" [icon]="errorIcon"
+                                title="Price should not exceed 100,000"></fa-icon>
                         </span>
 
                     </div>
 
 
                 </div>
+
                 <!--Quantity-->
                 <div class="mb-4 position-relative d-flex align-items-center w-25">
                     <label for="Quantity">Quantity</label>
@@ -81,12 +87,14 @@
                         </span>
 
                         <span *ngIf="productForm.controls['quantity'].errors?.['max']">
-                            <fa-icon id="errorIcon" [icon]="errorIcon" title="Maximum quantity should not exceed 1000"></fa-icon>
+                            <fa-icon id="errorIcon" [icon]="errorIcon"
+                                title="Maximum quantity should not exceed 1000"></fa-icon>
                         </span>
 
                     </div>
 
                 </div>
+
                 <!--Offer-->
                 <div class="mb-4 position-relative d-flex align-items-center w-25">
                     <label for="">Offer</label>
@@ -102,47 +110,30 @@
                         </span>
 
                         <span *ngIf="productForm.controls['offer'].errors?.['max']">
-                            <fa-icon id="errorIcon" [icon]="errorIcon" title="Maximum sale should not exceed 100"></fa-icon>
+                            <fa-icon id="errorIcon" [icon]="errorIcon"
+                                title="Maximum sale should not exceed 100"></fa-icon>
                         </span>
 
                     </div>
 
                 </div>
+
             </div>
-            <div class="d-flex justify-content-center">
+
+            <div class="d-flex justify-content-end">
 
                 <!--Image-->
                 <div class="mb-4 position-relative col-8">
 
-                    <input class="form-control image d-none" formControlName="image" type="file"
-                    accept="image/png, image/jpg, image/jpeg" (change)="fetchFiles($event)" multiple="multiple">
-
-                    <div class="d-flex align-items-center justify-content-center upload-area position-relative" (click)="selectFile()">
-                        <fa-icon class="" [icon]="uploadIcon"></fa-icon>
-
-                        <div id="imageHelp" class="form-text position-absolute error-msg m-0"
-                            *ngIf="productForm.controls['image'].touched && productForm.controls['image'].invalid">
-
-                            <span *ngIf="productForm.controls['image'].errors?.['required']">
-                                <fa-icon id="errorIcon" id="errorIcon" [icon]="errorIcon" title="Reqiured"></fa-icon>
-                            </span>
-
-                        </div>
-                    </div>
-
-                    <div class="position-absolute" style="top: 10px;left: 10px; bottom: 10px;overflow-y: scroll;">
-                        <ul class="list-group d-block" style="list-style: none;">
-                            <!--Images will be showen here-->
-                        </ul>
-                    </div>
-
+                    <app-upload-area [isMultiple]="true" (newItemEvent)="addItem($event)"></app-upload-area>
 
                 </div>
 
                 <!--Colors-->
                 <div class="col-3 d-flex justify-content-evenly align-items-center position-relative flex-column">
                     <div class="mb-2 selection-area d-flex">
-                        <input type="color" id="draggable colors" draggable="true" (dragstart)="dragFun($event)" formControlName="colors">
+                        <input type="color" id="draggable colors" draggable="true" (dragstart)="dragFun($event)"
+                            formControlName="colors">
 
                     </div>
                     <div id="colorsHelp" class="form-text error-msg m-0">
@@ -153,7 +144,7 @@
 
                     </div>
                     <div class="mb-4 d-flex Box" (dragover)="myDrop($event)" (drop)="dropMe($event)">
-                        
+
                     </div>
                 </div>
 
@@ -172,7 +163,7 @@
 
                 </div>
             </div>
-            <button [disabled]="productForm.invalid" class="btn special-btn d-block m-auto">Add</button>
+            <button [disabled]="productForm.invalid" class="btn submit-btn d-block m-auto">Add</button>
         </form>
     </div>
 </div>

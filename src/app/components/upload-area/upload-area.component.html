@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+    <input class="form-control image d-none"  type="file" formControlName="image"
+    accept="image/png, image/jpg, image/jpeg" (change)="fetchFiles($event)" [multiple]="isMultiple">
+
+    <div class="d-flex align-items-center justify-content-center upload-area position-relative" (click)="selectFile()">
+        <fa-icon class="" [icon]="uploadIcon"></fa-icon>
+
+        <div id="imageHelp" class="form-text position-absolute error-msg m-0"
+            *ngIf="form.controls['image'].touched && form.controls['image'].invalid">
+
+            <span *ngIf="form.controls['image'].errors?.['required']">
+                <fa-icon id="errorIcon" id="errorIcon" [icon]="errorIcon" title="Reqiured"></fa-icon>
+            </span>
+
+        </div>
+    </div>
+
+    <div class="position-absolute upload-list h-100" [style.display]="dataTransfer.items.length == 0 ? 'none' : null">
+
+        <ul class="list-group d-block" >
+            <!--Images will be showen here-->
+        </ul>
+    </div>
+</form>
+
+
+
+

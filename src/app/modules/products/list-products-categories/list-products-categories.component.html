@@ -1,0 +1,17 @@
+<div class="container py-5">
+    <div class="d-flex">
+
+        <div class="category-list me-5  rounded-3 overflow-hidden">
+            
+            <app-list-categories [allCategories]="allCategories" [getImageUrl]="getImageUrl"></app-list-categories>
+
+        </div>
+
+        <div class="product-list rounded-3 overflow-hidden">
+
+           <app-list-products [allPrds]="allPrds" [getImageUrl]="getImageUrl"></app-list-products>
+
+        </div>
+
+    </div>
+</div>

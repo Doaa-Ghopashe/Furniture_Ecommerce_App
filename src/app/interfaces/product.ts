@@ -1,8 +1,11 @@
+import { Category } from "./category";
+
 export interface Product {
     "name":String,
-    "category":String,
+    "category_Id":String|any,
     "details":String,
-
+    "_id":String,
+    
     "price":Number,
     "offer":Number,
     "quantity":Number,

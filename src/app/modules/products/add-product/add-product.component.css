@@ -50,8 +50,6 @@ input[type="color"] {
     width: 50%;
     height: 100%;
     border: none;
-    border-radius: 80px;
-    overflow: hidden;
     cursor: pointer;
 }
 
@@ -92,28 +90,6 @@ textarea {
     font-size: 23px;
     backdrop-filter: blur(3px);
     padding: 0 6px;
-}
-
-.upload-area {
-    border: 2px dashed rgba(160, 160, 160, 0.534);
-    border-radius: 10px;
-    height: 300px;
-    width: 100%;
-    margin: auto;
-    color: gainsboro;
-    transition: all 0.1s;
-    cursor: pointer;
-}
-
-.upload-area fa-icon {
-    font-size: 80px;
-    filter: drop-shadow(3px 0px 1px rgba(0, 0, 0, 0.468));
-    transition: all 0.1s;
-}
-
-.upload-area:hover {
-    border-color: rgba(0, 0, 0, 0.757);
-    color: rgb(3, 133, 180);
 }
 
 .list-group {
@@ -162,4 +138,3 @@ input::-webkit-inner-spin-button {
     right: 0;
     border-left: 1px solid rgba(0, 0, 0, 0.184)
 }
-

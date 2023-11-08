@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle, faTimesCircle, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { CategoryService } from 'src/app/services/category.service';
 import Swal from 'sweetalert2';
 
@@ -11,22 +12,40 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-category.component.css']
 })
 export class AddCategoryComponent {
-  addCategoryForm!:FormGroup;
+  categoryForm!:FormGroup;
   errorIcon!:IconDefinition;
-
-  constructor(private fb:FormBuilder , private service: CategoryService){}
+  xIcon!:IconDefinition;
+  uploadIcon!:IconDefinition;
+  dataTransfer!:DataTransfer;
+  multiple:boolean=false;
+  constructor(private fb:FormBuilder , private service: CategoryService, private router:Router){}
 
   ngOnInit(){
-    this.addCategoryForm = this.fb.group({
-      name:['',[Validators.required,Validators.minLength(4),Validators.maxLength(14)]]
+    this.categoryForm = this.fb.group({
+      name:['',[Validators.required,Validators.minLength(4),Validators.maxLength(14)]],
+      image: ['', [Validators.required]]
     });
 
+    this.xIcon = faTimesCircle;
+    this.uploadIcon = faUpload
     this.errorIcon = faExclamationTriangle;
+
+    this.dataTransfer = new DataTransfer();
   }
 
-  createCategory(data:FormGroup){
-    
-    this.service.addCategory(data.value).subscribe({
+  addItem(newItem: DataTransfer) {
+    this.categoryForm.controls['image'].setValue(newItem)
+    this.dataTransfer = newItem
+  }
+
+  createCategory(){
+    let formdata = new FormData();
+
+    formdata.append('image',this.dataTransfer.files[0]);
+
+    formdata.append('name',this.categoryForm.controls['name'].value);
+
+    this.service.addCategory(formdata).subscribe({
       next:(res:any)=>{
         Swal.fire({
           text:res.message,
@@ -40,7 +59,8 @@ export class AddCategoryComponent {
             left top
             no-repeat
           `
-        })
+        });
+        this.router.navigate(['/products']);
       },
       error:(res:any)=>{
         Swal.fire({
@@ -59,4 +79,6 @@ export class AddCategoryComponent {
       }
     })
   }
+
+ 
 }
