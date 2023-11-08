@@ -14,6 +14,8 @@ const express = require('express'),
 
     category = require('./routes/category'),
 
+    // bodyParser = require('body-parser'),
+
     PORT = process.env.SERVER_PORT,
 
     Mongodb = process.env.MONGODB_URL,
@@ -30,7 +32,9 @@ mongoose.connect(Mongodb, { useUnifiedTopology: true, useNewUrlParser: true })
 
 app.use(express.json());
 
-app.use(express.static('public'));
+// app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static('../public'));
 
 app.use('', user);
 

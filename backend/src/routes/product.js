@@ -6,14 +6,18 @@ let express = require('express'),
 
     { newProductValidation, validate } = require('../middleware/validation'),
 
-    { multerStorage, Filteration } = require('../middleware/upload'),
+    { productMulterStorage, Filteration } = require('../middleware/upload'),
 
     router = express.Router(),
 
-    upload = multer({ storage: multerStorage, fileFilter: Filteration, limits: { fileSize: 1024 * 1024 } });
+    upload = multer({ storage: productMulterStorage, fileFilter: Filteration, limits: { fileSize: 1024 * 1024 }});
+    
+router.get('/', controller.listProducts)
 
-router.get('/', () => { })
+router.post('/add-product', upload.array('images',4) , newProductValidation(), validate, controller.addProduct);
 
-router.post('/add-product', newProductValidation(), validate, upload.single('image'), controller.addProduct)
+router.delete('/delete-product/:id', controller.deleteProduct)
+
+router.put('/edit-product/:id', upload.array('images',4), controller.editProduct)
 
 module.exports = router

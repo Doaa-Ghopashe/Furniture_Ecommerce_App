@@ -1,15 +1,35 @@
-const { appError } = require('../appError');
+let imgList = [];
 
-const multer = require('multer'),
+const { appError } = require('../appError'),
+
+    multer = require('multer'),
 
     path = require('path'),
 
-    multerStorage = multer.diskStorage({
+    productMulterStorage = multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, '../public/images/products')
         },
         filename: (req, file, cb) => {
-            cb(null, Date.now() + path.extname(file.originalname))
+            if (!req.imgList) {
+                req.imgList = []; // Create imgList array if it doesn't exist
+            }
+    
+            const filename = Date.now() + path.extname(file.originalname);
+            req.imgList.push('public/images/products/' + filename);
+            req.body['images'] = req.imgList;
+            cb(null, filename)
+        }
+    }),
+
+    categoryMulterStorage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, '../public/images/category')
+        },
+        filename: (req, file, cb) => {
+            filename = Date.now() + path.extname(file.originalname);
+            req.body['image'] = 'public/images/category/'+filename
+            cb(null, filename)
         }
     }),
 
@@ -21,4 +41,4 @@ const multer = require('multer'),
         cb(null, true)
     };
 
-module.exports = { multerStorage, Filteration }
+module.exports = { productMulterStorage, Filteration, categoryMulterStorage }

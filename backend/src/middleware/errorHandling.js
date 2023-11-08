@@ -7,7 +7,9 @@ let errorHandling = (err,req,res,next)=>{
             message:err.message,
         })
     }
-    return res.status(500).send('Something went wrong')
+    return res.status(500).json({
+        message:err.message
+    })
 }
 
 module.exports = errorHandling;

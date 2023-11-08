@@ -17,22 +17,19 @@ const { check, validationResult } = require('express-validator'),
         .notEmpty().withMessage('Offer should have value')
         .isFloat({ gt: -1, ls: 0 }).withMessage('Offer is a decimal number between 0 and 1'),
 
-      check('image')
-        .trim()
+      check('images')
         .notEmpty().withMessage('Image doesn\'t exist'),
 
       check('colors')
-        .trim().escape()
+        .notEmpty().withMessage('Colors should exist')
         .custom((colors) => {
           let flag = false
-          colors.split(' ').map((clr) => {
+          JSON.parse(colors).map((clr) => {
             flag = clr.match(/^#(?:[0-9a-fA-F]{3}){1,2}$/g) ? true : false;
           })
           return flag;
-        }).withMessage('There is a color that does not follow the colors pattern')
-        .notEmpty().withMessage('Colors should exist')
-        .isString(),
-
+        }).withMessage('There is a color that does not follow the colors pattern'),
+        
       check('quantity')
         .trim().escape()
         .notEmpty().withMessage('quantity should be exist')
@@ -44,7 +41,8 @@ const { check, validationResult } = require('express-validator'),
         .isString(),
 
       check('category')
-        .trim().escape()
+        .trim()
+        .escape()
         .notEmpty().withMessage('You should include the product to one of the existing categories')
     ];
   },
@@ -97,8 +95,14 @@ const { check, validationResult } = require('express-validator'),
         .trim().escape()
         .notEmpty().withMessage('It should exist')
         .isString()
-        .matches(/^[A-Z a-z]/g).withMessage('It should be string that starts with letter')
-        .isLength({ min: 3, max: 14 }).withMessage('It\'s length should be between 5 and 14'),
+        .matches(/^[A-Z a-z]/g).withMessage('The name should start with letter')
+        .isLength({ min: 3, max: 14 }).withMessage('Name characters should be between 5 and 14')
+        .customSanitizer((name)=>{
+          return name.toLowerCase();
+        }),
+      
+      check('image')
+        .notEmpty().withMessage('It should exist')
     ];
   },
 
@@ -119,10 +123,10 @@ const { check, validationResult } = require('express-validator'),
       return next()
     }
     const extractedErrors = []
-    errors.array().map(err => extractedErrors.push({ "field": err.path, 'message': err.msg }))
+    errors.array().map(err => extractedErrors.push(err.msg))
 
     return res.status(422).json({
-      error: extractedErrors,
+      message:extractedErrors[0]
     })
   }
 

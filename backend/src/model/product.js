@@ -2,17 +2,20 @@ const mongoose = require('mongoose'),
 
     productSchema = new mongoose.Schema({
         name: String,
-        category_Id: mongoose.Schema.Types.ObjectId,
+        category_Id: {type:mongoose.Schema.Types.ObjectId,ref:"Category"},
         price: String,
-        image: String,
+        images: Array,
         offer: Number,
         quantity: Number,
         avail: Boolean,
         details: String,
-        colors: String
+        colors: Array
     })
-        .pre('deleteOne', (next) => { }),
+        .pre('deleteOne', (next) => { 
+            
+        }),
 
+        
     product = mongoose.model('product', productSchema);
 
 module.exports = product;
