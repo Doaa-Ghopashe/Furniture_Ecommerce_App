@@ -2,8 +2,9 @@
     margin-top: 50px;
     border: 1px solid rgba(0, 0, 0, 0.296);
     box-shadow: 4px 5px 1px rgba(0, 0, 0, 0.237);
-    background-color: rgba(255, 255, 255, 0.687);
+    background-color: rgba(255, 255, 255, 0.888);
     border-radius: 10px;
+    width:60%
 }
 
 .selection-area {
@@ -89,7 +90,7 @@ textarea {
     color: red;
     font-size: 23px;
     backdrop-filter: blur(3px);
-    -webkit-backdrop-filter:blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     padding: 0 6px;
 }
 
@@ -121,7 +122,7 @@ textarea {
     display: flex;
     align-items: center;
     backdrop-filter: blur(3px);
-    -webkit-backdrop-filter:blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     justify-content: center;
 
 }
@@ -139,4 +140,28 @@ input::-webkit-inner-spin-button {
 #measure {
     right: 0;
     border-left: 1px solid rgba(0, 0, 0, 0.184)
+}
+
+.number-of-chars {
+    bottom: 2px;
+    right: 5px;
+    font-size: 16px;
+    color: rgb(131, 131, 131);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+h1 {
+    font-family: Agbalumo;
+    color: rgb(87 63 32 / 93%);
+    text-transform: capitalize;
+    width: fit-content;
+    border-bottom-style: double;
+    /* font-weight: 400; */
+}
+label{
+    font-family: Lobster;
+    font-size: 18px;
+    color: rgb(66 48 23 / 70%);
+    vertical-align: middle;
 }

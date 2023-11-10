@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class ListCategoriesComponent {
   @Input() allCategories!: Category[];
   @Input() getImageUrl!:Function;
+
   trashIcon!:IconDefinition;
   infoIcon!:IconDefinition;
   penIcon!:IconDefinition;
@@ -73,6 +74,10 @@ export class ListCategoriesComponent {
 
   NavigateToAddCategory() {
     this.router.navigate(['products/add-category'])
+  }
+
+  NavigateToEditCategory(id:String) {
+    this.router.navigate([`products/edit-category/${id}`])
   }
 
 }

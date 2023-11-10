@@ -16,10 +16,11 @@ import Swal from 'sweetalert2';
 })
 export class AddProductComponent {
   productForm!: FormGroup;
-  
+
   selectedColors!: String[];
   categories!: any;
   dataTransfer!: DataTransfer;
+  charCount:number = 0;
 
   errorIcon!: IconDefinition;
   xIcon!: IconDefinition;
@@ -27,7 +28,7 @@ export class AddProductComponent {
 
   colorList !: Element;
 
-  constructor(private fb: FormBuilder, private category_service: CategoryService, private product_service: ProductService, private router:Router) {}
+  constructor(private fb: FormBuilder, private category_service: CategoryService, private product_service: ProductService, private router: Router) { }
 
   ngOnInit() {
 
@@ -38,7 +39,7 @@ export class AddProductComponent {
       quantity: ['', [Validators.required, Validators.max(1000)]],
       offer: ['', [Validators.required, Validators.max(1)]],
       image: ['', [Validators.required]],
-      colors: ['',[Validators.required]],
+      colors: ['', [Validators.required]],
       details: ['', [Validators.required]]
     });
 
@@ -64,24 +65,24 @@ export class AddProductComponent {
     let formdata = new FormData();
 
     Object.entries(this.productForm.controls).forEach(([key, control]) => {
-      if(!(key=='colors'||key=='image')){
+      if (!(key == 'colors' || key == 'image')) {
         formdata.append(key, control.value);
       }
     });
-  
+
     for (let i = 0; i < this.dataTransfer.files.length; i++) {
-      formdata.append('images',this.dataTransfer.files[i]);
+      formdata.append('images', this.dataTransfer.files[i]);
     }
-    
-    formdata.append('colors',JSON.stringify(this.selectedColors))
+
+    formdata.append('colors', JSON.stringify(this.selectedColors))
 
     this.product_service.addProduct(formdata).subscribe({
-      next:(res:any)=>{
+      next: (res: any) => {
         Swal.fire({
-          text:res.message,
-          showConfirmButton:false,
-          timer:5000,
-          icon:'success',
+          text: res.message,
+          showConfirmButton: false,
+          timer: 5000,
+          icon: 'success',
           width: 600,
           padding: '3em',
           backdrop: `
@@ -92,12 +93,12 @@ export class AddProductComponent {
         })
         this.router.navigate(['/products']);
       },
-      error:(res:any)=>{
+      error: (res: any) => {
         Swal.fire({
-          text:res.error.message,
-          showConfirmButton:false,
-          timer:5000,
-          icon:'error',
+          text: res.error.message,
+          showConfirmButton: false,
+          timer: 5000,
+          icon: 'error',
           width: 600,
           padding: '3em',
           backdrop: `
@@ -113,33 +114,37 @@ export class AddProductComponent {
   myDrop(e: Event) {
     e.preventDefault()
   }
-  
+
   dragFun(e: any) {
     e.dataTransfer.setData("color", e.target.value)
   }
 
   dropMe(e: any) {
     this.colorList = e.target;
-    
-    if (this.selectedColors.length < 5) {
-      const choosedColor = e.dataTransfer.getData("color");
-      this.selectedColors.push(choosedColor);
-      this.displayColor();
-    }
-    this.productForm.controls['colors'].setValue(this.selectedColors[0])
 
+    if (!(this.colorList.classList.contains('colorItem'))) {
+
+      if (this.selectedColors.length < 5) {
+        const choosedColor = e.dataTransfer.getData("color");
+        this.selectedColors.push(choosedColor);
+        this.displayColor();
+      }
+      this.productForm.controls['colors'].setValue(this.selectedColors[0])
+
+    }
   }
 
   displayColor() {
-    console.log(this.selectedColors)
     this.colorList.innerHTML = "";
+
     let idx = 0;
+
     for (const color of this.selectedColors) {
 
       const deletebtn = document.createElement('button'),
         colorItem = document.createElement('div');
 
-     colorItem.classList.add('colorItem');
+      colorItem.classList.add('colorItem');
 
       colorItem.style.cssText += `background-color:${color};`;
 
@@ -167,11 +172,16 @@ export class AddProductComponent {
 
     this.selectedColors.splice(index, 1);
 
-    if(this.selectedColors.length == 0){
+    if (this.selectedColors.length == 0) {
       this.productForm.controls['colors'].setValue('')
     }
 
     this.displayColor();
 
+  }
+
+  countChars(){
+    this.charCount = this.productForm.controls['details'].value.length;
+    
   }
 }

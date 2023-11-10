@@ -2,9 +2,9 @@
     <input class="form-control image d-none" title="image"  type="file" formControlName="image"
     accept="image/png, image/jpg, image/jpeg" (change)="fetchFiles($event)" [multiple]="isMultiple">
 
-    <div class="d-flex align-items-center justify-content-center upload-area position-relative" (click)="selectFile()">
-        <fa-icon class="" [icon]="uploadIcon"></fa-icon>
-
+    <div class="d-flex align-items-center flex-column justify-content-center upload-area position-relative" (click)="selectFile()">
+        <fa-icon [icon]="uploadIcon"></fa-icon>
+        <h4 >Upload Image</h4>
         <div id="imageHelp" class="form-text position-absolute error-msg m-0"
             *ngIf="form.controls['image'].touched && form.controls['image'].invalid">
 

@@ -1,4 +1,4 @@
-<div class="container AddProductForm w-50">
+<div class="container AddProductForm">
     <div>
         <h1 class="fw-light mt-3 mb-3 border-bottom">Add new Furniture</h1>
     </div>
@@ -152,8 +152,10 @@
             <!--Details-->
             <div class="mb-4 position-relative d-flex">
                 <label for="Details">details</label>
-                <textarea id="Details" class="form-control" formControlName="details"></textarea>
-
+                <textarea id="Details" class="form-control" formControlName="details" (keydown)="countChars()"></textarea>
+                
+                <span class="position-absolute fw-bold number-of-chars">{{charCount}}/250</span>
+                
                 <div id="nameHelp" class="form-text error-msg m-0"
                     *ngIf="productForm.controls['details'].touched && productForm.controls['details'].invalid">
 

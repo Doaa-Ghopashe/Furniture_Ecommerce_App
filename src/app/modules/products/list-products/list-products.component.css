@@ -2,18 +2,25 @@
     width: 70%;
     user-select: none;
     -webkit-user-select:none;
+    font-family:var(--stringfont);
     font-weight: 100;
+    text-transform: capitalize;
 }
-.product-inf .prd-name{
-    font-family:Agbalumo;
-}
+
 .product-inf .prd-price{
-    font-family: Dancing Script;
+    font-family: var(--numberfont);
 }
+
+.product-inf .prd-qty{
+    font-family: var(--numberfont);
+    font-size: 18px;
+}
+
 .prd-img{
     height: 170px;
     z-index: 0;
 }
+
 .prd-img img{
     filter:drop-shadow(5px 7px 3px rgba(0, 0, 0, 0.208));
     object-fit: contain;

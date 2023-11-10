@@ -1,6 +1,7 @@
 .title {
-    background-color: rgba(128, 128, 128, 0.587);
-    color: ghostwhite
+    background-color: rgb(57 87 84 / 57%);
+    color: ghostwhite;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .categories,
