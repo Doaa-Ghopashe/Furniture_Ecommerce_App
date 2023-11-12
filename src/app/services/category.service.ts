@@ -25,4 +25,8 @@ export class CategoryService {
   updateCategory(data: any) {
     return this.http.put('http://localhost:4000/category/update-category', data);
   }
+
+  getCategory(id:String){
+    return this.http.get(`http://localhost:4000/category/${id}`)
+  }
 }

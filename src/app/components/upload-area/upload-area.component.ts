@@ -10,6 +10,7 @@ import { faExclamationTriangle, faTimesCircle, faUpload } from '@fortawesome/fre
 })
 export class UploadAreaComponent {
   @Output() newItemEvent = new EventEmitter<DataTransfer>();
+  // @Input() uploadedImg!:string;
   
   form!: FormGroup; 
 

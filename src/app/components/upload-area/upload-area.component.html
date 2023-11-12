@@ -1,10 +1,10 @@
 <form [formGroup]="form">
-    <input class="form-control image d-none" title="image"  type="file" formControlName="image"
-    accept="image/png, image/jpg, image/jpeg" (change)="fetchFiles($event)" [multiple]="isMultiple">
+    <input class="form-control image d-none" title="image" type="file" formControlName="image"
+        accept="image/png, image/jpg, image/jpeg" (change)="fetchFiles($event)" [multiple]="isMultiple">
 
     <div class="d-flex align-items-center flex-column justify-content-center upload-area position-relative" (click)="selectFile()">
         <fa-icon [icon]="uploadIcon"></fa-icon>
-        <h4 >Upload Image</h4>
+        <h4>Upload Image</h4>
         <div id="imageHelp" class="form-text position-absolute error-msg m-0"
             *ngIf="form.controls['image'].touched && form.controls['image'].invalid">
 
@@ -15,14 +15,10 @@
         </div>
     </div>
 
-    <div class="position-absolute upload-list h-100" [style.display]="dataTransfer.items.length == 0 ? 'none' : null">
+    <div class="position-absolute upload-list h-100"  [style.display]="dataTransfer.items.length == 0 ? 'none' : null">
 
-        <ul class="list-group d-block" >
+        <ul class="list-group d-block">
             <!--Images will be showen here-->
         </ul>
     </div>
 </form>
-
-
-
-

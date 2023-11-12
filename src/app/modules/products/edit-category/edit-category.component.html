@@ -1,1 +1,42 @@
-<p>edit-category works!</p>
+<div class="container addCategoryForm w-50">
+    <div>
+
+        <h1 class="fw-light mt-3 mb-3 border-bottom">Edit Category</h1>
+    
+    </div>
+    <div>
+        <form [formGroup]="form"  class="px-5 py-3" >
+                
+                <!--Name-->
+                <div class="mb-4 position-relative d-flex align-items-center w-100 ">
+                    <label for="Name">Name</label>
+
+                    <input class="form-control" type="text" id="Name" formControlName="name">
+
+                    <!-- <div id="nameHelp" class="form-text error-msg m-0"
+                        *ngIf="categoryForm.controls['name'].touched && categoryForm.controls['name'].invalid">
+
+                        <span *ngIf="categoryForm.controls['name']?.errors?.['required']">
+                            <fa-icon [icon]="errorIcon" title="Reqiured"></fa-icon>
+                        </span>
+
+                        <span
+                            *ngIf="categoryForm.controls['name']?.errors?.['maxlength'] || categoryForm.controls['name']?.errors?.['minlength'] ">
+                            <fa-icon [icon]="errorIcon" title="It should be between 4 and 14"></fa-icon>
+                        </span>
+
+                    </div> -->
+
+                </div>
+
+                 <!--Image-->
+                 <div class="position-relative mb-3">
+                    <!-- <img src="" formControlName="image"> -->
+                    <!-- <app-upload-area [isMultiple]="false" (newItemEvent)="addItem($event)" [uploadedImg]="image"></app-upload-area> -->
+                 
+                </div>
+
+            <button class="btn submit-btn d-block m-auto">Update</button>
+        </form>
+    </div>
+</div>
