@@ -11,6 +11,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { UploadAreaComponent } from 'src/app/components/upload-area/upload-area.component';
 import { ListProductsCategoriesComponent } from './list-products-categories/list-products-categories.component';
 import { ListProductsComponent } from './list-products/list-products.component';
+import { ModalBoxComponent } from 'src/app/components/modal-box/modal-box.component';
+import { MagnifireComponent } from 'src/app/components/magnifire/magnifire.component';
 
 const routes:Routes = [
   {
@@ -44,7 +46,9 @@ const routes:Routes = [
     EditCategoryComponent,
     EditProductComponent,
     UploadAreaComponent,
-    ListProductsCategoriesComponent
+    ListProductsCategoriesComponent,
+    ModalBoxComponent,
+    MagnifireComponent
   ],
   imports: [
     CommonModule,

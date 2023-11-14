@@ -1,0 +1,11 @@
+.lens {
+    /* background-image: url('https://static.safetydetectives.com/wp-content/uploads/2020/06/The-6-Best-Antivirus-for-Linux-2020-Be-Careful.jpg'); */
+    border-radius: 100px;
+    height: 100px;
+    width: 100px;
+    /* background-position: top; */
+    border:5px solid rgba(0, 0, 0, 0.391);
+    background-size:500px;
+    background-repeat: no-repeat;
+    
+}

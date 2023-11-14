@@ -1,4 +1,4 @@
-<div class="products bg-light">
+<div class="products">
     <!--If there is no category to display then show this div-->
     <div class="d-flex flex-column justify-content-center align-items-center position-relative"
         *ngIf="allPrds.length == 0">
@@ -18,7 +18,7 @@
             <ul class=" h-100 m-0" style="padding: 0 10px 60px 10px;">
 
                 <li class="d-flex align-items-center justify-content-between border-bottom my-1 position-relative"
-                    *ngFor="let product of allPrds;let carouselIndex=index">
+                    *ngFor="let product of allPrds;let carouselIndex=index"  >
     
                     <div class="w-25">
                         <div [id]="'carouselExampleFade' + carouselIndex" class="carousel slide carousel-fade"
@@ -85,7 +85,7 @@
                     </div>
     
                     <div class="d-flex position-absolute bottom-0 end-0 mb-3">
-                        <button title="infoBtn" class="btn inf-btn me-2"><fa-icon
+                        <button title="infoBtn" class="btn inf-btn me-2" (click)="showProduct(product)"><fa-icon
                                 [icon]="infoIcon"></fa-icon></button>
     
                         <button title="deleteBtn" class="btn dlt-btn me-2" (click)="DeleteProduct(product._id)"><fa-icon

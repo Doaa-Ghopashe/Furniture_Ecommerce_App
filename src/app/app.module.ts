@@ -36,7 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     SalesByMonthComponent,
     SalesByCategoryComponent,
     SalesByLastFewTransactionsComponent,
-    TopThreeProductsComponent,
+    TopThreeProductsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,12 @@
 <!-- <div class=" "> -->
 
-    <div class="categories bg-light">
+    <div class="categories">
 
         <!--If there is no category to display then show this div-->
         <div class="d-flex flex-column justify-content-center align-items-center position-relative"
             *ngIf="allCategories.length == 0">
 
-            <img class="nodata" src="/assets/NoCategory.png">
+            <img title="category-data-not-found" class="nodata" src="/assets/NoCategory.png">
 
             <h4 class="text-center msg mt-0 position-absolute">There is no categories to be displayed</h4>
         </div>
@@ -34,16 +34,16 @@
                     <tbody>
                         <tr *ngFor="let category of allCategories">
                             <td class="w-25 text-center">
-                                <img class="w-50" [src]='getImageUrl(category.image)'>
+                                <img title="category-image" class="w-50" [src]='getImageUrl(category.image)'>
                             </td>
                             <td class="ctgry-name">
                                 {{category.name}}
                             </td>
                             <td class="align-middle text-center">
-                                <button class="btn dlt-btn me-3" (click)="DeleteCategory(category._id)">
+                                <button title="delete" class="btn dlt-btn me-3" (click)="DeleteCategory(category._id)">
                                     <fa-icon [icon]="trashIcon"></fa-icon>
                                 </button>
-                                <button class="btn edt-btn" (click)="NavigateToEditCategory(category._id)">
+                                <button title="edit" class="btn edt-btn" (click)="NavigateToEditCategory(category._id)">
                                     <fa-icon [icon]="penIcon"></fa-icon>
                                 </button>
                             </td>

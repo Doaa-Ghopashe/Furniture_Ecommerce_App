@@ -143,3 +143,7 @@ div::-webkit-scrollbar-thumb{
     background-color: rgb(70 95 93 / 67%);
     border-radius: 100px;
 }
+
+.products, .categories{
+    background: white;
+}

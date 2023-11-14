@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output ,  EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faChevronLeft, faChevronRight, faExclamationCircle, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -16,7 +16,8 @@ export class ListProductsComponent {
   allCategories: Category[] = new Array();
   @Input() allPrds!: Product[];
   @Input() getImageUrl!:Function;
-
+  @Output() newItemEvent = new EventEmitter<string>();
+  
   trashIcon!: IconDefinition;
   infoIcon!: IconDefinition;
   penIcon!: IconDefinition;
@@ -75,5 +76,9 @@ export class ListProductsComponent {
         })
       }
     })
+  }
+
+  showProduct(product:any){
+    this.newItemEvent.emit(product)
   }
 }
